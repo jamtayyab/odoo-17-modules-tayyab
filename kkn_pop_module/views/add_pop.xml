@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_kkn_add_pop_tree" model="ir.ui.view">
+        <field name="name">kkn.add.pop.tree</field>
+        <field name="model">add.pop.model</field>
+        <field name="arch" type="xml">
+            <tree string="POP's" name="POP" export_xlsx="false" delete="false">
+                <field name="usage"/>
+                <field name="name"/>
+                <field name="street"/>
+                <field name="street2"/>
+                <field name="city_id"/>
+                <field name="state_id"/>
+                <field name="zip_id" optional="hide"/>
+                <field name="country_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_kkn_add_pop_form" model="ir.ui.view">
+        <field name="name">kkn.add.pop.form</field>
+        <field name="model">add.pop.model</field>
+        <field name="arch" type="xml">
+            <form string="ADD POP" name="POP" delete="false">
+                <header>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,admin_approval,approved,coo_approval,ceo_approval,rejected,cancel"/>
+
+                    <button string="Reset to Draft" name="draft_state_method" type="object"
+                            states="rejected,cancel"
+                            class="oe_highlight"/>
+                    <button string="Admin Approval" name="admin_approval_state_method" type="object"
+                            class="oe_highlight" states="draft"/>
+                    <button string="Approved" name="approved_state_method" type="object"
+                            class="oe_highlight" states="admin_approval"/>
+                    <button string="COO Approval" name="coo_approval_state_method" type="object"
+                            class="oe_highlight" states="approved"/>
+                    <button string="CEO Approval" name="ceo_approval_state_method" type="object"
+                            class="oe_highlight" states="coo_approval"/>
+                    <button string="Reject" name="rejected_state_method" type="object"
+                            states="admin_approval" class="oe_highlight"/>
+                    <button string="Cancel" name="cancel_state_method" type="object" class="oe_highlight"
+                            attrs="{'invisible':[('state','in',('approved','ceo_approval','cancel'))]}"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="pop_new_type" force_save="1"
+                                   options="{'horizontal': true}" widget="radio"
+                                   style="font-size: 15px;" string="POP Type"/>
+
+                            <field name="is_rental" force_save="1"
+                                   options="{'horizontal': true}" widget="radio"
+                                   attrs="{'invisible':[('pop_new_type', '!=', 'Existing')]}"
+                                   style="font-size: 15px;" string="Is Rental"/>
+                        </group>
+                        <group>
+                            <field name="existing_location_id" style="width:100%;"
+                                   options="{'no_open': True, 'no_edit': True, 'no_create': True}"
+                                   force_save="1"
+                                   attrs="{'invisible':[('pop_new_type','not in',('Existing'))],'required':[('pop_new_type','in',('Existing'))]}"
+                                   string="Existing Location"/>
+
+                            <field name="name" force_save="1" options="{'no_quick_create': True}"
+                                   attrs="{'invisible':[('pop_new_type','in',('Existing'))],'required':[('pop_new_type','not in',('Existing'))]}"
+                                   string="Location Name"/>
+
+                            <field name="location_id" readonly="1" string="Parent Location"
+                                   options="{'no_open': True, 'no_edit': True, 'no_create': True}"/>
+                        </group>
+                    </group>
+                    <group style="margin-top: 50px;">
+                        <group string="Additional Information" name="additional_info">
+                            <field name="usage" readonly="1" force_save="1"/>
+                            <field name="company_id" groups="base.group_multi_company"
+                                   options="{'no_create': True}"
+                                   force_save="1"
+                                   readonly="1"/>
+                            <field name="company_currency" invisible="1"/>
+                        </group>
+                        <group string="Address" name="address">
+
+                            <b id="address">Address</b>
+                            <div class="o_address_format" modifiers="{}">
+                                <field name="street" placeholder="Street..."
+                                       class="o_address_street" force_save="1"
+                                       readonly="1"/>
+                                <field name="street2" placeholder="Street 2..."
+                                       class="o_address_street"
+                                       force_save="1"
+                                       readonly="1"/>
+                                <field name="city_id" placeholder="City" class="o_address_city"
+                                       options="{'no_open': True, 'no_create': True}" can_create="true"
+                                       can_write="true" force_save="1"
+                                       readonly="1"/>
+                                <field name="state_id" class="o_address_state"
+                                       placeholder="Province"
+                                       options="{'no_open': True, 'no_create': True}"
+                                       context="{'country_id': country_id, 'zip_id': zip_id}"
+                                       domain="['|', '|', '|', '|', ('code', '=', 'PK-BL'), ('code', '=', 'PK-ICT'), ('code', '=', 'PK-KPK'), ('code', '=', 'PK-PJ'), ('code', '=', 'PK-SN')]"
+                                       on_change="1" can_create="true" can_write="true" force_save="1"
+                                       readonly="1"/>
+                                <field name="zip_id" placeholder="ZIP" class="o_address_zip"
+                                       on_change="1"
+                                       force_save="1"
+                                       readonly="1"/>
+                                <field name="country_id" placeholder="Country"
+                                       class="o_address_country"
+                                       domain="[('code', '=', 'PK')]"
+                                       options="{'no_open': True, 'no_create': True}"
+                                       on_change="1" can_create="true" can_write="true" force_save="1"
+                                       readonly="1"/>
+                            </div>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Other Charges">
+                            <field name="is_service_charges" force_save="1"/>
+                            <field name="service_charges"
+                                   attrs="{'invisible':[('is_service_charges','=', False)]}"
+                                   force_save="1"/>
+                            <field name="is_generator_charges" force_save="1"/>
+                            <field name="generator_charges"
+                                   attrs="{'invisible':[('is_generator_charges','=', False)]}"
+                                   force_save="1"/>
+                        </group>
+                    </group>
+
+                    <field name="comment" placeholder="External note..." force_save="1"/>
+
+                    <notebook>
+                        <page string="Location Coordinates" id="partner_assignation">
+                            <group colspan="2" col="2">
+                                <separator string="Geolocation" colspan="2"/>
+                                <button string="Geolocate" name="geo_localize_location" colspan="2"
+                                        icon="fa-check"
+                                        type="object"/>
+                                <div>
+                                    <span class="oe_inline">( On</span>
+                                    <field name="date_localization" nolabel="1" class="oe_inline"
+                                           force_save="1"
+                                           attrs="{'required':[('is_rental','=','Yes')]}"/>
+                                    <span>: Lat :</span>
+                                    <field name="partner_latitude" nolabel="1" class="oe_inline"
+                                           force_save="1"
+                                           attrs="{'required':[('is_rental','=','Yes')]}"/>
+                                    <span>; Long:</span>
+                                    <field name="partner_longitude" nolabel="1" class="oe_inline"
+                                           force_save="1"
+                                           attrs="{'required':[('is_rental','=','Yes')]}"/>
+                                    <span>)</span>
+                                </div>
+                            </group>
+                        </page>
+                        <page string="POP Information">
+                            <notebook>
+                                <page string="Landlord Details">
+                                    <group string="Landlord Details" name="landlord_details"
+                                           attrs="{'invisible':[('is_rental', '!=', 'Yes')]}">
+                                        <group>
+                                            <field name="landlord_name" force_save="1"
+                                                   attrs="{'required':[('is_rental','=','Yes')]}"/>
+                                            <field name="landlord_cnic" force_save="1"
+                                                   attrs="{'required':[('is_rental','=','Yes')]}"/>
+                                            <field name="landlord_mobile" force_save="1"
+                                                   attrs="{'required':[('is_rental','=','Yes')]}"/>
+                                        </group>
+                                        <group>
+                                            <field name="landlord_email" force_save="1"/>
+                                            <field name="bank_id" force_save="1"
+                                                   attrs="{'required':[('is_rental','=','Yes')]}"/>
+                                            <field name="acc_number" force_save="1"
+                                                   attrs="{'required':[('is_rental','=','Yes')]}"/>
+                                        </group>
+                                    </group>
+                                </page>
+                                <page string="Agreement Details">
+                                    <group string="Agreement Details" name="agreement_details"
+                                           attrs="{'invisible':[('is_rental', '!=', 'Yes')]}">
+                                        <group>
+                                            <field name="rent" force_save="1"
+                                                   attrs="{'required':[('is_rental','=','Yes')]}"/>
+
+                                            <field name="security" force_save="1"
+                                                   attrs="{'required':[('is_rental','=','Yes')]}"/>
+
+                                            <label for="time_period"/>
+                                            <div class="o_row">
+                                                <field name="time_period" force_save="1"
+                                                       attrs="{'required':[('is_rental','=','Yes')]}"/>
+                                                <field name="time_period_unit"
+                                                       options='{"no_open": True, "no_create": True, "no_edit": True}'
+                                                       readonly="1"
+                                                       force_save="1"/>
+                                            </div>
+
+                                            <field name="agreement_date" force_save="1"
+                                                   attrs="{'required':[('is_rental','=','Yes')]}"/>
+
+                                            <field name="annual_increment" force_save="1"
+                                                   attrs="{'required':[('is_rental','=','Yes')]}"/>
+
+
+                                            <field name="payment_terms" force_save="1"
+                                                   attrs="{'required':[('is_rental','=','Yes')]}"/>
+
+                                            <field name="payment_mode" force_save="1"
+                                                   attrs="{'required':[('is_rental','=','Yes')]}"/>
+
+                                        </group>
+                                        <group>
+                                            <field name="bank_name" force_save="1"
+                                                   attrs="{'invisible':[('payment_mode','!=', 'Bank')],'required':[('payment_mode','=', 'Bank')]}"/>
+
+                                            <field name="account_no" force_save="1"
+                                                   attrs="{'invisible':[('payment_mode','!=', 'Bank')],'required':[('payment_mode','=', 'Bank')]}"/>
+
+                                            <field name="account_title" force_save="1"
+                                                   attrs="{'invisible':[('payment_mode','!=', 'Bank')],'required':[('payment_mode','=', 'Bank')]}"/>
+
+                                            <field name="tax_ids" widget="many2many_tags" string="Taxes"
+                                                   options="{'no_open': True, 'no_create': True, 'no_edit': True}"/>
+
+                                            <field name="vat" force_save="1"/>
+
+                                            <field name="next_amount_paid" force_save="1"/>
+
+                                            <field name="no_of_years" force_save="1" readonly="1"/>
+
+                                            <field name="cost_center_id" invisible="1"/>
+
+                                            <field name="created_location" invisible="1"/>
+                                        </group>
+                                    </group>
+                                </page>
+                            </notebook>
+
+                        </page>
+                        <page string="POP Configuration">
+                            <notebook>
+                                <page string="Billing Details">
+                                    <group string="Billing Details" name="billing_details"
+                                           attrs="{'invisible':[('is_rental', '!=', 'Yes')]}">
+                                        <group>
+                                            <field name="company_type" force_save="1"/>
+
+                                            <field name="partner_id" force_save="1"/>
+
+                                            <field name="next_billing_date" force_save="1" readonly="1"/>
+
+                                            <field name="utility_status" force_save="1"
+                                                   attrs="{'required':[('is_rental','=','Yes')]}"/>
+                                        </group>
+                                        <group>
+                                            <field name="meter_num" force_save="1"
+                                                   attrs="{'required':[('utility_status','=','Not Included')],'invisible':[('utility_status','!=','Not Included')]}"/>
+
+                                            <field name="billing_date" force_save="1"
+                                                   attrs="{'required':[('utility_status','=','Not Included')],'invisible':[('utility_status','!=','Not Included')]}"/>
+
+                                            <field name="rent_electricity_bill_due" force_save="1"
+                                                   attrs="{'required':[('utility_status','=','Not Included')],'invisible':[('utility_status','!=','Not Included')]}"/>
+
+                                            <field name="rent_electricity_amount" force_save="1"
+                                                   attrs="{'required':[('utility_status','=','Not Included')],'invisible':[('utility_status','!=','Not Included')]}"/>
+                                        </group>
+                                    </group>
+                                </page>
+                                <page string="POP Area Details">
+                                    <group string="POP Area Details" name="pop_area_details"
+                                           attrs="{'invisible':[('is_rental', '!=', 'Yes')]}">
+                                        <group>
+                                            <field name="room_loc" force_save="1"
+                                                   attrs="{'required':[('is_rental','=','Yes')]}"/>
+
+                                            <label for="room_size"/>
+                                            <div class="o_row">
+
+                                                <field name="room_size" force_save="1"
+                                                       attrs="{'required':[('is_rental','=','Yes')]}"/>
+
+                                                <field name="room_size_unit"
+                                                       options='{"no_open": True, "no_create": True, "no_edit": True}'
+                                                       readonly="1"
+                                                       force_save="1"/>
+                                            </div>
+
+                                            <label for="roof_size"/>
+                                            <div class="o_row">
+                                                <field name="roof_size" force_save="1"
+                                                       attrs="{'required':[('is_rental','=','Yes')]}"/>
+
+                                                <field name="roof_size_unit"
+                                                       options='{"no_open": True, "no_create": True, "no_edit": True}'
+                                                       readonly="1"
+                                                       force_save="1"/>
+                                            </div>
+
+                                            <field name="access_status" force_save="1"
+                                                   widget="toggle_button"
+                                                   attrs="{'required':[('is_rental','=','Yes')]}"/>
+                                        </group>
+                                        <group>
+                                            <field name="tower_installed" force_save="1"
+                                                   attrs="{'required':[('is_rental','=','Yes')]}"/>
+
+                                            <field name="tower_height"
+                                                   attrs="{'required':[('tower_installed','=','Yes')],'invisible':[('tower_installed','!=','Yes')]}"/>
+
+                                            <field name="file_upload" filename="file_name" force_save='True'
+                                                   class="oe_highlight"
+                                                   string="Rental Agreement"
+                                                   type="object" icon="fa-paperclip" colspan='1'/>
+
+                                            <field name="file_name" invisible="1" force_save='True'/>
+                                        </group>
+                                    </group>
+                                </page>
+                            </notebook>
+                        </page>
+                        <page string="POP Bills">
+                            <notebook>
+                                <page string="Rent History">
+                                    <div>
+                                        <field name="rent_line" readonly="1" force_save="1">
+                                            <tree>
+                                                <field name="move_id"/>
+                                                <field name="billing_date"/>
+                                                <field name="name" invisible="1"/>
+                                            </tree>
+                                            <form>
+                                                <field name="move_id"/>
+                                                <field name="billing_date"/>
+                                                <field name="name" invisible="1"/>
+                                            </form>
+                                        </field>
+                                    </div>
+                                </page>
+                                <page string="Bills History">
+                                    <div>
+                                        <field name="electricity_rent_line" readonly="1" force_save="1">
+                                            <tree>
+                                                <field name="move_id"/>
+                                                <field name="billing_date"/>
+                                                <field name="name" invisible="1"/>
+                                            </tree>
+                                            <form>
+                                                <field name="move_id"/>
+                                                <field name="billing_date"/>
+                                                <field name="name" invisible="1"/>
+                                            </form>
+                                        </field>
+                                    </div>
+                                </page>
+                                <page string="Service History">
+                                    <div>
+                                        <field name="service_line" readonly="1" force_save="1">
+                                            <tree>
+                                                <field name="move_id"/>
+                                                <field name="billing_date"/>
+                                                <field name="name" invisible="1"/>
+                                            </tree>
+                                            <form>
+                                                <field name="move_id"/>
+                                                <field name="billing_date"/>
+                                                <field name="name" invisible="1"/>
+                                            </form>
+                                        </field>
+                                    </div>
+                                </page>
+                                <page string="Generator History">
+                                    <div>
+                                        <field name="generator_line" readonly="1" force_save="1">
+                                            <tree>
+                                                <field name="move_id"/>
+                                                <field name="billing_date"/>
+                                                <field name="name" invisible="1"/>
+                                            </tree>
+                                            <form>
+                                                <field name="move_id"/>
+                                                <field name="billing_date"/>
+                                                <field name="name" invisible="1"/>
+                                            </form>
+                                        </field>
+                                    </div>
+                                </page>
+                            </notebook>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_pop_search" model="ir.ui.view">
+        <field name="name">add.pop.search</field>
+        <field name="model">add.pop.model</field>
+        <field name="arch" type="xml">
+            <search string="Location Name">
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="add_pops_kanban" model="ir.ui.view">
+        <field name="name">add.pops.kanban</field>
+        <field name="model">add.pop.model</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state" class="o_kanban_project_tasks o_kanban_small_column o_opportunity_kanban"
+                    quick_create="false">
+                <field name="state"/>
+                <field name="name"/>
+                <field name="pop_new_type"/>
+                <field name="kanban_state"/>
+                <progressbar field="kanban_state"
+                             colors='{"draft": "secondary","admin_approval": "warning" ,"approved": "success", "coo_approval": "primary","ceo_approval": "info", "rejected": "danger", "cancel": "danger"}'/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_has_icon oe_kanban_content oe_kanban_card"
+                        >
+                            <div class="oe_kanban_details d-flex flex-column">
+                                <span>POP:
+                                    <strong>
+                                        <field name="name"/>
+                                    </strong>
+                                </span>
+                                <hr/>
+                                <ul>
+
+                                    <li>
+                                        <strong>POP Type:</strong>
+                                        <field
+                                                name="pop_new_type"/>
+
+                                    </li>
+                                </ul>
+
+                            </div>
+
+                            <div class="oe_kanban_footer">
+                                <div class="o_kanban_record_bottom">
+                                    <div class="oe_kanban_bottom_left">
+
+                                    </div>
+
+                                    <div class="oe_kanban_bottom_right">
+                                        <i title="Add POP card icon"
+                                           t-attf-class="fa fa-podcast #{record.kanban_state.raw_value == 'draft' ? 'text-secondary' : record.kanban_state.raw_value == 'admin_approval' ? 'text-warning' : record.kanban_state.raw_value == 'approved' ? 'text-success' : record.kanban_state.raw_value == 'coo_approval' ? 'text-primary' : record.kanban_state.raw_value == 'ceo_approval' || record.kanban_state.raw_value == 'rejected' || record.kanban_state.raw_value == 'cancel' ? 'text-danger' : 'default_color'}"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="action_kkn_pop" model="ir.actions.act_window">
+        <field name="name">Add Pop</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">add.pop.model</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new POP!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_kkn_add_pop_root"
+              name="Add Pop"
+              action="action_kkn_pop"
+              parent="menu_kkn_pop_operation_root"
+              sequence="0"/>
+
+</odoo>

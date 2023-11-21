@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="update_product_template_form_view" model="ir.ui.view">
+        <field name="name">update.product.template.form.view</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//form[1]/sheet[1]/notebook[1]/page[5]" position="after">
+                <page string="Specification" name="specification" class="page_sales">
+                    <group>
+                        <group>
+                            <field name="equipment_type" force_save="1" />
+                            <field name="type_manageable" force_save="1" />
+                            <field name="power_type" force_save="1" />
+                            <label for="total_ampere" />
+                            <div class="o_row">
+                                <field name="total_ampere" force_save="1" />
+                                <field name="ampere_uom1" placeholder="UoM" force_save="True"
+                                    domain="[('name','=','Ampere')]"
+                                    options='{"no_open": True, "no_create": True, "no_edit": True}' />
+                            </div>
+                            <label for="running_load" />
+                            <div class="o_row">
+                                <field name="running_load" force_save="1" />
+                                <field name="ampere_uom2" placeholder="UoM" force_save="1"
+                                    domain="[('name','=','Ampere')]"
+                                    options='{"no_open": True, "no_create": True, "no_edit": True}' />
+                            </div>
+                            <label for="rated_load" />
+                            <div class="o_row">
+                                <field name="rated_load" force_save="1" />
+                                <field name="ampere_uom3" placeholder="UoM" force_save="1"
+                                    domain="[('name','=','Ampere')]"
+                                    options='{"no_open": True, "no_create": True, "no_edit": True}' />
+                            </div>
+                        </group>
+                        <group>
+                            <field name="is_tower"
+                                invisible="is_rack == True"
+                                force_save="1" />
+                            <field name="is_rack"
+                                invisible="is_tower == True"
+                                force_save="1" />
+                            <field name="rack_mountable"
+                                invisible="is_rack == True or is_tower == True" force_save="1" />
+
+                            <label for="rack_space"
+                                invisible="rack_mountable == 'no' or is_tower == True"
+                            />
+                            <div class="o_row"
+                                invisible="rack_mountable == 'no' or is_tower == True"
+                                force_save="1">
+                                <field name="rack_space"
+                                    invisible="rack_mountable == 'no'"
+                                    force_save="1" />
+                                <field name="rack_space_uom" placeholder="UoM" force_save="True"
+                                    domain="[('name','=','U')]"
+                                    options='{"no_open": True, "no_create": True, "no_edit": True}'
+                                    invisible="rack_mountable == 'no'" />
+                            </div>
+                        </group>
+                    </group>
+
+                    <group>
+                        <group invisible="equipment_type in ('wireless','radio')">
+                            <field name="uplink_port_type" string="Uplink Port Type"
+                                readonly="uplink_switch_button == True"
+                                force_save="True" />
+                            <field name="uplink_electric_optic"
+                                readonly="uplink_switch_button == True"
+                                invisible="uplink_port_type == False"
+                                force_save="True" />
+                            <field name="uplink_quantity" string="Uplink Port Quantity"
+                                readonly="uplink_switch_button == True"
+                                invisible="uplink_port_type == False"
+                                force_save="True" />
+                            <field name="uplink_port_name"
+                                required="uplink_port_type != False"
+                                readonly="uplink_switch_button == True"
+                                invisible="uplink_port_type == False"
+                                force_save="True" />
+                            <field name="uplink_switch_button" force_save="1"
+                                invisible="uplink_port_type == False or uplink_port_name == False or uplink_switch_button == True"
+                            />
+                            <h4 invisible="uplink_switch_button == False">
+                                Uplink Switch Ports Created</h4>
+                        </group>
+                        <group invisible="equipment_type in ('wireless','radio')">
+                            <field name="downlink_port_type" string="Downlink Port Type"
+                                readonly="downlink_switch_button == True"
+                                force_save="True" />
+                            <field name="downlink_electric_optic"
+                                readonly="downlink_switch_button == True"
+                                invisible="downlink_port_type == False"
+                                force_save="True" />
+                            <field name="downlink_quantity" string="Downlink Port Quantity"
+                                readonly="downlink_switch_button == True"
+                                invisible="downlink_port_type == False"
+                                force_save="True" />
+                            <field name="downlink_port_name"
+                                required="downlink_port_type != False"
+                                readonly="downlink_switch_button == True"
+                                invisible="downlink_port_type == False"
+                                force_save="True" />
+                            <field name="downlink_switch_button"
+                                invisible="downlink_port_type == False or downlink_port_name == False or downlink_switch_button == True"
+                                force_save="1" />
+                            <h4 invisible="downlink_switch_button == False">Downlink
+                                Switch Ports
+                                Created</h4>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+
+
+</odoo>
