@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+
+    <record id="hr_leave_view_form_manager_inherit" model="ir.ui.view">
+      <field name="name">hr.leave.view.form.manager.inherit</field>
+      <field name="model">hr.leave</field>
+      <field name="inherit_id" ref="hr_holidays.hr_leave_view_form_manager" />
+      <field name="arch" type="xml">
+        <xpath expr="//sheet[1]/div[2]/div[1]/group[1]/field[@name='employee_ids']"
+          position="attributes">
+          <!-- Add or update attributes here -->
+          <attribute name="options">{'no_quick_create': True, 'no_create_edit': True,
+            'no_open':
+            True,
+            'no_create': True, 'no_edit': True}
+          </attribute>
+
+
+        </xpath>
+      </field>
+
+
+    </record>
+    <record id="hr_leave_allocation_view_form_manager_inherit" model="ir.ui.view">
+      <field name="name">hr.leave.allocation.view.form.manager.inherit</field>
+      <field name="model">hr.leave.allocation</field>
+      <field name="inherit_id" ref="hr_holidays.hr_leave_allocation_view_form_manager" />
+      <field name="arch" type="xml">
+        <!-- Use XPath to target and modify the elements you want to change -->
+        <xpath expr="//field[@name='employee_ids']" position="attributes">
+          <attribute name="options">{'no_quick_create': True, 'no_create_edit': True,
+            'no_open':
+            True,
+            'no_create': True, 'no_edit': True}
+          </attribute>
+        </xpath>
+
+        <xpath expr="//field[@name='accrual_plan_id']" position="attributes">
+          <attribute name="options">{'no_quick_create': True, 'no_create_edit': True,
+            'no_open':
+            True,
+            'no_create': True, 'no_edit': True}
+          </attribute>
+        </xpath>
+      </field>
+    </record>
+
+    <record id="hr_leave_allocation_view_form_inherit" model="ir.ui.view">
+      <field name="name">hr.leave.allocation.view.form.inherit</field>
+      <field name="model">hr.leave.allocation</field>
+      <field name="inherit_id" ref="hr_holidays.hr_leave_allocation_view_form" />
+      <field name="arch" type="xml">
+        <!-- Use XPath to target and modify the elements you want to change -->
+        <xpath expr="//field[@name='holiday_status_id']" position="attributes">
+          <attribute name="options">{'no_quick_create': True, 'no_create_edit': True,
+            'no_open':
+            True,
+            'no_create': True, 'no_edit': True}
+          </attribute>
+        </xpath>
+
+        <xpath expr="//field[@name='accrual_plan_id']" position="attributes">
+          <attribute name="options">{'no_quick_create': True, 'no_create_edit': True,
+            'no_open':
+            True,
+            'no_create': True, 'no_edit': True}
+          </attribute>
+        </xpath>
+      </field>
+    </record>
+  </data>
+</odoo>

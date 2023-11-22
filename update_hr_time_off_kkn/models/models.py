@@ -3,9 +3,9 @@
 # from odoo import models, fields, api
 
 
-# class update_time_off_kkn(models.Model):
-#     _name = 'update_time_off_kkn.update_time_off_kkn'
-#     _description = 'update_time_off_kkn.update_time_off_kkn'
+# class update_hr_time_off_kkn(models.Model):
+#     _name = 'update_hr_time_off_kkn.update_hr_time_off_kkn'
+#     _description = 'update_hr_time_off_kkn.update_hr_time_off_kkn'
 
 #     name = fields.Char()
 #     value = fields.Integer()
