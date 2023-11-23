@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="resource_resource_form_inherit" model="ir.ui.view">
+        <field name="name">resource.resource.form.inherit</field>
+        <field name="model">resource.resource</field>
+        <field name="inherit_id" ref="resource.resource_resource_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='calendar_id']" position="attributes">
+                <!-- Add or update attributes here -->
+                <attribute name="options">{'no_create': True, 'no_open': True}</attribute>
+            </xpath>
+            <xpath expr="//sheet[1]/group[1]/group[1]/field[@name='company_id']"
+                position="attributes">
+                <!-- Add or update attributes here -->
+                <attribute name="options"> {'no_create_edit': True, 'no_create': True, 'no_open':
+                    True,
+                    'no_quick_create':
+                    True,'no_edit': True}</attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

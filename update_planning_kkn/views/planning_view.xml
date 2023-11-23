@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+    <record id="planning_slot_form_view_inherit" model="ir.ui.view">
+      <field name="name">planning.slot.form.view.inherit</field>
+      <field name="model">planning.slot</field>
+      <field name="inherit_id" ref="planning.planning_view_form" />
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='resource_id']" position="replace">
+          <field name="resource_id"
+            context="{'search_view_ref': 'planning.resource_resource_search_view_roles', 'search_default_role_ids': role_id, 'from_planning': True, 'show_job_title': True, 'tree_view_ref': 'planning.resource_resource_tree_view_inherit'}"
+            options="{'no_create_edit': True, 'no_create': True, 'no_open': True, 'no_quick_create': True,'no_edit': True}"
+            readonly="not start_datetime or not end_datetime" widget="many2one_avatar_resource"
+            placeholder="Open Shift" />
+        </xpath>
+        <xpath expr="//field[@name='role_id']" position="attributes">
+          <attribute name="options">
+            {'no_create_edit': True, 'no_create': True, 'no_open': True, 'no_quick_create':
+            True,'no_edit': True}
+          </attribute>
+        </xpath>
+
+        <xpath expr="//field[@name='company_id']" position="attributes">
+          <attribute name="options">
+            {'no_create_edit': True, 'no_create': True, 'no_open': True, 'no_quick_create':
+            True,'no_edit': True}
+          </attribute>
+        </xpath>
+      </field>
+    </record>
+
+
+  </data>
+</odoo>
