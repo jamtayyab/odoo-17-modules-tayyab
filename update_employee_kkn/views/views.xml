@@ -1,0 +1,182 @@
+<odoo>
+    <data>
+        <record id="hr_view_employee_form_inherit" model="ir.ui.view">
+            <field name="name">hr.employee.form.inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//sheet/group/group[1]/field[@name='company_id']" position="before">
+                    <field name="station_id"
+                           options="{'no_quick_create': True,
+                'no_create_edit': True ,
+                'no_open' : True ,
+                 'no_create': True, 'no_edit': True
+                }"
+                    />
+                </xpath>
+
+                <xpath expr="//sheet/group/group[1]/field[@name='company_id']" position="attributes">
+                    <attribute name="options">
+                        {'no_quick_create': True,
+                        'no_create_edit': True ,
+                        'no_open' : True ,
+                        'no_create': True, 'no_edit': True
+                        }
+                    </attribute>
+                </xpath>
+
+                <xpath expr="//sheet/group/group[2]/field[@name='department_id']" position="attributes">
+                    <attribute name="options">
+                        {'no_quick_create': True,
+                        'no_create_edit': True ,
+                        'no_open' : True ,
+                        'no_create': True, 'no_edit': True
+                        }
+                    </attribute>
+                </xpath>
+
+                <xpath expr="//sheet/group/group[2]/field[@name='job_id']" position="attributes">
+                    <attribute name="options">
+                        {'no_quick_create': True,
+                        'no_create_edit': True ,
+                        'no_open': True, 'no_create': True, 'no_edit': True
+                        }
+                    </attribute>
+                </xpath>
+
+                <xpath expr="//sheet/group/group[2]/field[@name='parent_id']" position="attributes">
+                    <attribute name="options">
+                        {'no_quick_create': True,
+                        'no_create_edit': True ,
+                        'no_open': True, 'no_create': True, 'no_edit': True
+                        }
+                    </attribute>
+                </xpath>
+
+                <xpath expr="//sheet/group/group[2]/field[@name='coach_id']" position="attributes">
+                    <attribute name="options">
+                        {'no_quick_create': True,
+                        'no_create_edit': True ,
+                        'no_open': True, 'no_create': True, 'no_edit': True
+                        }
+                    </attribute>
+                </xpath>
+
+                <xpath expr="//sheet/notebook/page[@name='public']//field[@name='address_id']" position="attributes">
+                    <attribute name="options">{'no_quick_create': True, 'no_create_edit': True, 'no_open': True,
+                        'no_create': True, 'no_edit': True}
+                    </attribute>
+                </xpath>
+
+                <xpath expr="//sheet/notebook/page[@name='public']//field[@name='work_location_id']"
+                       position="attributes">
+                    <attribute name="options">{'no_quick_create': True, 'no_create_edit': True, 'no_open': True,
+                        'no_create': True, 'no_edit': True}
+                    </attribute>
+                </xpath>
+
+                <xpath expr="//sheet/notebook/page[@name='public']//field[@name='resource_calendar_id']"
+                       position="attributes">
+                    <attribute name="options">{'no_quick_create': True, 'no_create_edit': True, 'no_open': True,
+                        'no_create': True, 'no_edit': True}
+                    </attribute>
+                </xpath>
+                <xpath expr="//sheet/notebook/page[@name='personal_information']//field[@name='private_state_id']"
+                       position="attributes">
+                    <attribute name="options">{'no_quick_create': True, 'no_create_edit': True, 'no_open': True,
+                        'no_create': True, 'no_edit': True}
+                    </attribute>
+                </xpath>
+                <xpath expr="//sheet/notebook/page[@name='personal_information']//field[@name='country_of_birth']"
+                       position="attributes">
+                    <attribute name="options">{'no_quick_create': True, 'no_create_edit': True, 'no_open': True,
+                        'no_create': True, 'no_edit': True}
+                    </attribute>
+                </xpath>
+                <xpath expr="//sheet/notebook/page[@name='hr_settings']//field[@name='user_id']"
+                       position="attributes">
+                    <attribute name="options">{'no_quick_create': True, 'no_create_edit': True, 'no_open': True,
+                        'no_create': True, 'no_edit': True}
+                    </attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="hr_view_employee_planning_form_inherit" model="ir.ui.view">
+            <field name="name">hr.employee.planning.form.inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="planning.hr_employee_view_form_inherit"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='planning_role_ids']" position="attributes">
+                    <attribute name="options">{'no_quick_create': True, 'no_create_edit': True, 'no_open': True,
+                        'no_create': True, 'no_edit': True}
+                    </attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='default_planning_role_id']" position="attributes">
+                    <attribute name="options">{'no_quick_create': True, 'no_create_edit': True, 'no_open': True,
+                        'no_create': True, 'no_edit': True}
+                    </attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+
+        <record id="hr_view_employee_leave_form_inherit" model="ir.ui.view">
+            <field name="name">hr.employee.leave.form.inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr_holidays.view_employee_form_leave_inherit"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='leave_manager_id']" position="attributes">
+                    <attribute name="options">{'no_quick_create': True, 'no_create_edit': True, 'no_open': True,
+                        'no_create': True, 'no_edit': True}
+                    </attribute>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="hr_view_resume_line_form_inherit" model="ir.ui.view">
+            <field name="name">hr.resume.line.form.inherit</field>
+            <field name="model">hr.resume.line</field>
+            <field name="inherit_id" ref="hr_skills.resume_line_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='employee_id']" position="attributes">
+                    <attribute name="options">{'no_quick_create': True, 'no_create_edit': True, 'no_open': True,
+                        'no_create': True, 'no_edit': True}
+                    </attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="hr_view_department_form_inherit" model="ir.ui.view">
+            <field name="name">hr.department.form.inherit</field>
+            <field name="model">hr.department</field>
+            <field name="inherit_id" ref="hr.view_department_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group//field[@name='manager_id']" position="attributes">
+                    <attribute name="options">{'no_quick_create': True, 'no_create_edit': True, 'no_open': True,
+                        'no_create': True, 'no_edit': True}
+                    </attribute>
+                </xpath>
+
+                <xpath expr="//sheet/group//field[@name='parent_id']" position="attributes">
+                    <attribute name="options">{'no_quick_create': True, 'no_create_edit': True, 'no_open': True,
+                        'no_create': True, 'no_edit': True}
+                    </attribute>
+                </xpath>
+
+                <xpath expr="//sheet/group//field[@name='child_ids']" position="attributes">
+                    <attribute name="options">{'no_quick_create': True, 'no_create_edit': True, 'no_open': True,
+                        'no_create': True, 'no_edit': True}
+                    </attribute>
+                </xpath>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

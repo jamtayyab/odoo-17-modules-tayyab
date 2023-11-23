@@ -1,0 +1,209 @@
+<odoo>
+    <data>
+
+        <record id="update_sale_view_form_inherit" model="ir.ui.view">
+            <field name="name">update_sale_view_form_inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref='sale.view_order_form'/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet//field[@name='partner_id']" position="attributes">
+                    <attribute name="options">
+                        {
+                        'no_quick_create': True,
+                        }
+                    </attribute>
+                </xpath>
+
+
+                <xpath expr="//sheet//field[@name='partner_invoice_id']" position="attributes">
+                    <attribute name="options">
+                        {
+                        'no_quick_create': True,
+                        }
+                    </attribute>
+                </xpath>
+
+                <xpath expr="//sheet//field[@name='partner_shipping_id']" position="attributes">
+                    <attribute name="options">
+                        {
+                        'no_quick_create': True,
+                        }
+                    </attribute>
+                </xpath>
+
+
+                <xpath expr="//sheet//page[@name='order_lines']//field[@name='product_id']" position="attributes">
+                    <attribute name="options">
+                        {
+                        'no_edit': True,
+                        'no_open': True,
+                        'no_create': True,
+                        'no_create_edit': True,
+                        'no_quick_create': True,
+                        }
+                    </attribute>
+                </xpath>
+
+
+                <xpath expr="//sheet/notebook//page[@name='order_lines']//field[@name='product_template_id']"
+                       position="attributes">
+                    <attribute name="options">
+                        {
+                        'no_edit': True,
+                        'no_open': True,
+                        'no_create': True,
+                        'no_create_edit': True,
+                        'no_quick_create': True,
+                        }
+                    </attribute>
+                </xpath>
+
+
+                <xpath expr="//sheet/notebook/page[@name='order_lines']//field[@name ='order_line']/tree/field[@name='product_uom'][2]"
+                       position="attributes">
+                    <attribute name="options">
+                        {
+                        'no_edit': True,
+                        'no_open': True,
+                        'no_create': True,
+                        'no_create_edit': True,
+                        'no_quick_create': True,
+                        }
+                    </attribute>
+                </xpath>
+
+                <xpath expr="//sheet/notebook/page[@name='other_information']//field[@name ='user_id']"
+                       position="attributes">
+                    <attribute name="options">
+                        {
+                        'no_edit': True,
+                        'no_open': True,
+                        'no_create': True,
+                        'no_create_edit': True,
+                        'no_quick_create': True,
+                        }
+                    </attribute>
+                </xpath>
+
+
+                <xpath expr="//sheet/notebook/page[@name='other_information']//field[@name ='tag_ids']"
+                       position="attributes">
+                    <attribute name="options">
+                        {
+                        'no_edit': True,
+                        'no_open': True,
+                        'no_create': True,
+                        'no_create_edit': True,
+                        'no_quick_create': True,
+                        }
+                    </attribute>
+                </xpath>
+
+                <xpath expr="//sheet/notebook/page[@name='other_information']//group[@name='sale_info']//field[@name ='journal_id']"
+                       position="attributes">
+                    <attribute name="options">
+                        {
+                        'no_edit': True,
+                        'no_open': True,
+                        'no_create': True,
+                        'no_create_edit': True,
+                        'no_quick_create': True,
+                        }
+                    </attribute>
+                </xpath>
+
+                <xpath expr="//sheet/notebook/page[@name='other_information']//group[@name='sale_reporting']//field[@name ='opportunity_id']"
+                       position="attributes">
+                    <attribute name="options">
+                        {
+                        'no_edit': True,
+                        'no_open': True,
+                        'no_create': True,
+                        'no_create_edit': True,
+                        'no_quick_create': True,
+                        }
+                    </attribute>
+                </xpath>
+
+                <xpath expr="//sheet/notebook/page[@name='other_information']//group[@name='sale_reporting']//field[@name ='campaign_id']"
+                       position="attributes">
+                    <attribute name="options">
+                        {
+                        'no_edit': True,
+                        'no_open': True,
+                        'no_create': True,
+                        'no_create_edit': True,
+                        'no_quick_create': True,
+                        }
+                    </attribute>
+                </xpath>
+
+                <xpath expr="//sheet/notebook/page[@name='other_information']//group[@name='sale_reporting']//field[@name ='medium_id']"
+                       position="attributes">
+                    <attribute name="options">
+                        {
+                        'no_edit': True,
+                        'no_open': True,
+                        'no_create': True,
+                        'no_create_edit': True,
+                        'no_quick_create': True,
+                        }
+                    </attribute>
+                </xpath>
+
+                <xpath expr="//sheet/notebook/page[@name='other_information']//group[@name='sale_reporting']//field[@name ='source_id']"
+                       position="attributes">
+                    <attribute name="options">
+                        {
+                        'no_edit': True,
+                        'no_open': True,
+                        'no_create': True,
+                        'no_create_edit': True,
+                        'no_quick_create': True,
+                        }
+                    </attribute>
+                </xpath>
+
+
+            </field>
+        </record>
+
+        <record id="update_sale_order_form_inherit" model="ir.ui.view">
+            <field name="name">update_sale_order_form_inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref='sale_management.sale_order_form_quote'/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='optional_products']/field/tree//field[@name ='product_id']"
+                       position="attributes">
+                    <attribute name="options">
+                        {
+                        'no_edit': True,
+                        'no_open': True,
+                        'no_create': True,
+                        'no_create_edit': True,
+                        'no_quick_create': True,
+                        }
+                    </attribute>
+                </xpath>
+
+
+                <xpath expr="//page[@name='optional_products']/field/tree//field[@name ='uom_id']"
+                       position="attributes">
+                    <attribute name="options">
+                        {
+                        'no_edit': True,
+                        'no_open': True,
+                        'no_create': True,
+                        'no_create_edit': True,
+                        'no_quick_create': True,
+                        }
+                    </attribute>
+                </xpath>
+
+
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

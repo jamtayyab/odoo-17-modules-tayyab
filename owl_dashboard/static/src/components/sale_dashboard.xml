@@ -24,9 +24,11 @@
                 <div class="row">
                     <KpiCard name="'Quotations'" onClick.bind="viewQuotation" percentage="state.quotation.percentage"    value="state.quotation.value"
                     />
-                    <KpiCard name="'Orders'"   percentage="state.orders.percentage"  value="state.orders.value"/>  
-                    <KpiCard name="'Revenues'" percentage="state.orders.revenue_percentage"  value="state.orders.revenue"/>
-                    <KpiCard name="'Average Order'" percentage="state.orders.average_percentage"  value="state.orders.average"/>
+                    <KpiCard name="'Orders'" onClick.bind="viewOrders"  percentage="state.orders.percentage"  value="state.orders.value"/>  
+                    <KpiCard name="'Revenues'" onClick.bind="viewRevenue" percentage="state.orders.revenue_percentage"  value="state.orders.revenue"/>
+                    <KpiCard name="'Average Order'" 
+                    onClick.bind="viewRevenue"
+                    percentage="state.orders.average_percentage"  value="state.orders.average"/>
                             <!-- <KpiCard name="'Quotations'" /> -->
                     </div>
                 
@@ -41,7 +43,9 @@
                                             <span class="fa fa-arrow-right text-white"/>
                                         </div>
                                     </div>
-                                    <ChartRenderer type="'doughnut'" title="'Top Products'" />
+                                    <ChartRenderer type="'doughnut'" title="'Top Products'"
+                                    config="state.topProduct"
+                                    />
 
                                 <!-- <ChartRenderer type="'doughnut'" title="'Top Products
                                 Report'"/> -->
@@ -57,7 +61,7 @@
                                             <span class="fa fa-arrow-right text-white"/>
                                         </div>
                                     </div>
-                                    <ChartRenderer type="'pie'" title="'Top Products'" />
+                                    <ChartRenderer type="'pie'" title="'Top Sales'" config="state.toSalesPeople"/>
 
                                 <!-- <ChartRenderer type="'doughnut'" title="'Top Products
                                 Report'"/> -->
@@ -79,7 +83,8 @@
                                     <span class="fa fa-arrow-right text-white"/>
                                 </div>
                             </div>
-                            <ChartRenderer type="'bar'" title="'Top Products'" />
+                            <ChartRenderer type="'bar'" title="'Monthly Sale'" config="state.monthlySales"
+                            />
 
                                 <!-- <ChartRenderer type="'doughnut'" title="'Top Products
                         Report'"/> -->
@@ -95,7 +100,7 @@
                                     <span class="fa fa-arrow-right text-white"/>
                                 </div>
                             </div>
-                            <ChartRenderer type="'line'" title="'Top Products'" />
+                            <ChartRenderer config="state.partnerOrders" type="'bar'" title="'Partner Order'" />
 
                                 <!-- <ChartRenderer type="'doughnut'" title="'Top Products
                         Report'"/> -->

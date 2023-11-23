@@ -1,0 +1,26 @@
+<odoo>
+  <data>
+    <record id="frontdesk_visitor_view_form_inherit" model="ir.ui.view">
+    <field name="name">frontdesk.visitor.view.form.inherit</field>
+    <field name="model">frontdesk.visitor</field>
+    <field name="inherit_id" ref="frontdesk.frontdesk_visitor_view_form"/>
+    <field name="arch" type="xml">
+        <xpath expr="//sheet/group/group[2]/field[@name='station_id']" position="attributes">
+            <attribute name="options">
+            {'no_quick_create': True,
+                'no_create_edit': True ,
+                'no_open' : True ,
+                 'no_create': True, 'no_edit': True
+                }</attribute></xpath>
+
+        <xpath expr="//sheet/group/group[2]/field[@name='host_ids']" position="attributes">
+            <attribute name="options">
+            {'no_quick_create': True,
+                'no_create_edit': True ,
+                'no_open': True, 'no_create': True, 'no_edit': True
+                }</attribute>
+        </xpath>
+    </field>
+    </record>
+  </data>
+</odoo>

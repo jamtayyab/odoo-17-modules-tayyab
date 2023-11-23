@@ -5,12 +5,169 @@ import { ChartRenderer } from "./chart_renderer/chart_renderer";
 import { useService } from "@web/core/utils/hooks";
 const { Component, onWillStart, useRef, onMounted, useState } = owl;
 const { DateTime } = luxon;
+import { getColor } from "@web/core/colors/colors";
 export class OwlSalesDashboard extends Component {
+  async getTopProducts() {
+    let domain = [["state", "in", ["sale"]]];
+    if (this.state.period > 0) {
+      domain.push(["date", ">", this.state.current_date]);
+    }
+    const top_product_data = await this.orm.readGroup(
+      "sale.report",
+      domain,
+      ["product_id", "price_total"],
+      ["product_id"],
+      {limit:4,orderby:"price_total desc"}
+    );
+  
+    this.state.topProduct = {
+      data: {
+        labels: top_product_data.map((d) => d.product_id[1]),
+        datasets: [
+          {
+            label: "Total",
+            data: top_product_data.map((d) => d.price_total),
+            hoverOffset: 4,
+            backgroundColor: top_product_data.map((_, index) =>
+              getColor(index)
+            ),
+          },
+          {
+            label: "Count",
+            data: top_product_data.map((d) => d.product_id_count),
+            hoverOffset: 4,
+            backgroundColor: top_product_data.map((_, index) =>
+              getColor(index)
+            ),
+          },
+        ],
+      },
+    };
+  }
+  async getTopSalesPeople() {
+
+    let domain = [["state", "in", ["sale"]]];
+    if (this.state.period > 0) {
+      domain.push(["date", ">", this.state.current_date]);
+    }
+    const top_sale_person = await this.orm.readGroup(
+      "sale.report",
+      domain,
+      ["user_id", "price_total"],
+      ["user_id"],
+      {limit:4,orderby:"price_total desc"}
+    );
+  
+    this.state.toSalesPeople = {
+      data: {
+        labels: top_sale_person.map((d) => d.user_id[1]),
+        datasets: [
+          {
+            label: "Total",
+            data: top_sale_person.map((d) => d.price_total),
+            hoverOffset: 4,
+            backgroundColor: top_sale_person.map((_, index) =>
+              getColor(index)
+            ),
+          },
+         
+        ],
+      },
+    };
+   
+  }
+  async getMonthlySales() {
+    
+    let domain = [["state", "in", ["draft","sent","sale"]]];
+    if (this.state.period > 0) {
+      domain.push(["date", ">", this.state.current_date]);
+    }
+    const MonthlySales = await this.orm.readGroup(
+      "sale.report",
+      domain,
+      ["date","state", "price_total"],
+      ["date","state"],
+      {orderby:"date",lazy:false}
+    );
+
+    this.state.monthlySales = {
+      data: {
+        labels: [... new Set(MonthlySales.map((d) => d.date))
+        ],
+        datasets: [
+          {
+            label: "Quotation",
+            data: MonthlySales.filter(d=>d.state == 'draft' || d.state == 'sent').map((d) => d.price_total),
+            hoverOffset: 4,
+            backgroundColor:"red"
+            
+          },
+          
+          {
+            label: "Count",
+            data: MonthlySales.filter(d=>['sale'].includes(d.state)).map((d) => d.price_total),
+            hoverOffset: 4,
+            backgroundColor: "green"
+          },
+         
+        ],
+      },
+    };
+  }
+  async getPartnerOrders() {
+    let domain = [["state", "in", ["draft","sent","sale"]]];
+    if (this.state.period > 0) {
+      domain.push(["date", ">", this.state.current_date]);
+    }
+    const partner_id_data = await this.orm.readGroup(
+      "sale.report",
+      domain,
+      ["partner_id", "price_total","product_uom_qty"],
+      ["partner_id"],
+      {orderby:"partner_id",lazy:false}
+    );
+    // console.log(partner_id_data);
+
+    this.state.partnerOrders = {
+      data: {
+        labels: partner_id_data.map(d => d.partner_id[1]),
+        datasets: [
+          {
+            label: "Total Amount",
+            data: partner_id_data.map(d => d.price_total),
+            hoverOffset: 4,
+            backgroundColor:"orange",
+            yAxisID:"Total",
+            order:1
+            
+          },
+          
+          {
+            label: "Ordered QTY",
+            data: partner_id_data.map(d => d.product_uom_qty),
+            hoverOffset: 4,
+            type:"line",
+            backgroundColor: "blue",
+            borderColor:"blue",
+            yAxisID:"Qty",
+            order:0
+
+          },
+          
+         
+        ],
+      },
+      scales:
+          {
+         
+            Qty:{
+              position:"right"
+            }
+          }
+    };
+  }
+
   setup() {
-    // this.ref =useRef("chart")
-    // onWillStart(async ()=>{
-    //     await loadJS("https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js")
-    // })
     this.state = useState({
       quotation: {
         value: 10,
@@ -24,6 +181,10 @@ export class OwlSalesDashboard extends Component {
       this.getDates();
       await this.getQuotation();
       await this.getOrders();
+      await this.getPartnerOrders();
+      await this.getMonthlySales();
+      await this.getTopProducts();
+      await this.getTopSalesPeople();
     });
 
     // })
@@ -85,10 +246,8 @@ export class OwlSalesDashboard extends Component {
     );
     const revenue_percentage =
       ((current_revenue[0].amount_total - prev_revenue[0].amount_total) /
-      prev_revenue[0].amount_total) *
+        prev_revenue[0].amount_total) *
       100;
-
-
 
     //average order value
     const current_average = await this.orm.readGroup(
@@ -134,12 +293,67 @@ export class OwlSalesDashboard extends Component {
     console.log(this.state.current_date, this.state.prev_date);
   }
 
-  viewQuotation(){
-  this.action.doAction("sale.action_quotations_with_onboarding")
-
+  async viewQuotation() {
+    let domain = [["state", "in", ["sent", "draft"]]];
+    if (this.state.period > 0) {
+      domain.push(["date_order", ">", this.state.current_date]);
+    }
+    let action_id = await this.orm.searchRead(
+      "ir.model.data",
+      [["name", "=", "view_quotation_tree_with_onboarding"]],
+      ["res_id"]
+    );
+    this.action.doAction({
+      type: "ir.actions.act_window",
+      name: "Quotations",
+      res_model: "sale.order",
+      domain,
+      views: [
+        [action_id.length > 0 ? action_id[0].res_id : false, "list"],
+        [false, "form"],
+      ],
+    });
   }
-}
 
+  viewOrders() {
+    let domain = [["state", "in", ["sale"]]];
+    if (this.state.period > 0) {
+      domain.push(["date_order", ">", this.state.current_date]);
+    }
+    this.action.doAction({
+      type: "ir.actions.act_window",
+      name: "Orders",
+      res_model: "sale.order",
+      domain,
+      context: { group_by: "date_order" },
+      views: [
+        [false, "list"],
+        [false, "form"],
+      ],
+    });
+  }
+
+  viewRevenue() {
+    let domain = [["state", "in", ["sale"]]];
+    if (this.state.period > 0) {
+      domain.push(["date_order", ">", this.state.current_date]);
+    }
+    this.action.doAction({
+      type: "ir.actions.act_window",
+      name: "Orders",
+      res_model: "sale.order",
+      domain,
+      context: { group_by: "date_order" },
+      views: [
+        [false, "pivot"],
+        [false, "form"],
+      ],
+    });
+  }
+  // viewQuotation() {
+  //   this.action.doAction("sale.action_orders");
+  // }
+}
 
 OwlSalesDashboard.template = "owl_dashboard.OwlSalesDashboard";
 OwlSalesDashboard.components = { KpiCard, ChartRenderer };

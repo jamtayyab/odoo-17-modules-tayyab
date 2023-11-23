@@ -13,28 +13,15 @@ export class ChartRenderer extends Component {
         onMounted(()=>this.renderChart())
     }
 
-    renderChart(){
+    async renderChart(){
         new Chart(this.chartRef.el,
         {
           type: this.props.type,
-          data: {
-            labels: [
-                'Red',
-                'Blue',
-                'Yellow'
-              ],
-              datasets: [
-              {
-                label: 'My First Dataset',
-                data: [300, 50, 100],
-                hoverOffset: 4
-              },{
-                label: 'My Second Dataset',
-                data: [100, 70, 150],
-                hoverOffset: 4
-              }]
-          },
+          data: await this.props.config.data,
           options: {
+            // onclick:(e)=>{
+
+            // }
             responsive: true,
             plugins: {
               legend: {
@@ -45,7 +32,8 @@ export class ChartRenderer extends Component {
                 text: this.props.title,
                 position: 'bottom',
               }
-            }
+            },
+            scales:'scales' in this.props.config ? this.props.config.scales : {},
           },
         }
       );
