@@ -94,6 +94,10 @@ export class OwlSalesDashboard extends Component {
       {orderby:"date",lazy:false}
     );
 
+    // const labels = [... new Set (data.map(d => d.date))]
+    // const quotations = data.filter(d => d.state == 'draft' || d.state == 'sent')
+    // const orders = data.filter(d => ['sale', 'done'].includes(d.state))
+
     this.state.monthlySales = {
       data: {
         labels: [... new Set(MonthlySales.map((d) => d.date))
@@ -108,7 +112,7 @@ export class OwlSalesDashboard extends Component {
           },
           
           {
-            label: "Count",
+            label: "Orders",
             data: MonthlySales.filter(d=>['sale'].includes(d.state)).map((d) => d.price_total),
             hoverOffset: 4,
             backgroundColor: "green"
