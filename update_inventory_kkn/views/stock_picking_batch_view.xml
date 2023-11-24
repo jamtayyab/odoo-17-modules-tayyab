@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- primary|extension Inherited .:Tree:. view for "model" -->
+    <record id="stock_picking_batch_form_view_inherit" model="ir.ui.view">
+        <field name="name">stock.picking.batch.form.view.inherit</field>
+        <field name="model">stock.picking.batch</field>
+        <field name="inherit_id" ref="stock_picking_batch.stock_picking_batch_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="attributes">
+                <attribute name="options">{'no_quick_create': True, 'no_create_edit': True,
+                    'no_open':
+                    True,
+                    'no_create': True, 'no_edit': True}
+                </attribute>
+            </xpath>
+            <xpath expr="//field[@name='picking_type_id']" position="attributes">
+                <attribute name="options">{'no_quick_create': True, 'no_create_edit': True,
+                    'no_open':
+                    True,
+                    'no_create': True, 'no_edit': True}
+                </attribute>
+            </xpath>
+            <xpath expr="//sheet/group//field[@name='company_id']" position="attributes">
+                <attribute name="options">{'no_quick_create': True, 'no_create_edit': True,
+                    'no_open':
+                    True,
+                    'no_create': True, 'no_edit': True}
+                </attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

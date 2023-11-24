@@ -15,7 +15,13 @@
     "category": "Customizations",
     "version": "17.0.0.0",
     # any module necessary for this one to work correctly
-    "depends": ["base", "stock", "update_contact_kkn", "base_geolocalize"],
+    "depends": [
+        "base",
+        "stock",
+        "update_contact_kkn",
+        "base_geolocalize",
+        "stock_picking_batch",
+    ],
     # always loaded
     "data": [
         "security/ir.model.access.csv",
@@ -28,6 +34,7 @@
         "views/stock_warehouse_orderpoint_view.xml",
         "views/stock_quant_package_view.xml",
         "views/stock_lot_view.xml",
+        "views/stock_picking_batch_view.xml",
         # "views/switchport_view.xml",
         # "views/update_location.xml",
         # "views/update_contact_stock_location_view.xml",

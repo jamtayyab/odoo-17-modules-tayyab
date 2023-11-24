@@ -42,6 +42,8 @@ export class OwlSalesDashboard extends Component {
           },
         ],
       },
+      domain,
+      label_field:'product_id'
     };
   }
   async getTopSalesPeople() {
@@ -73,6 +75,8 @@ export class OwlSalesDashboard extends Component {
          
         ],
       },
+      domain,
+      label_field:'user_id'
     };
    
   }
@@ -112,6 +116,8 @@ export class OwlSalesDashboard extends Component {
          
         ],
       },
+      domain,
+      label_field:'date'
     };
   }
   async getPartnerOrders() {
@@ -163,7 +169,9 @@ export class OwlSalesDashboard extends Component {
             Qty:{
               position:"right"
             }
-          }
+          },
+          domain,
+          label_field:'partner_id'
     };
   }
 
