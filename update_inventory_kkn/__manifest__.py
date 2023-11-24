@@ -23,6 +23,11 @@
         "views/views.xml",
         "views/templates.xml",
         "views/product_template_view.xml",
+        "views/stock_picking_view.xml",
+        "views/stock_scrap_view.xml",
+        "views/stock_warehouse_orderpoint_view.xml",
+        "views/stock_quant_package_view.xml",
+        "views/stock_lot_view.xml",
         # "views/switchport_view.xml",
         # "views/update_location.xml",
         # "views/update_contact_stock_location_view.xml",
@@ -32,4 +37,5 @@
         "demo/demo.xml",
     ],
     "license": "LGPL-3",
+    "application": True,
 }
