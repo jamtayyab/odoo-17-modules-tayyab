@@ -94,18 +94,18 @@ export class OwlSalesDashboard extends Component {
       {orderby:"date",lazy:false}
     );
 
-    // const labels = [... new Set (data.map(d => d.date))]
-    // const quotations = data.filter(d => d.state == 'draft' || d.state == 'sent')
-    // const orders = data.filter(d => ['sale', 'done'].includes(d.state))
+    const labels = [... new Set (MonthlySales.map(d => d.date))]
+    const quotations = MonthlySales.filter(d => d.state == 'draft' || d.state == 'sent')
+    const orders = MonthlySales.filter(d => ['sale','done'].includes(d.state))
 
     this.state.monthlySales = {
       data: {
-        labels: [... new Set(MonthlySales.map((d) => d.date))
-        ],
+        labels: labels
+        ,
         datasets: [
           {
-            label: "Quotation",
-            data: MonthlySales.filter(d=>d.state == 'draft' || d.state == 'sent').map((d) => d.price_total),
+            label: "Quotations",
+            data: labels.map(l=>quotations.filter (q=>l==q.date).map (j=>j. price_total).reduce ((a, c) => a+c, 0)),
             hoverOffset: 4,
             backgroundColor:"red"
             
@@ -113,7 +113,7 @@ export class OwlSalesDashboard extends Component {
           
           {
             label: "Orders",
-            data: MonthlySales.filter(d=>['sale'].includes(d.state)).map((d) => d.price_total),
+            data: labels.map(l=>orders.filter(q=>l==q.date).map (j=>j.price_total).reduce ((a, c) => a+c, 0)),
             hoverOffset: 4,
             backgroundColor: "green"
           },
