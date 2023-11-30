@@ -9,7 +9,7 @@
     "author": "KKN Developers",
     "maintainers": ["Muhammad Tayyab", "Muhammad Muzafar", "Muhammad Husnain"],
     "website": "https://www.kknetworks.com.pk",
-    "depends": ["base", "contacts"],
+    "depends": ["base", "contacts", "base_vat"],
     "data": [
         "security/ir.model.access.csv",
         "data/sequence_data.xml",

@@ -102,19 +102,26 @@
 
                 </xpath>
 
-
                 <!--
                    Following VAT was changed to NTN/PSTN with help of  Placeholder.
                    VAT ->  NTN/PSTN
                    -->
 
-                <xpath expr="//field[@name='vat']" position="attributes">
-                    <attribute name="string">NTN/PSTN</attribute>
-                    <attribute name="invisible">"tax_status == 'unregistered'"</attribute>
+
+                <xpath expr="//label[@for='vat']" position="before">
+                    <field
+                        name="tax_status" widget="radio"
+                        options="{'horizontal': True}" />
+                </xpath>
+
+                <xpath expr="//sheet[1]/group[1]/group[1]//field[@name='vat']" position="replace">
+                    <field name="vat" placeholder="NTN/PSTN"
+                        required="tax_status == 'registered'"
+                    />
                 </xpath>
 
 
-                <xpath expr="//field[@name='vat']" position="before">
+                <xpath expr="//label[@for='vat']" position="before">
                     <field name="cnic" placeholder="00000-0000000-0"
                         invisible="contact_type != 'customer'"
                         required="contact_type == 'customer'"
@@ -122,22 +129,22 @@
                 </xpath>
 
 
-                <xpath expr="//field[@name='vat']" position="after">
+                <xpath expr="//label[@for='vat']" position="before">
                     <field name="gstn" placeholder="00-0000-00000-0"
                         readonly="parent_id != False"
                         invisible="tax_status == 'unregistered'"
                         required="tax_status == True"
                     />
-                    <field
-                        name="tax_status" widget="radio" options="{'horizontal': True}" />
-
-                    <!-- <field name="reseller" widget="radio" options="{'horizontal':True}" /> -->
 
                 </xpath>
+
                 <xpath expr="//field[@name='tax_status']" position="after">
                     <field name="pta_registered" widget="radio"
-                        invisible="tax_status == 'unregistered'" />
+                        invisible="tax_status == 'unregistered'"
+                        options="{'horizontal': True}"
+                    />
                 </xpath>
+
                 <xpath
                     expr="//page[@name='contact_addresses']/field[@name='child_ids']/form/sheet/field[@name='type']"
                     position="before">
@@ -228,26 +235,16 @@
             </field>
         </record>
 
-        <!-- filter in search views  -->
-
-        <!-- <record id="view_res_partner_search_inherit" model="ir.ui.view">
-            <field name="name">res.partner.select.inherit</field>
+        <record id="view_res_partner_tree_inherit" model="ir.ui.view">
+            <field name="name">res.partner.tree.inherit</field>
             <field name="model">res.partner</field>
-            <field name="inherit_id" ref="base.view_res_partner_filter" />
+            <field name="inherit_id" ref="base.view_partner_tree" />
             <field name="arch" type="xml">
-                <xpath expr="//search/filter[@name='type_person']" position="after">
-                    <filter string="Master Dealers" name="master_dealer"
-                        domain="[('contact_sub_type','=','5')]" />
-                    <filter string="Dealers" name="dealer" domain="[('contact_sub_type','=','6')]" />
-                    <filter string="Sub Dealers" name="sub_dealer"
-                        domain="[('contact_sub_type','=','7')]" />
-                    <filter string="Panel Users" name="panel_users"
-                        domain="[('contact_sub_type','=','8')]" />
-                    <filter string="Residential" name="residential_users"
-                        domain="[('contact_sub_type','=','customer')]" />
+                <xpath expr="//field[@name='display_name']" position="before">
+                    <field name="unique_id" string="Unique ID" />
                 </xpath>
             </field>
 
-        </record> -->
+        </record>
     </data>
 </odoo>

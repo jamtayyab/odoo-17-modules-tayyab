@@ -9,11 +9,19 @@
     "author": "KKN Developers",
     "maintainers": ["Muhammad Tayyab", "Muhammad Muzafar", "Muhammad Husnain"],
     "website": "https://www.kknetworks.com.pk",
-    "depends": ["base", "hr", "update_contact_kkn", "planning","hr_holidays","hr_skills"],
+    "depends": [
+        "base",
+        "hr",
+        "update_contact_kkn",
+        "hr_holidays",
+        "hr_skills",
+        "product",
+        "stock",
+    ],
     "data": [
         # "security/ir.model.access.csv",
         "views/views.xml",
-        'views/templates.xml',
+        "views/templates.xml",
     ],
     "external_dependencies": {
         "python": [],

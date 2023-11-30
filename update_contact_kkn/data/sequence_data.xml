@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <data>
+    <data noupdate="1">
         <record id="sq_residentail" model="ir.sequence">
             <field name="name">Residentail Sequenece</field>
             <field name="code">res.partner.residential</field>
             <field name="prefix">RES-</field>
-            <field name="padding">5</field>
+            <field name="padding">4</field>
+            <field name="number_next_actual">1501</field>
             <field name="company_id" eval="False" />
         </record>
 
@@ -13,72 +14,78 @@
             <field name="name">Small Business</field>
             <field name="code">res.partner.small.business</field>
             <field name="prefix">SMB-</field>
-            <field name="padding">5</field>
+            <field name="padding">4</field>
+            <field name="number_next_actual">1501</field>
             <field name="company_id" eval="False" />
         </record>
         <record id="sq_installation_poc" model="ir.sequence">
             <field name="name">Installation POC sequence</field>
             <field name="code">res.partner.installation.poc</field>
             <field name="prefix">INPOC-</field>
-            <field name="padding">5</field>
+            <field name="padding">4</field>
+            <field name="number_next_actual">1501</field>
             <field name="company_id" eval="False" />
         </record>
         <record id="sq_billing_poc" model="ir.sequence">
             <field name="name">Billing POC Sequence</field>
             <field name="code">res.partner.billing.poc</field>
             <field name="prefix">BPOC-</field>
-            <field name="padding">5</field>
+            <field name="padding">4</field>
+            <field name="number_next_actual">1501</field>
             <field name="company_id" eval="False" />
         </record>
         <record id="sq_portal_user" model="ir.sequence">
             <field name="name">Portal User Sequence</field>
             <field name="code">res.partner.portal.user</field>
             <field name="prefix">PU-</field>
-            <field name="padding">5</field>
+            <field name="padding">4</field>
+            <field name="number_next_actual">1501</field>
             <field name="company_id" eval="False" />
         </record>
-
-
         <record id="sq_corporate" model="ir.sequence">
             <field name="name">Corporate Sequence</field>
             <field name="code">res.partner.corporate</field>
             <field name="prefix">CORP-</field>
-            <field name="padding">5</field>
+            <field name="padding">4</field>
             <field name="company_id" eval="False" />
         </record>
         <record id="sq_carriers_operators" model="ir.sequence">
             <field name="name">Carriers Operators Sequence</field>
             <field name="code">res.partner.carriers.operators</field>
             <field name="prefix">COP-</field>
-            <field name="padding">5</field>
+            <field name="padding">4</field>
             <field name="company_id" eval="False" />
         </record>
         <record id="sq_vendor" model="ir.sequence">
             <field name="name">Vendor Sequence</field>
             <field name="code">res.partner.vendor</field>
             <field name="prefix">V-</field>
-            <field name="padding">5</field>
+            <field name="padding">4</field>
             <field name="company_id" eval="False" />
         </record>
         <record id="sq_employee" model="ir.sequence">
             <field name="name">Employee Sequence</field>
             <field name="code">res.partner.employee</field>
             <field name="prefix">EMP-</field>
-            <field name="padding">5</field>
+            <field name="padding">4</field>
+            <field name="number_next_actual">1501</field>
             <field name="company_id" eval="False" />
         </record>
         <record id="sq_other" model="ir.sequence">
             <field name="name">Other Sequence</field>
             <field name="code">res.partner.other</field>
             <field name="prefix">OTH-</field>
-            <field name="padding">5</field>
+            <field name="number_next_actual">1501</field>
+            <field name="padding">4</field>
+
             <field name="company_id" eval="False" />
         </record>
         <record id="sq_company_sequence" model="ir.sequence">
             <field name="name">Company Sequence</field>
             <field name="code">res.partner.company</field>
             <field name="prefix">COMP-</field>
-            <field name="padding">5</field>
+            <field name="padding">4</field>
+            <field name="number_next_actual">1501</field>
             <field name="company_id" eval="False" />
         </record>
 
@@ -86,21 +93,24 @@
             <field name="name">Company Vendor Sequence</field>
             <field name="code">res.partner.comp.vendor</field>
             <field name="prefix">C-V-</field>
-            <field name="padding">5</field>
+            <field name="padding">4</field>
+            <field name="number_next_actual">1501</field>
             <field name="company_id" eval="False" />
         </record>
         <record id="sq_comp_employee" model="ir.sequence">
             <field name="name">Company Employee Sequence</field>
             <field name="code">res.partner.comp.employee</field>
             <field name="prefix">C-EMP-</field>
-            <field name="padding">5</field>
+            <field name="padding">4</field>
+            <field name="number_next_actual">1501</field>
             <field name="company_id" eval="False" />
         </record>
         <record id="sq_comp_portal" model="ir.sequence">
             <field name="name">Company Portal user Sequence</field>
             <field name="code">res.partner.comp.portal.user</field>
             <field name="prefix">C-PU-</field>
-            <field name="padding">5</field>
+            <field name="padding">4</field>
+            <field name="number_next_actual">1501</field>
             <field name="company_id" eval="False" />
         </record>
 
@@ -108,7 +118,8 @@
             <field name="name">Company Residential Sequence</field>
             <field name="code">res.partner.comp.residential</field>
             <field name="prefix">C-RES-</field>
-            <field name="padding">5</field>
+            <field name="padding">4</field>
+            <field name="number_next_actual">1501</field>
             <field name="company_id" eval="False" />
         </record>
 
@@ -116,7 +127,8 @@
             <field name="name">Company Small Business Sequence</field>
             <field name="code">res.partner.comp.small.business</field>
             <field name="prefix">C-SMB-</field>
-            <field name="padding">5</field>
+            <field name="padding">4</field>
+            <field name="number_next_actual">1501</field>
             <field name="company_id" eval="False" />
         </record>
 
@@ -124,7 +136,8 @@
             <field name="name">Company Installation POC Sequence</field>
             <field name="code">res.partner.comp.installation.poc</field>
             <field name="prefix">C-INPOC-</field>
-            <field name="padding">5</field>
+            <field name="padding">4</field>
+            <field name="number_next_actual">1501</field>
             <field name="company_id" eval="False" />
         </record>
 
@@ -132,7 +145,25 @@
             <field name="name">Company Billing POC Sequence</field>
             <field name="code">res.partner.comp.billing.poc</field>
             <field name="prefix">C-BPOC-</field>
-            <field name="padding">5</field>
+            <field name="padding">4</field>
+            <field name="number_next_actual">1501</field>
+            <field name="company_id" eval="False" />
+        </record>
+        <record id="sq_comp_corporate" model="ir.sequence">
+            <field name="name">Company corporate Sequence</field>
+            <field name="code">res.partner.comp.corporate</field>
+            <field name="prefix">C-CORP-</field>
+            <field name="padding">4</field>
+            <field name="number_next_actual">1501</field>
+            <field name="company_id" eval="False" />
+        </record>
+
+        <record id="sq_comp_carriers_operators" model="ir.sequence">
+            <field name="name">Company Carriers Operators Sequence</field>
+            <field name="code">res.partner.comp.carriers.operators</field>
+            <field name="prefix">C-COP-</field>
+            <field name="padding">4</field>
+            <field name="number_next_actual">1501</field>
             <field name="company_id" eval="False" />
         </record>
     </data>

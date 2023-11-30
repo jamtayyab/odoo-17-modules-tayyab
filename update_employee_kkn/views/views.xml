@@ -104,7 +104,7 @@
             </field>
         </record>
 
-        <record id="hr_view_employee_planning_form_inherit" model="ir.ui.view">
+        <!-- <record id="hr_view_employee_planning_form_inherit" model="ir.ui.view">
             <field name="name">hr.employee.planning.form.inherit</field>
             <field name="model">hr.employee</field>
             <field name="inherit_id" ref="planning.hr_employee_view_form_inherit"/>
@@ -122,7 +122,7 @@
                 </xpath>
 
             </field>
-        </record>
+        </record> -->
 
 
         <record id="hr_view_employee_leave_form_inherit" model="ir.ui.view">

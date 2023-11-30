@@ -54,21 +54,11 @@ class ResPartner(models.Model):
     pta_registered = fields.Selection(
         [("registered", "Registered"), ("unregistered", "Unregistered")],
         string="PTA Registered",
+        default="unregistered",
         tracking=True,
     )
-    vat = fields.Char(
-        string="Tax ID",
-        index=True,
-        help="The Tax Identification Number. Complete it if the contact is subjected "
-        "to government taxes. Used in some legal statements.",
-        tracking=True,
-    )
+
     gstn = fields.Char(string="GSTN", tracking=True)
-
-    # reseller = fields.Selection(
-    #     [("yes", "Yes"), ("no", "No")], string="Reseller", required=False, tracking=True
-    # )
-
     tax_status = fields.Selection(
         [("registered", "Registered"), ("unregistered", "Unregistered")],
         string="Tax Status",
@@ -94,6 +84,27 @@ class ResPartner(models.Model):
     # @api.onchange("station_id")
     # def _onchange_district(self):
     #     self.district_id = self.station_id.district_id
+    # for address type contact
+    @api.constrains("cnic", "mobile")
+    def _check_fields_length(self):
+        for record in self:
+            if len(record.cnic) != 15:
+                raise ValidationError(
+                    _("Please enter correct CNIC number. It should be 15 characters.")
+                )
+
+    @api.onchange("mobile", "country_id", "company_id")
+    def _onchange_mobile_validation(self):
+        if self.mobile:
+            if len(self.mobile) != 12:
+                raise ValidationError(
+                    _("Please enter correct Mobile number. It should be 12 characters.")
+                )
+            self.mobile = (
+                self._phone_format(fname="mobile", force_format="INTERNATIONAL")
+                or self.mobile
+            )
+
     @api.onchange("type")
     def address_type(self):
         address_dict = {
@@ -133,7 +144,7 @@ class ResPartner(models.Model):
             if vals.get("unique_id", _("New")) == _("New"):
                 id_type = vals.get("company_type")
                 contact_type = vals.get("contact_type")
-                contact_sub_type = vals.get("contact_sub_type")
+                contact_sub_type = vals.get("contact_sub_type", False)
                 _logger.error(
                     "%s      %s        %s  ", id_type, contact_type, contact_sub_type
                 )
@@ -182,16 +193,17 @@ class ResPartner(models.Model):
         if sequence := unique_id_sequence_mapping.get(
             (id_type, contact_type, contact_sub_type)
         ):
+            unique_id = self.env["ir.sequence"].next_by_code(sequence)
             # logger for debugging
 
-            _logger.error(
-                "%s   %s     %s  %s  ",
-                contact_type,
-                contact_sub_type,
-                sequence,
-                self.env["ir.sequence"].next_by_code(sequence),
-            )
-            return self.env["ir.sequence"].next_by_code(sequence) or _("New")
+            # _logger.error(
+            #     "%s   %s     %s  %s  ",
+            #     contact_type,
+            #     contact_sub_type,
+            #     sequence,
+            #     unique_id,
+            # )
+            return unique_id or _("New")
         return "N/A"
 
     @api.model
