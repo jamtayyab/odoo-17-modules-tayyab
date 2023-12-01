@@ -45,7 +45,7 @@ class ResPartner(models.Model):
     )
 
     unique_id = fields.Char(
-        string="unique_id",
+        string="Unique Id",
         default=lambda self: _("New"),
         readonly=True,
         required=True,

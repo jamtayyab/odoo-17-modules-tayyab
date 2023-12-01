@@ -17,6 +17,7 @@
         "hr_skills",
         "product",
         "stock",
+        "update_inventory_kkn",
     ],
     "data": [
         # "security/ir.model.access.csv",
