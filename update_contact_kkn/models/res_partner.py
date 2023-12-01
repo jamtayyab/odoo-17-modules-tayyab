@@ -41,6 +41,7 @@ class ResPartner(models.Model):
         [("pre_paid", "Pre Paid"), ("post_paid", "Post Paid")],
         string="Subscription Model",
         default="pre_paid",
+        tracking=True,
     )
 
     unique_id = fields.Char(
@@ -88,11 +89,12 @@ class ResPartner(models.Model):
     @api.constrains("cnic", "mobile")
     def _check_fields_length(self):
         for record in self:
-            if len(record.cnic) != 15:
+            if record.cnic and len(record.cnic) != 15:
                 raise ValidationError(
                     _("Please enter correct CNIC number. It should be 15 characters.")
                 )
 
+    # method override
     @api.onchange("mobile", "country_id", "company_id")
     def _onchange_mobile_validation(self):
         if self.mobile:

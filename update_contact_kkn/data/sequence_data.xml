@@ -47,6 +47,8 @@
             <field name="code">res.partner.corporate</field>
             <field name="prefix">CORP-</field>
             <field name="padding">4</field>
+            <field name="number_next_actual">1501</field>
+
             <field name="company_id" eval="False" />
         </record>
         <record id="sq_carriers_operators" model="ir.sequence">
@@ -54,6 +56,7 @@
             <field name="code">res.partner.carriers.operators</field>
             <field name="prefix">COP-</field>
             <field name="padding">4</field>
+            <field name="number_next_actual">1501</field>
             <field name="company_id" eval="False" />
         </record>
         <record id="sq_vendor" model="ir.sequence">
@@ -61,6 +64,7 @@
             <field name="code">res.partner.vendor</field>
             <field name="prefix">V-</field>
             <field name="padding">4</field>
+            <field name="number_next_actual">1501</field>
             <field name="company_id" eval="False" />
         </record>
         <record id="sq_employee" model="ir.sequence">

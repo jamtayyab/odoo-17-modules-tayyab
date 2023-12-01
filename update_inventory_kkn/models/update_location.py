@@ -9,7 +9,6 @@ _logger = logging.getLogger(__name__)
 class UpdateLocationForm(models.Model):
     _name = "stock.location"
     _inherit = ["stock.location", "mail.thread", "mail.activity.mixin"]
-
     name = fields.Char("Location Name", required=True, tracking=True)
     complete_name = fields.Char(
         "Full Location Name",
@@ -28,13 +27,13 @@ class UpdateLocationForm(models.Model):
         tracking=True,
     )
 
-    city_id = fields.Many2one(
-        "res.district",
-        default=lambda self: self.env["res.district"].search([("code", "=", "LHR")])
-    )
-    city_code = fields.Char(
-        related="city_id.code", tracking=True, readonly=True, store=True
-    )
+    # city_id = fields.Many2one(
+    #     "res.district",
+    #     default=lambda self: self.env["res.district"].search([("code", "=", "LHR")])
+    # )
+    # city_code = fields.Char(
+    #     related="city_id.code", tracking=True, readonly=True, store=True
+    # )
     # Unique ID for location form
     unique_id = fields.Char(
         string="Unique ID",
@@ -43,7 +42,7 @@ class UpdateLocationForm(models.Model):
         readonly=True,
         default=lambda self: _("New"),
     )
-    customer_is_pop = fields.Boolean("Is POP?")
+    is_pop = fields.Boolean("Is POP?")
 
     # New Type in usage Pop
     usage = fields.Selection(
@@ -52,6 +51,7 @@ class UpdateLocationForm(models.Model):
             ("view", "View"),
             ("internal", "Internal Location"),
             ("customer", "Customer Location"),
+            ("employee", "Employee Location"),
             ("pop", "POP"),
             ("exchange", "Exchange"),
             ("storeconsumed", "Store Consumed"),
@@ -73,18 +73,19 @@ class UpdateLocationForm(models.Model):
         "\n* Transit Location: Counterpart location that should be used in inter-company or inter-warehouses operations",
         tracking=True,
         ondelete={
-            'supplier': 'set default',
-            'view': 'set default',
-            'internal': 'set default',
-            'customer': 'set default',
-            'pop': 'set default',
-            'exchange': 'set default',
-            'storeconsumed': 'set default',
-            'inventory': 'set default',
-            'production': 'set default',
-            'costcenter': 'set default',
-            'transit': 'set default',
-        }
+            "supplier": "set default",
+            "view": "set default",
+            "internal": "set default",
+            "employee": "set default",
+            "customer": "set default",
+            "pop": "set default",
+            "exchange": "set default",
+            "storeconsumed": "set default",
+            "inventory": "set default",
+            "production": "set default",
+            "costcenter": "set default",
+            "transit": "set default",
+        },
     )
     partner_latitude = fields.Float("Geo Latitude", digits=(16, 6), tracking=True)
     partner_longitude = fields.Float("Geo Longitude", digits=(16, 6), tracking=True)
@@ -94,17 +95,19 @@ class UpdateLocationForm(models.Model):
         unique_code = self.env["ir.sequence"].next_by_code(
             "stock.location.sequenece"
         ) or _("New")
-        city = self.env["res.district"].browse(city_id)
-        if unique_code == _("New") or not city:
+        station = self.env["res.station"].browse(city_id)
+
+        if unique_code == _("New") or not station:
             return unique_code
-        code = f"{city.code}-{unique_code}"
+        code = f"{station.district_id.code}-{unique_code}"
         return code
 
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
+            # _logger.error("%s      ", vals_list)
             if vals.get("unique_id", _("New")) == _("New"):
-                vals["unique_id"] = self.generat_id(vals["city_id"])
+                vals["unique_id"] = self.generat_id(vals["station_id"])
                 # _logger.error("%s      %s   ", vals["unique_id"], self)
 
         return super().create(vals_list)

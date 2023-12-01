@@ -19,18 +19,28 @@
                         placeholder="e.g. new company"
                         required="type == 'contact'" invisible="is_company == False" />
                 </xpath>
+
+                <xpath expr="//field[@name='company_type']" position="attributes">
+                    <attribute name="readonly">
+                        unique_id not in ['New','N/A']
+                    </attribute>
+                </xpath>
                 <xpath expr="//field[@name='company_type']" position="after">
 
                     <group>
                         <group>
                             <field name="contact_type"
-                                invisible="company_type == False" />
+                                invisible="company_type == False"
+                                readonly="unique_id not in ['New','N/A']"
+                            />
 
                         </group>
                         <group>
                             <field name="contact_sub_type"
                                 invisible="contact_type != 'customer'"
-                                required="contact_type == 'customer'" />
+                                required="contact_type == 'customer'"
+                                readonly="unique_id not in ['New','N/A']"
+                            />
                         </group>
                     </group>
 
