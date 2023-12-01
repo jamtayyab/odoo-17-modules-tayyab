@@ -19,7 +19,19 @@
             <field name="location_id"
                 ref="kkn_parent_location_id" />
             <field name="street">KK House 1566/124 Walton Road</field>
+        </record>   
+        
+        <record id="kkn_customer_location_id" model="stock.location">
+            <field name="name">Customer</field>
+            <field name="usage">customer</field>
+            <field name="station_id" ref="update_contact_kkn.lahore_station_id" />
+            <field name="company_id" ref="base.main_company" />
+            <field name="location_id"
+                ref="kkn_parent_location_id" />
+            <field name="street">KK House 1566/124 Walton Road</field>
         </record>
+
+        
 
     </data>
 </odoo>
