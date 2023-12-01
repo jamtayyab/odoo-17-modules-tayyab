@@ -130,7 +130,7 @@ class ResPartner(models.Model):
 
     @api.onchange("tax_status")
     def onchange_tax_status(self):
-        if self.tax_status:  # == 'unregistered':
+        if self.tax_status == "unregistered":
             self.pta_registered = False
 
     @api.onchange("contact_type")

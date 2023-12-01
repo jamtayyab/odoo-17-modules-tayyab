@@ -26,14 +26,6 @@ class UpdateLocationForm(models.Model):
         "location.",
         tracking=True,
     )
-
-    # city_id = fields.Many2one(
-    #     "res.district",
-    #     default=lambda self: self.env["res.district"].search([("code", "=", "LHR")])
-    # )
-    # city_code = fields.Char(
-    #     related="city_id.code", tracking=True, readonly=True, store=True
-    # )
     # Unique ID for location form
     unique_id = fields.Char(
         string="Unique ID",
