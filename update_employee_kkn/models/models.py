@@ -9,6 +9,13 @@ class Employee(models.Model):
     _inherit = "hr.employee"
 
     station_id = fields.Many2one("res.station", string="Station", required=True)
+    unique_id = fields.Char(
+        string="unique_id",
+        default=lambda self: _("New"),
+        readonly=True,
+        required=True,
+        tracking=True,
+    )
 
     @api.constrains("mobile_phone")
     def _check_fields_length(self):
@@ -19,6 +26,7 @@ class Employee(models.Model):
                     _("Please enter correct Mobile number. It should be 12 characters.")
                 )
 
+    # overrides the inverse function for res.partner data creation
     def _inverse_work_contact_details(self):
         for employee in self:
             if not employee.work_contact_id:
@@ -39,6 +47,9 @@ class Employee(models.Model):
                         }
                     )
                 )
+                if employee.work_contact_id:
+                    employee.unique_id = employee.work_contact_id.unique_id
+
             else:
                 employee.work_contact_id.sudo().write(
                     {

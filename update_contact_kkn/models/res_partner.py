@@ -151,6 +151,10 @@ class ResPartner(models.Model):
                 vals["unique_id"] = self._generate_unique_id(
                     id_type, contact_type, contact_sub_type
                 )
+                # if vals["unique_id"] not in ("N/A", _("New")):
+                #     if contact_type == 'employee':
+                        
+                    
         return super(ResPartner, self).create(vals_list)
 
     def _generate_unique_id(self, id_type, contact_type, contact_sub_type):
