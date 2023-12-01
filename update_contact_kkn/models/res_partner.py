@@ -90,22 +90,20 @@ class ResPartner(models.Model):
     def _check_fields_length(self):
         for record in self:
             if record.cnic and len(record.cnic) != 15:
+                _logger.error("%s  ", record.cnic)
                 raise ValidationError(
                     _("Please enter correct CNIC number. It should be 15 characters.")
+                )
+            if record.mobile and len(record.mobile) != 12:
+                _logger.error("%s  ", record.mobile)
+                raise ValidationError(
+                    _("Please enter correct Mobile number. It should be 12 characters.")
                 )
 
     # method override
     @api.onchange("mobile", "country_id", "company_id")
     def _onchange_mobile_validation(self):
-        if self.mobile:
-            if len(self.mobile) != 12:
-                raise ValidationError(
-                    _("Please enter correct Mobile number. It should be 12 characters.")
-                )
-            self.mobile = (
-                self._phone_format(fname="mobile", force_format="INTERNATIONAL")
-                or self.mobile
-            )
+        pass
 
     @api.onchange("type")
     def address_type(self):

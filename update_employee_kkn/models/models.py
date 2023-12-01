@@ -1,13 +1,23 @@
 # -*- coding: utf-8 -*-
 
 
-from odoo import models, fields, api
+from odoo import models, fields, api, _
+from odoo.exceptions import ValidationError
 
 
 class Employee(models.Model):
     _inherit = "hr.employee"
 
     station_id = fields.Many2one("res.station", string="Station", required=True)
+
+    @api.constrains("mobile_phone")
+    def _check_fields_length(self):
+        for record in self:
+            if record.mobile_phone and len(record.mobile_phone) != 12:
+                # _logger.error("%s  ", record.mobile)
+                raise ValidationError(
+                    _("Please enter correct Mobile number. It should be 12 characters.")
+                )
 
     def _inverse_work_contact_details(self):
         for employee in self:
@@ -35,5 +45,6 @@ class Employee(models.Model):
                         "email": employee.work_email,
                         "mobile": employee.mobile_phone,
                         "phone": employee.work_phone,
+                        "station_id": employee.station_id.id,
                     }
                 )
