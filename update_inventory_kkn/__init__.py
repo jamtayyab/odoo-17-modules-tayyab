@@ -12,7 +12,6 @@ def _auto_post_init(env):
             "street": "KK House 1566/124 Walton Road",
         }
         parent_location = env["stock.location"].create(kkn_parent_location_values)
-        print("parent_location", parent_location)
         kkn_employee_location_values = {
             "name": "Employee",
             "usage": "employee",
@@ -22,7 +21,6 @@ def _auto_post_init(env):
             "street": "KK House 1566/124 Walton Road",
         }
         env["stock.location"].create(kkn_employee_location_values)
-        print("kkn_employee_location_values", kkn_employee_location_values)
         kkn_customer_location_values = {
             "name": "Customer",
             "usage": "customer",
@@ -32,7 +30,6 @@ def _auto_post_init(env):
             "street": "KK House 1566/124 Walton Road",
         }
         env["stock.location"].create(kkn_customer_location_values)
-        print("kkn_customer_location_values", kkn_customer_location_values)
 
 
 from . import controllers
