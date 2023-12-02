@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    "name": "update_inventory_kkn",
+    "name": "Update Inventory KKN",
     "summary": """
         Short (1 phrase/line) summary of the module's purpose, used as
         subtitle on modules listing or apps.openerp.com""",
@@ -15,6 +15,7 @@
     "category": "Customizations",
     "version": "17.0.0.0",
     # any module necessary for this one to work correctly
+    "post_init_hook": "_auto_post_init",
     "depends": [
         "base",
         "stock",
@@ -26,7 +27,7 @@
     "data": [
         "security/ir.model.access.csv",
         "data/sequence.xml",
-        "data/stock_location.xml",
+        # "data/stock_location.xml",
         "views/views.xml",
         "views/templates.xml",
         "views/product_template_view.xml",
@@ -46,4 +47,5 @@
     ],
     "license": "LGPL-3",
     "application": True,
+    "installable": True,
 }

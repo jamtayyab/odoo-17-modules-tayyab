@@ -121,6 +121,18 @@
             </field>
         </record>
 
+        <record id="hr_view_employee_list_inherit" model="ir.ui.view">
+            <field name="name">hr.employee.list.inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_tree" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree//field[@name='name']" position="before">
+                    <field name="unique_id" />
+                </xpath>
+
+            </field>
+        </record>
+
         <!-- <record id="hr_view_employee_planning_form_inherit" model="ir.ui.view">
             <field name="name">hr.employee.planning.form.inherit</field>
             <field name="model">hr.employee</field>

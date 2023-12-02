@@ -9,11 +9,15 @@ _logger = logging.getLogger(__name__)
 class Employee(models.Model):
     _inherit = "hr.employee"
 
-    station_id = fields.Many2one("res.station", string="Station", required=True)
+    station_id = fields.Many2one(
+        "res.station",
+        string="Station",
+        required=True,
+        inverse="_inverse_work_contact_details",
+    )
     unique_id = fields.Char(
-        string="unique_id",
+        string="Unique ID",
         related="work_contact_id.unique_id",
-        default=lambda self: _("New"),
         readonly=True,
         tracking=True,
         store=True,
@@ -49,25 +53,40 @@ class Employee(models.Model):
                         }
                     )
                 )
+                # if partner created now create location for it for inventory purpose
                 if employee.work_contact_id and employee.unique_id:
-                    location_id = (
-                        self.env["stock.location"]
-                        .sudo()
-                        .create(
-                            {
-                                "name": f"{employee.unique_id}-{employee.work_contact_id.name}",
-                                "usage": "employee",
-                                "location_id": self.env.ref(
-                                    "update_inventory_kkn.kkn_employee_location_id"
-                                ).id,
-                                "station_id": employee.station_id.id,
-                                "street": employee.work_contact_id.street,
-                            }
-                        )
+                    location_id = self.env["stock.location"].search(
+                        [
+                            ("name", "=", "Employee"),
+                            ("unique_id", "not in", [_("New"), "N/A"]),
+                        ],
+                        limit=1,
                     )
+                    location_vals = {
+                        "name": f"{employee.unique_id}-{employee.name}",
+                        "usage": "employee",
+                        "location_id": location_id.id,
+                        "station_id": employee.station_id.id,
+                        "street": employee.work_contact_id.street,
+                    }
+                    location_id = (
+                        self.env["stock.location"].sudo().create(location_vals)
+                    )
+                    if location_id:
+                        employee.work_contact_id.property_stock_customer = location_id
+
                     _logger.info("Location Created: %s", location_id)
 
             else:
+                _logger.info(
+                    "changed: %s",
+                    {
+                        "email": employee.work_email,
+                        "mobile": employee.mobile_phone,
+                        "phone": employee.work_phone,
+                        "station_id": employee.station_id.id,
+                    },
+                )
                 employee.work_contact_id.sudo().write(
                     {
                         "email": employee.work_email,
