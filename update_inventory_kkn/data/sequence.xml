@@ -2,12 +2,12 @@
 <odoo>
     <data noupdate="1">
         <record id="location_id_seq" model="ir.sequence">
-            <field name="name">Stock location Sequenece</field>
-            <field name="code">stock.location.sequenece</field>
+            <field name="name">Stock location Sequence</field>
+            <field name="code">stock.location.sequence</field>
             <field name="padding">4</field>
             <field name="number_next_actual">1501</field>
         </record>
 
-  
+
     </data>
 </odoo>
