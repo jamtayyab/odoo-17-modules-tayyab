@@ -1,0 +1,59 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record id="company_form_view_inherit" model="ir.ui.view">
+      <field name="name">company.view.form.inherit</field>
+      <field name="model">res.company</field>
+      <field name="inherit_id" ref="base.view_company_form" />
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='partner_id']" position="after">
+          <field name="company_short" />
+        </xpath>
+      </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+    <!--
+    <record model="ir.actions.act_window" id="update_company_kkn.action_window">
+      <field name="name">update_company_kkn window</field>
+      <field name="res_model">update_company_kkn.update_company_kkn</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="update_company_kkn.action_server">
+      <field name="name">update_company_kkn server</field>
+      <field name="model_id" ref="model_update_company_kkn_update_company_kkn"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+    <!--
+    <menuitem name="update_company_kkn" id="update_company_kkn.menu_root"/>
+-->
+    <!-- menu categories -->
+    <!--
+    <menuitem name="Menu 1" id="update_company_kkn.menu_1" parent="update_company_kkn.menu_root"/>
+    <menuitem name="Menu 2" id="update_company_kkn.menu_2" parent="update_company_kkn.menu_root"/>
+-->
+    <!-- actions -->
+    <!--
+    <menuitem name="List" id="update_company_kkn.menu_1_list" parent="update_company_kkn.menu_1"
+              action="update_company_kkn.action_window"/>
+    <menuitem name="Server to list" id="update_company_kkn" parent="update_company_kkn.menu_2"
+              action="update_company_kkn.action_server"/>
+-->
+  </data>
+</odoo>

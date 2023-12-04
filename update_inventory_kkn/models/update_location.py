@@ -83,7 +83,7 @@ class UpdateLocationForm(models.Model):
     partner_longitude = fields.Float("Geo Longitude", digits=(16, 6), tracking=True)
     date_localization = fields.Date(string="Geolocation Date", tracking=True)
 
-    def generat_id(self, city_id):
+    def _generate_id(self, city_id):
         unique_code = self.env["ir.sequence"].next_by_code(
             "stock.location.sequenece"
         ) or _("New")
@@ -99,7 +99,7 @@ class UpdateLocationForm(models.Model):
         for vals in vals_list:
             # _logger.error("%s      ", vals_list)
             if vals.get("unique_id", _("New")) == _("New"):
-                vals["unique_id"] = self.generat_id(vals["station_id"])
+                vals["unique_id"] = self._generate_id(vals["station_id"])
                 # _logger.error("%s      %s   ", vals["unique_id"], self)
 
         return super().create(vals_list)

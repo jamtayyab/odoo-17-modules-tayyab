@@ -64,7 +64,7 @@ class Employee(models.Model):
                     )
                     location_vals = {
                         "name": f"{employee.unique_id}-{employee.name}",
-                        "usage": "employee",
+                        "usage": "internal",
                         "location_id": location_id.id,
                         "station_id": employee.station_id.id,
                         "street": employee.work_contact_id.street,

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    "name": "Update Inventory KKN",
+    "name": "Update Company KKN",
     "summary": """
         Short (1 phrase/line) summary of the module's purpose, used as
         subtitle on modules listing or apps.openerp.com""",
@@ -15,32 +15,13 @@
     "category": "Customizations",
     "version": "17.0.0.0",
     # any module necessary for this one to work correctly
-    "post_init_hook": "_auto_post_init",
     "depends": [
         "base",
-        "stock",
-        "update_company_kkn",
-        "update_contact_kkn",
-        "base_geolocalize",
-        "stock_picking_batch",
     ],
     # always loaded
     "data": [
-        "security/ir.model.access.csv",
-        "data/sequence.xml",
-        # "data/stock_location.xml",
+        # "security/ir.model.access.csv",
         "views/views.xml",
-        "views/templates.xml",
-        "views/product_template_view.xml",
-        "views/stock_picking_view.xml",
-        "views/stock_scrap_view.xml",
-        "views/stock_warehouse_orderpoint_view.xml",
-        "views/stock_quant_package_view.xml",
-        "views/stock_lot_view.xml",
-        "views/stock_picking_batch_view.xml",
-        # "views/switchport_view.xml",
-        "views/update_location.xml",
-        "views/update_contact_stock_location_view.xml",
     ],
     # only loaded in demonstration mode
     "demo": [
