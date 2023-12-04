@@ -25,24 +25,24 @@ class ResPartner(models.Model):
         required=True,
         tracking=True,
     )
-    contact_sub_type = fields.Selection(
-        [
-            ("residential", "Residential"),
-            ("small_business", "Small Business"),
-            ("corporate", "Corporate"),
-            ("carriers_operators", "Carriers/Operators"),
-        ],
-        string="Contact Sub Type",
-        default=False,
-        tracking=True,
-    )
+    # contact_sub_type = fields.Selection(
+    #     [
+    #         ("residential", "Residential"),
+    #         ("small_business", "Small Business"),
+    #         ("corporate", "Corporate"),
+    #         ("carriers_operators", "Carriers/Operators"),
+    #     ],
+    #     string="Contact Sub Type",
+    #     default=False,
+    #     tracking=True,
+    # )
 
-    customer_subscription_model = fields.Selection(
-        [("pre_paid", "Pre Paid"), ("post_paid", "Post Paid")],
-        string="Subscription Model",
-        default="pre_paid",
-        tracking=True,
-    )
+    # customer_subscription_model = fields.Selection(
+    #     [("pre_paid", "Pre Paid"), ("post_paid", "Post Paid")],
+    #     string="Subscription Model",
+    #     default="pre_paid",
+    #     tracking=True,
+    # )
 
     unique_id = fields.Char(
         string="Unique Id",
@@ -86,7 +86,7 @@ class ResPartner(models.Model):
     # def _onchange_district(self):
     #     self.district_id = self.station_id.district_id
     # for address type contact
-    @api.constrains("cnic", "mobile")
+    @api.constrains("cnic", "mobile", "vat")
     def _check_fields_length(self):
         for record in self:
             if record.cnic and len(record.cnic) != 15:
@@ -98,6 +98,13 @@ class ResPartner(models.Model):
                 _logger.error("%s  ", record.mobile)
                 raise ValidationError(
                     _("Please enter correct Mobile number. It should be 12 characters.")
+                )
+            if record.vat and len(record.vat) != 9:
+                _logger.error("%s  ", record.vat)
+                raise ValidationError(
+                    _(
+                        "Please enter correct NTN/PSTN number. It should be 9 characters."
+                    )
                 )
 
     # method override
@@ -126,16 +133,25 @@ class ResPartner(models.Model):
             if search_cnic > 0:
                 raise ValidationError(_("CNIC No Already Exist"))
 
+    @api.onchange("vat")
+    def _onchange_vat(self):
+        if self.vat:
+            search_vat = self.env["res.partner"].search_count(
+                [("vat", "=", self.vat), ("id", "not in", self.ids)]
+            )
+            if search_vat > 0:
+                raise ValidationError(_("NTN Number Already Exist"))
+
     @api.onchange("tax_status")
     def onchange_tax_status(self):
         if self.tax_status == "unregistered":
             self.pta_registered = False
 
-    @api.onchange("contact_type")
-    def onchange_contact_type(self):
-        if self.contact_type and self.contact_type != "customer":
-            self.customer_subscription_model = False
-            self.contact_sub_type = False
+    # @api.onchange("contact_type")
+    # def onchange_contact_type(self):
+    #     if self.contact_type and self.contact_type != "customer":
+    #         self.customer_subscription_model = False
+    #         self.contact_sub_type = False
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -144,59 +160,37 @@ class ResPartner(models.Model):
             if vals.get("unique_id", _("New")) == _("New"):
                 id_type = vals.get("company_type")
                 contact_type = vals.get("contact_type")
-                contact_sub_type = vals.get("contact_sub_type", False)
-                _logger.error(
-                    "%s      %s        %s  ", id_type, contact_type, contact_sub_type
-                )
-                vals["unique_id"] = self._generate_unique_id(
-                    id_type, contact_type, contact_sub_type
-                )
-                # if vals["unique_id"] not in ("N/A", _("New")):
-                #     if contact_type == 'employee':
-                        
-                    
+                # contact_sub_type = vals.get("contact_sub_type", False)
+                # _logger.error(
+                #     "%s      %s        %s  ", id_type, contact_type, contact_sub_type
+                # )
+                # vals["unique_id"] = self._generate_unique_id(
+                #     id_type, contact_type, contact_sub_type
+                # )
+                vals["unique_id"] = self._generate_unique_id(id_type, contact_type)
+
         return super(ResPartner, self).create(vals_list)
 
-    def _generate_unique_id(self, id_type, contact_type, contact_sub_type):
+    def _generate_unique_id(self, id_type, contact_type):
         unique_id_sequence_mapping = {
-            ("person", "customer", "residential"): "res.partner.residential",
-            ("person", "customer", "small_business"): "res.partner.small.business",
-            ("person", "customer", "corporate"): "res.partner.corporate",
-            (
-                "person",
-                "customer",
-                "carriers_operators",
-            ): "res.partner.carriers.operators",
-            ("person", "vendor", False): "res.partner.vendor",
-            ("person", "employee", False): "res.partner.employee",
-            ("person", "other", False): "res.partner.other",
-            ("person", "installation_poc", False): "res.partner.installation.poc",
-            ("person", "billing_poc", False): "res.partner.billing.poc",
-            ("person", "portal", False): "res.partner.portal.user",
-            ("company", "customer", "residential"): "res.partner.comp.residential",
-            (
-                "company",
-                "customer",
-                "small_business",
-            ): "res.partner.comp.small.business",
-            ("company", "customer", "corporate"): "res.partner.comp.corporate",
-            (
-                "company",
-                "customer",
-                "carriers_operators",
-            ): "res.partner.comp.carriers.operators",
-            ("company", "vendor", False): "res.partner.comp.vendor",
-            ("company", "employee", False): "res.partner.comp.employee",
-            ("company", "other", False): "res.partner.other",
-            ("company", "installation_poc", False): "res.partner.comp.installation.poc",
-            ("company", "billing_poc", False): "res.partner.comp.billing.poc",
-            ("company", "portal", False): "res.partner.comp.portal.user",
-            ("company", False, False): "res.partner.company",
+            ("person", "customer"): "res.partner.customer",
+            ("person", "vendor"): "res.partner.vendor",
+            ("person", "employee"): "res.partner.employee",
+            ("person", "other"): "res.partner.other",
+            ("person", "installation_poc"): "res.partner.installation.poc",
+            ("person", "billing_poc"): "res.partner.billing.poc",
+            ("person", "portal"): "res.partner.portal.user",
+            ("company", "customer"): "res.partner.comp.customer",
+            ("company", "vendor"): "res.partner.comp.vendor",
+            ("company", "employee"): "res.partner.comp.employee",
+            ("company", "other"): "res.partner.other",
+            ("company", "installation_poc"): "res.partner.comp.installation.poc",
+            ("company", "billing_poc"): "res.partner.comp.billing.poc",
+            ("company", "portal"): "res.partner.comp.portal.user",
+            ("company"): "res.partner.company",
         }
 
-        if sequence := unique_id_sequence_mapping.get(
-            (id_type, contact_type, contact_sub_type)
-        ):
+        if sequence := unique_id_sequence_mapping.get((id_type, contact_type)):
             unique_id = self.env["ir.sequence"].next_by_code(sequence)
             # logger for debugging
 
@@ -218,7 +212,7 @@ class ResPartner(models.Model):
         ):
             id_type = vals.get("company_type", self.company_type)
             contact_type = vals.get("contact_type", self.contact_type)
-            contact_sub_type = vals.get("contact_sub_type", self.contact_sub_type)
+            # contact_sub_type = vals.get("contact_sub_type", self.contact_sub_type)
 
             # logger for debugging
 
@@ -226,11 +220,9 @@ class ResPartner(models.Model):
             #     "%s   %s     %s  ", contact_type, contact_sub_type, id_type
             # )
 
-            if contact_type != "customer":
-                vals["contact_sub_type"] = ""
-                contact_sub_type = False
+            # if contact_type != "customer":
+            #     vals["contact_sub_type"] = ""
+            #     contact_sub_type = False
 
-            vals["unique_id"] = self._generate_unique_id(
-                id_type, contact_type, contact_sub_type
-            )
+            vals["unique_id"] = self._generate_unique_id(id_type, contact_type)
         return super().write(vals)

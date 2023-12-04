@@ -5,7 +5,7 @@
        This Module upgrades the Contact Module""",
     "license": "LGPL-3",
     "category": "Customizations",
-    "version": "17.0.1.0.0",
+    "version": "17.0.2.0.0",
     "author": "KKN Developers",
     "maintainers": ["Muhammad Tayyab", "Muhammad Muzafar", "Muhammad Husnain"],
     "website": "https://www.kknetworks.com.pk",

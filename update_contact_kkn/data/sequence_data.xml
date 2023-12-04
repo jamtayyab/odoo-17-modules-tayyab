@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <data noupdate="1">
+    <data>
         <record id="sq_residentail" model="ir.sequence">
-            <field name="name">Residentail Sequenece</field>
-            <field name="code">res.partner.residential</field>
-            <field name="prefix">RES-</field>
+            <field name="name">Customer Sequenece</field>
+            <field name="code">res.partner.customer</field>
+            <field name="prefix">CSTMR-</field>
             <field name="padding">4</field>
             <field name="number_next_actual">1501</field>
             <field name="company_id" eval="False" />
         </record>
+
+        <record id="sq_company_customer" model="ir.sequence">
+            <field name="name">Company Customer Sequenece</field>
+            <field name="code">res.partner.comp.customer</field>
+            <field name="prefix">C-CSTMR-</field>
+            <field name="padding">4</field>
+            <field name="number_next_actual">1501</field>
+            <field name="company_id" eval="False" />
+        </record>
+
 
         <record id="sq_small_business" model="ir.sequence">
             <field name="name">Small Business</field>

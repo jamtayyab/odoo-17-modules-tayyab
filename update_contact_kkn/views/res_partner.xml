@@ -35,22 +35,22 @@
                             />
 
                         </group>
-                        <group>
+                        <!-- <group>
                             <field name="contact_sub_type"
                                 invisible="contact_type != 'customer'"
                                 required="contact_type == 'customer'"
                                 readonly="unique_id not in ['New','N/A']"
                             />
-                        </group>
+                        </group> -->
                     </group>
 
                     <group>
-                        <group>
+                        <!-- <group>
                             <field name="customer_subscription_model" widget="radio"
                                 options="{'horizontal': true}"
                                 invisible="contact_sub_type == False"
                                 required="contact_type == 'customer'" />
-                        </group>
+                        </group> -->
                     </group>
 
                 </xpath>
@@ -163,9 +163,9 @@
                         <field name="contact_type"
                             invisible="1"
                         />
-                        <field name="contact_sub_type"
+                        <!-- <field name="contact_sub_type"
                             invisible="contact_type != 'customer'"
-                            required="contact_type == 'customer'" />
+                            required="contact_type == 'customer'" /> -->
                     </group>
 
 
