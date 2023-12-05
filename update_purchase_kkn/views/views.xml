@@ -1,0 +1,270 @@
+<odoo>
+    <data>
+
+        <record id="update_purchase_kkn_form_inherit" model="ir.ui.view">
+            <field name="name">update_purchase_kkn_form_inherit</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref='purchase.purchase_order_form'/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet//field[@name='partner_id']" position="attributes">
+                    <attribute name="options">
+                        {
+                        'no_edit': True,
+                        'no_open': True,
+                        'no_create': True,
+                        'no_create_edit': True,
+                        'no_quick_create': True,
+                        }
+                    </attribute>
+                </xpath>
+
+
+                <xpath expr="//sheet//field[@name='currency_id']" position="attributes">
+                    <attribute name="options">
+                        {
+                        'no_edit': True,
+                        'no_open': True,
+                        'no_create': True,
+                        'no_create_edit': True,
+                        'no_quick_create': True,
+                        }
+                    </attribute>
+                </xpath>
+
+                <xpath expr="//sheet//page[@name='products']//field[@name='product_id']" position="attributes">
+                    <attribute name="options">
+                        {
+                        'no_edit': True,
+                        'no_open': True,
+                        'no_create': True,
+                        'no_create_edit': True,
+                        'no_quick_create': True,
+                        }
+                    </attribute>
+                </xpath>
+
+
+                <xpath expr="//sheet//page[@name='products']//field[@name='product_uom'][2]" position="attributes">
+                    <attribute name="options">
+                        {
+                        'no_edit': True,
+                        'no_open': True,
+                        'no_create': True,
+                        'no_create_edit': True,
+                        'no_quick_create': True,
+                        }
+                    </attribute>
+                </xpath>
+
+
+                <xpath expr="//sheet//page[@name='purchase_delivery_invoice']//field[@name='user_id']"
+                       position="attributes">
+                    <attribute name="options">
+                        {
+                        'no_edit': True,
+                        'no_open': True,
+                        'no_create': True,
+                        'no_create_edit': True,
+                        'no_quick_create': True,
+                        }
+                    </attribute>
+                </xpath>
+
+
+                <xpath expr="//sheet//page[@name='purchase_delivery_invoice']//field[@name='company_id']"
+                       position="attributes">
+                    <attribute name="options">
+                        {
+                        'no_edit': True,
+                        'no_open': True,
+                        'no_create': True,
+                        'no_create_edit': True,
+                        'no_quick_create': True,
+                        }
+                    </attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+
+        <record id="update_purchase_incomterm_kkn_form_inherit" model="ir.ui.view">
+            <field name="name">update_purchase_incomterm_kkn_form_inherit</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref='purchase_stock.purchase_order_view_form_inherit'/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='incoterm_id']" position="attributes">
+                    <attribute name="options">
+                        {
+                        'no_edit': True,
+                        'no_open': True,
+                        'no_create': True,
+                        'no_create_edit': True,
+                        'no_quick_create': True,
+                        }
+                    </attribute>
+                </xpath>
+            </field>
+        </record>
+
+
+<!--        <record id="product_template_customer_taxes_form_view_inherit" model="ir.ui.view">-->
+<!--            <field name="name">product_template_customer_taxes_form_view_inherit</field>-->
+<!--            <field name="model">product.template</field>-->
+<!--            <field name="inherit_id" ref='account.product_template_form_view'/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//field[@name='taxes_id']" position="attributes">-->
+<!--                    <attribute name="options">-->
+<!--                        {-->
+<!--                        'no_edit': True,-->
+<!--                        'no_open': True,-->
+<!--                        'no_create': True,-->
+<!--                        'no_create_edit': True,-->
+<!--                        'no_quick_create': True,-->
+<!--                        }-->
+<!--                    </attribute>-->
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
+
+
+
+        <record id="product_template_customer_taxes_form_view_inherit" model="ir.ui.view">
+            <field name="name">product_template_customer_taxes_form_view_inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref='account.product_template_form_view'/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='taxes_id']" position="attributes">
+                    <attribute name="options">
+                        {
+                        'no_edit': True,
+                        'no_open': True,
+                        'no_create': True,
+                        'no_create_edit': True,
+                        'no_quick_create': True,
+                        }
+                    </attribute>
+                </xpath>
+            </field>
+        </record>
+
+
+
+         <record id="product_categ_id_form_view_inherit" model="ir.ui.view">
+            <field name="name">product_categ_id_form_view_inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref='product.product_template_form_view'/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='categ_id']" position="attributes">
+                    <attribute name="options">
+                        {
+                        'no_edit': True,
+                        'no_open': True,
+                        'no_create': True,
+                        'no_create_edit': True,
+                        'no_quick_create': True,
+                        }
+                    </attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='product_tag_ids']" position="attributes">
+                    <attribute name="options">
+                        {
+                        'no_edit': True,
+                        'no_open': True,
+                        'no_create': True,
+                        'no_create_edit': True,
+                        'no_quick_create': True,
+                        }
+                    </attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+
+        <record id="product_template_only_form_view_attribute_line_inherit" model="ir.ui.view">
+            <field name="name">product_template_only_form_view_attribute_line_inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref='product.product_template_only_form_view'/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='attribute_id']" position="attributes">
+                    <attribute name="options">
+                        {
+                        'no_edit': True,
+                        'no_open': True,
+                        'no_create': True,
+                        'no_create_edit': True,
+                        'no_quick_create': True,
+                        }
+                    </attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='value_ids']" position="attributes">
+                    <attribute name="options">
+                        {
+                        'no_edit': True,
+                        'no_open': True,
+                        'no_create': True,
+                        'no_create_edit': True,
+                        'no_quick_create': True,
+                        }
+                    </attribute>
+                </xpath>
+            </field>
+        </record>
+
+
+
+        <record id="product_template_view_form_inherit" model="ir.ui.view">
+            <field name="name">product_template_view_form_inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref='product.product_template_only_form_view'/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='attribute_id']" position="attributes">
+                    <attribute name="options">
+                        {
+                        'no_edit': True,
+                        'no_open': True,
+                        'no_create': True,
+                        'no_create_edit': True,
+                        'no_quick_create': True,
+                        }
+                    </attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='value_ids']" position="attributes">
+                    <attribute name="options">
+                        {
+                        'no_edit': True,
+                        'no_open': True,
+                        'no_create': True,
+                        'no_create_edit': True,
+                        'no_quick_create': True,
+                        }
+                    </attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="product_template_view_upsell_form_inherit" model="ir.ui.view">
+            <field name="name">product_template_view_upsell_form_inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref='sale_product_configurator.product_template_view_form'/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='optional_product_ids']" position="attributes">
+                    <attribute name="options">
+                        {
+                        'no_edit': True,
+                        'no_open': True,
+                        'no_create': True,
+                        'no_create_edit': True,
+                        'no_quick_create': True,
+                        }
+                    </attribute>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
