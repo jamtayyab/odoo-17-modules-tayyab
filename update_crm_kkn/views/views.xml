@@ -23,18 +23,24 @@
           <field name="stage_id" widget="statusbar" class="o_field_statusbar"
             options="{'fold_field': 'fold'}"
             domain="['|', ('team_id', '=', team_id), ('team_id', '=', False)]"
-            attrs="{'invisible': ['|' , ('active', '=', False), ('type', '=', 'lead')]}" />
+            invisible="('active' == False) or ('type' == 'lead')"
+          />
         </xpath>
-
-        <xpath expr="//form[1]/sheet[1]/group[1]/group[4]/field[@name='user_id']"
+        <xpath expr="//sheet[1]/group[1]/group[4]//field[@name='user_id']"
           position="replace">
           <field name="user_id"
             context="{'default_sales_team_id': team_id}"
-            attrs="{'readonly':True}"
+            options="{
+              'no_edit': True,
+              'no_open': True,
+              'no_create': True,
+              'no_create_edit': True,
+              'no_quick_create': True,
+              }"
+            readonly="1"
             widget="many2one_avatar_user" />
 
         </xpath>
-
 
       </field>
     </record>
@@ -84,10 +90,12 @@
       </field>
     </record>
 -->
-
+    <record id="crm.res_partner_menu_customer" model="ir.ui.menu">
+      <field name="action" ref="account.res_partner_action_customer" />
+    </record>
+    <!-- <menuitem name="update_crm_kkn" id="update_crm_kkn.menu_root" /> -->
     <!-- Top menu item -->
     <!--
-    <menuitem name="update_crm_kkn" id="update_crm_kkn.menu_root"/>
 -->
     <!-- menu categories -->
     <!--

@@ -10,13 +10,6 @@ ADDRESS_FIELDS = ("street", "street2", "zip", "city", "state_id", "country_id")
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
-    company_type = fields.Selection(
-        string="Company Type",
-        selection=[("person", "Individual"), ("company", "Company")],
-        compute="_compute_company_type",
-        inverse="_write_company_type",
-        store=True,
-    )
     contact_type = fields.Selection(
         [
             ("customer", "Customer"),
@@ -74,17 +67,18 @@ class ResPartner(models.Model):
         tracking=True,
     )
     cnic = fields.Char(string="CNIC")
-    station_id = fields.Many2one("res.station", "Station", tracking=True)
+    station_id = fields.Many2one("res.station", "Station")
     zip = fields.Char(
-        related="station_id.zip", change_default=True, store=True, tracking=True
+        related="station_id.zip",
+        change_default=True,
+        store=True,
     )
     district_id = fields.Many2one(
-        related="station_id.district_id", store=True, tracking=True
+        related="station_id.district_id",
+        store=True,
     )
-    state_id = fields.Many2one(related="station_id.state_id", store=True, tracking=True)
-    country_id = fields.Many2one(
-        related="station_id.state_id.country_id", store=True, tracking=True
-    )
+    state_id = fields.Many2one(related="station_id.state_id", store=True)
+    country_id = fields.Many2one(related="station_id.state_id.country_id", store=True)
 
     start_date = fields.Date(string="Starting Date", default=fields.Date.context_today)
     active_status = fields.Boolean(string="Active Status", default=True)
