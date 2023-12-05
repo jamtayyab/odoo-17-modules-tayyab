@@ -13,13 +13,14 @@ Long description of module's purpose
     "category": "Customizations",
     "version": "17.0.1.0.0",
     # any module necessary for this one to work correctly
-    "depends": ["base", "account", "sale"],
+    "depends": ["base", "account", "sale", "update_contact_kkn"],
     # always loaded
     "data": [
         # 'security/ir.model.access.csv',
         "views/templates.xml",
         "views/account_move_view.xml",
         "views/account_payment_view.xml",
+        "views/res_partner.xml",
     ],
     # only loaded in demonstration mode
     "demo": [

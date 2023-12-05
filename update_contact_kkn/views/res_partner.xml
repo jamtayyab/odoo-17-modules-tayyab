@@ -31,7 +31,7 @@
                         <group>
                             <field name="contact_type"
                                 invisible="company_type == False"
-                                readonly="unique_id not in ['New','N/A']"
+                                readonly="unique_id not in ['New','N/A'] or context.get('default_contact_type') in ['customer','vendor']"
                             />
 
                         </group>
@@ -119,7 +119,7 @@
 
                 <xpath expr="//label[@for='vat']" position="before">
                     <field name="cnic" placeholder="00000-0000000-0"
-                        invisible="contact_type != 'customer'"
+                        invisible="company_type == 'company' or contact_type != 'customer'"
                         required="contact_type == 'customer'"
                     />
 

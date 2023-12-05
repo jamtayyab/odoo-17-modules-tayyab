@@ -10,6 +10,13 @@ ADDRESS_FIELDS = ("street", "street2", "zip", "city", "state_id", "country_id")
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
+    company_type = fields.Selection(
+        string="Company Type",
+        selection=[("person", "Individual"), ("company", "Company")],
+        compute="_compute_company_type",
+        inverse="_write_company_type",
+        store=True,
+    )
     contact_type = fields.Selection(
         [
             ("customer", "Customer"),
@@ -107,6 +114,15 @@ class ResPartner(models.Model):
                     )
                 )
 
+    # default get method to get default values
+    # @api.model
+    # def default_get(self, fields_list):
+    #     defaults = super().default_get(fields_list)
+    #     print(defaults)
+    #     # if defaults.get("contact_type"):
+    #     #     self.contact_type = defaults.get("contact_type")
+    #     return defaults
+
     # method override
     @api.onchange("mobile", "country_id", "company_id")
     def _onchange_mobile_validation(self):
@@ -114,8 +130,9 @@ class ResPartner(models.Model):
 
     @api.onchange("type")
     def address_type(self):
+        # print(self.env.context)
         address_dict = {
-            "contact": "other",
+            "contact": self.env.context.get("default_contact_type") or "other",
             "invoice": "billing_poc",
             "delivery": "installation_poc",
             "followup": "other",
