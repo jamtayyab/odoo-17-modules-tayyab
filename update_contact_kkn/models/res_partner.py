@@ -67,7 +67,7 @@ class ResPartner(models.Model):
         tracking=True,
     )
     cnic = fields.Char(string="CNIC")
-    station_id = fields.Many2one("res.station", "Station")
+    station_id = fields.Many2one("res.station", "Station", tracking=True)
     zip = fields.Char(
         related="station_id.zip",
         change_default=True,
