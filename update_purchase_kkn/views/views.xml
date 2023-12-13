@@ -18,6 +18,12 @@
                     </attribute>
                 </xpath>
 
+                <xpath expr="//sheet//field[@name='partner_id']" position="attributes">
+                    <attribute name="domain">
+                        [('contact_type','=','vendor'), ('unique_id','!=','New')]
+                    </attribute>
+                </xpath>
+
 
                 <xpath expr="//sheet//field[@name='currency_id']" position="attributes">
                     <attribute name="options">
@@ -108,25 +114,24 @@
         </record>
 
 
-<!--        <record id="product_template_customer_taxes_form_view_inherit" model="ir.ui.view">-->
-<!--            <field name="name">product_template_customer_taxes_form_view_inherit</field>-->
-<!--            <field name="model">product.template</field>-->
-<!--            <field name="inherit_id" ref='account.product_template_form_view'/>-->
-<!--            <field name="arch" type="xml">-->
-<!--                <xpath expr="//field[@name='taxes_id']" position="attributes">-->
-<!--                    <attribute name="options">-->
-<!--                        {-->
-<!--                        'no_edit': True,-->
-<!--                        'no_open': True,-->
-<!--                        'no_create': True,-->
-<!--                        'no_create_edit': True,-->
-<!--                        'no_quick_create': True,-->
-<!--                        }-->
-<!--                    </attribute>-->
-<!--                </xpath>-->
-<!--            </field>-->
-<!--        </record>-->
-
+        <!--        <record id="product_template_customer_taxes_form_view_inherit" model="ir.ui.view">-->
+        <!--            <field name="name">product_template_customer_taxes_form_view_inherit</field>-->
+        <!--            <field name="model">product.template</field>-->
+        <!--            <field name="inherit_id" ref='account.product_template_form_view'/>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <xpath expr="//field[@name='taxes_id']" position="attributes">-->
+        <!--                    <attribute name="options">-->
+        <!--                        {-->
+        <!--                        'no_edit': True,-->
+        <!--                        'no_open': True,-->
+        <!--                        'no_create': True,-->
+        <!--                        'no_create_edit': True,-->
+        <!--                        'no_quick_create': True,-->
+        <!--                        }-->
+        <!--                    </attribute>-->
+        <!--                </xpath>-->
+        <!--            </field>-->
+        <!--        </record>-->
 
 
         <record id="product_template_customer_taxes_form_view_inherit" model="ir.ui.view">
@@ -149,8 +154,7 @@
         </record>
 
 
-
-         <record id="product_categ_id_form_view_inherit" model="ir.ui.view">
+        <record id="product_categ_id_form_view_inherit" model="ir.ui.view">
             <field name="name">product_categ_id_form_view_inherit</field>
             <field name="model">product.template</field>
             <field name="inherit_id" ref='product.product_template_form_view'/>
@@ -215,7 +219,6 @@
         </record>
 
 
-
         <record id="product_template_view_form_inherit" model="ir.ui.view">
             <field name="name">product_template_view_form_inherit</field>
             <field name="model">product.template</field>
@@ -265,6 +268,12 @@
                 </xpath>
             </field>
         </record>
+
+
+
+
+
+
 
     </data>
 </odoo>

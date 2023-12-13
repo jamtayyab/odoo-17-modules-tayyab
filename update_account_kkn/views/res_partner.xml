@@ -4,14 +4,34 @@
 
         <field name="context">{'search_default_customer': 1,'res_partner_search_mode': 'customer',
             'default_is_company': True, 'default_customer_rank': 1,
-            'default_contact_type':'customer'}</field>
+            'default_contact_type':'customer'}
+        </field>
     </record>
 
     <record id="account.res_partner_action_supplier" model="ir.actions.act_window">
 
         <field name="context">{'search_default_supplier': 1,'res_partner_search_mode': 'supplier',
             'default_is_company': True, 'default_supplier_rank':
-            1,'default_contact_type':'vendor'}</field>
+            1,'default_contact_type':'vendor'}
+        </field>
+    </record>
+
+    <record id="account.action_move_in_invoice_type" model="ir.actions.act_window">
+        <field name="domain">[('move_type', '=', 'in_invoice'), ('partner_id.contact_type','=','vendor'),
+            ('partner_id.contact_type','!=','New')]
+        </field>
+        <field name="context">{'default_move_type': 'in_invoice', 'display_account_trust':
+            True,'custom_contact_type':'vendor'}
+        </field>
+    </record>
+
+
+    <record id="account.action_move_out_invoice_type" model="ir.actions.act_window">
+        <field name="domain">[('move_type', '=', 'out_invoice'), ('partner_id.contact_type','=','customer'),
+            ('partner_id.contact_type','!=','New')]
+        </field>
+        <field name="context">{'default_move_type': 'out_invoice', 'custom_contact_type':'customer'}
+        </field>
     </record>
 
 </odoo>

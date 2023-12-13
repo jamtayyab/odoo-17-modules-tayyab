@@ -14,6 +14,16 @@
                     </attribute>
                 </xpath>
 
+                <xpath expr="//sheet//field[@name='partner_id']" position="attributes">
+
+                     <attribute name="domain">
+                        [('contact_type','=','customer'), ('unique_id','!=','New')]
+                    </attribute>
+
+                </xpath>
+
+
+
 
                 <xpath expr="//sheet//field[@name='partner_invoice_id']" position="attributes">
                     <attribute name="options">

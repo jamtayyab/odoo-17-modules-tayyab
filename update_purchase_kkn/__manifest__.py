@@ -12,14 +12,15 @@
     "depends": [
         "base",
         "purchase",
-        "purchase_stock",
         "account",
         "sale_product_configurator",
+        "purchase_stock",
     ],
     "data": [
         # "security/ir.model.access.csv",
         "views/views.xml",
         "views/templates.xml",
+        "views/account.xml",
     ],
     "external_dependencies": {
         "python": [],

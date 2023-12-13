@@ -12,6 +12,9 @@ class Employee(models.Model):
     station_id = fields.Many2one(
         "res.station",
         string="Station",
+        default=lambda self: self.env["res.station"].search(
+            [("name", "=", "Lahore")], limit=1
+        ),
         required=True,
         inverse="_inverse_work_contact_details",
     )

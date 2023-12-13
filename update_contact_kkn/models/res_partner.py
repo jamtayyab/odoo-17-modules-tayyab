@@ -18,6 +18,7 @@ class ResPartner(models.Model):
             ("installation_poc", "Installation POC"),
             ("billing_poc", "Billing POC"),
             ("portal", "Portal User"),
+            ("contact", "Contact"),
             ("other", "Other"),
         ],
         string="Contact Type",
@@ -69,16 +70,15 @@ class ResPartner(models.Model):
     cnic = fields.Char(string="CNIC")
     station_id = fields.Many2one("res.station", "Station", tracking=True)
     zip = fields.Char(
-        related="station_id.zip",
-        change_default=True,
-        store=True,
+        related="station_id.zip", change_default=True, store=True, tracking=True
     )
     district_id = fields.Many2one(
-        related="station_id.district_id",
-        store=True,
+        related="station_id.district_id", store=True, tracking=True
     )
-    state_id = fields.Many2one(related="station_id.state_id", store=True)
-    country_id = fields.Many2one(related="station_id.state_id.country_id", store=True)
+    state_id = fields.Many2one(related="station_id.state_id", store=True, tracking=True)
+    country_id = fields.Many2one(
+        related="station_id.state_id.country_id", store=True, tracking=True
+    )
 
     start_date = fields.Date(string="Starting Date", default=fields.Date.context_today)
     active_status = fields.Boolean(string="Active Status", default=True)
@@ -87,6 +87,8 @@ class ResPartner(models.Model):
     # def _onchange_district(self):
     #     self.district_id = self.station_id.district_id
     # for address type contact
+
+    # constraints
     @api.constrains("cnic", "mobile", "vat")
     def _check_fields_length(self):
         for record in self:
@@ -100,13 +102,24 @@ class ResPartner(models.Model):
                 raise ValidationError(
                     _("Please enter correct Mobile number. It should be 12 characters.")
                 )
-            if record.vat and len(record.vat) != 9:
+            if record.vat:
                 _logger.error("%s  ", record.vat)
-                raise ValidationError(
-                    _(
-                        "Please enter correct NTN/PSTN number. It should be 9 characters."
+                vat_len = len(record.vat)
+                if vat_len < 7 or vat_len > 9:
+                    raise ValidationError(
+                        _(
+                            "Please enter correct NTN/PSTN number. It should be 7 to 9 characters."
+                        )
                     )
+                search_vat = self.env["res.partner"].search_count(
+                    [
+                        ("vat", "=", record.vat),
+                        ("id", "not in", record.ids),
+                        ("contact_type", "=", record.contact_type),
+                    ]
                 )
+                if search_vat > 0:
+                    raise ValidationError(_("NTN Number Already Exist"))
 
     # default get method to get default values
     # @api.model
@@ -126,7 +139,7 @@ class ResPartner(models.Model):
     def address_type(self):
         # print(self.env.context)
         address_dict = {
-            "contact": self.env.context.get("default_contact_type") or "other",
+            "contact": self.env.context.get("default_contact_type") or "contact",
             "invoice": "billing_poc",
             "delivery": "installation_poc",
             "followup": "other",
@@ -148,7 +161,11 @@ class ResPartner(models.Model):
     def _onchange_vat(self):
         if self.vat:
             search_vat = self.env["res.partner"].search_count(
-                [("vat", "=", self.vat), ("id", "not in", self.ids)]
+                [
+                    ("vat", "=", self.vat),
+                    ("id", "not in", self.ids),
+                    ("contact_type", "=", self.contact_type),
+                ]
             )
             if search_vat > 0:
                 raise ValidationError(_("NTN Number Already Exist"))
@@ -172,9 +189,11 @@ class ResPartner(models.Model):
                 id_type = vals.get("company_type")
                 contact_type = vals.get("contact_type")
                 # contact_sub_type = vals.get("contact_sub_type", False)
-                # _logger.error(
-                #     "%s      %s        %s  ", id_type, contact_type, contact_sub_type
-                # )
+                _logger.error(
+                    "debugging create method res partner %s          %s  ",
+                    id_type,
+                    contact_type,
+                )
                 # vals["unique_id"] = self._generate_unique_id(
                 #     id_type, contact_type, contact_sub_type
                 # )
@@ -191,6 +210,7 @@ class ResPartner(models.Model):
             ("person", "installation_poc"): "res.partner.installation.poc",
             ("person", "billing_poc"): "res.partner.billing.poc",
             ("person", "portal"): "res.partner.portal.user",
+            ("person", "contact"): "res.partner.contact",
             ("company", "customer"): "res.partner.comp.customer",
             ("company", "vendor"): "res.partner.comp.vendor",
             ("company", "employee"): "res.partner.comp.employee",
