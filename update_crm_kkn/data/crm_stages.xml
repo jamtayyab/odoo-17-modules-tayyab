@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Update existing stages -->
+    <record model="crm.stage" id="crm.stage_lead1">
+        <field name="name">Opportunity</field>
+        <field name="sequence">1</field>
+    </record>
+
+    <record model="crm.stage" id="crm.stage_lead2">
+        <field name="name">Survey</field>
+        <field name="sequence">2</field>
+    </record>
+    <!-- new stage -->
+    <record model="crm.stage" id="solution_finalize_stage_id">
+        <field name="name">Solution Finalize</field>
+        <field name="sequence">3</field>
+    </record>
+    <record model="crm.stage" id="crm.stage_lead3">
+        <field name="name">Proposition</field>
+        <field name="sequence">4</field>
+    </record>
+    <record model="crm.stage" id="ceo_stage_id">
+        <field name="name">CEO Approval</field>
+        <field name="sequence">5</field>
+    </record>
+    <record model="crm.stage" id="crm.stage_lead4">
+        <field name="name">Won</field>
+        <field name="fold" eval="False" />
+        <field name="is_won">True</field>
+        <field name="sequence">70</field>
+    </record>
+</odoo>

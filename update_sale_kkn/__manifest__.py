@@ -9,18 +9,17 @@
     "author": "KKN Developers",
     "maintainers": ["Muhammad Tayyab", "Muhammad Muzafar"],
     "website": "https://www.kknetworks.com.pk",
-    "depends": ["base", "sale","sale_management"],
+    "depends": ["base", "sale", "sale_management"],
     "data": [
         # "security/ir.model.access.csv",
         "views/views.xml",
-        'views/templates.xml',
-        'views/account.xml',
+        "views/templates.xml",
+        "views/account.xml",
     ],
     "external_dependencies": {
-    "python": [],
-    "bin": [],
+        "python": [],
+        "bin": [],
     },
     "application": True,
     "installable": True,
 }
-

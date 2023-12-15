@@ -15,19 +15,21 @@
     "category": "Customizations",
     "version": "17.0.0.0",
     # any module necessary for this one to work correctly
-    "depends": ["base", "crm", "update_account_kkn"],
+    "depends": ["base", "crm", "sale", "update_account_kkn","sale_crm"],
     # always loaded
     "data": [
-        'security/ir.model.access.csv',
+        "security/ir.model.access.csv",
+        "data/crm_stages.xml",
+        "views/crm_stages.xml",
         "views/views.xml",
         "views/templates.xml",
         # "views/crm_lead_view_kk.xml",
-        'views/kk_branch_type.xml',
-        'views/kk_sale_type.xml',
-        'views/kk_lead_sources.xml',
-        'views/kk_requested_medium.xml',
-        'views/kk_crm_form.xml',
-        'views/crm_lead2opportunity.xml',
+        "views/kk_branch_type.xml",
+        "views/kk_sale_type.xml",
+        "views/kk_lead_sources.xml",
+        "views/kk_requested_medium.xml",
+        "views/kk_crm_form.xml",
+        "views/crm_lead2opportunity.xml",
     ],
     # only loaded in demonstration mode
     "demo": [
