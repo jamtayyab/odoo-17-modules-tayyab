@@ -15,7 +15,15 @@
     "category": "Customizations",
     "version": "17.0.0.0",
     # any module necessary for this one to work correctly
-    "depends": ["base", "crm", "sale", "update_account_kkn","sale_crm"],
+    "depends": [
+        "base",
+        "crm",
+        "sale",
+        "update_account_kkn",
+        "update_contact_kkn",
+        "update_inventory_kkn",
+        "sale_crm",
+    ],
     # always loaded
     "data": [
         "security/ir.model.access.csv",
