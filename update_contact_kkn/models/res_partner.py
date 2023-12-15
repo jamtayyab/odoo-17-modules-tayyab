@@ -130,7 +130,8 @@ class ResPartner(models.Model):
     #     #     self.contact_type = defaults.get("contact_type")
     #     return defaults
 
-    # method override
+    # method override to bypass autoformat phone number
+    
     @api.onchange("mobile", "country_id", "company_id")
     def _onchange_mobile_validation(self):
         pass

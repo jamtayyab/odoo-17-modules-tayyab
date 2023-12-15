@@ -1,113 +1,136 @@
 <odoo>
   <data>
 
+<!--    <record id="crm_lead_view_form_inherit" model="ir.ui.view">-->
+<!--      <field name="name">crm.lead.view.form.inherit</field>-->
+<!--      <field name="model">crm.lead</field>-->
+<!--      <field name="inherit_id" ref="crm.crm_lead_view_form" />-->
+<!--      <field name="arch" type="xml">-->
+
+<!--        &lt;!&ndash; <xpath expr="//form/sheet[1]/group[1]/group[1]/field[@name='partner_id']"-->
+<!--          position="attributes">-->
+<!--          <attribute name="options">-->
+<!--            {'no_quick_create': True,}</attribute>-->
+<!--        </xpath> &ndash;&gt;-->
+
+<!--        <xpath expr="//form/sheet[1]/group[1]/group[2]/field[@name='partner_id']"-->
+<!--          position='attributes'>-->
+<!--          <attribute name="options">-->
+<!--            {'no_quick_create': True,}</attribute>-->
+<!--        </xpath>-->
+
+
+<!--        <xpath expr="//form[1]/header[1]/field[@name='stage_id']" position="replace">-->
+<!--          <field name="stage_id" widget="statusbar" class="o_field_statusbar"-->
+<!--            options="{'fold_field': 'fold'}"-->
+<!--            domain="['|', ('team_id', '=', team_id), ('team_id', '=', False)]"-->
+<!--            invisible="('active' == False) or ('type' == 'lead')"-->
+<!--          />-->
+<!--        </xpath>-->
+
+<!--        <xpath expr="//sheet[1]/group[1]/group[4]//field[@name='user_id']"-->
+<!--          position="replace">-->
+<!--          <field name="user_id"-->
+<!--            context="{'default_sales_team_id': team_id}"-->
+<!--            options="{-->
+<!--              'no_edit': True,-->
+<!--              'no_open': True,-->
+<!--              'no_create': True,-->
+<!--              'no_create_edit': True,-->
+<!--              'no_quick_create': True,-->
+<!--              }"-->
+<!--            readonly="1"-->
+<!--            widget="many2one_avatar_user" />-->
+<!--        </xpath>-->
+<!--      </field>-->
+<!--    </record>-->
+
+<!--    <record id="quick_create_opportunity_form_inherit" model="ir.ui.view">-->
+<!--      <field name="name">crm.lead.form.quick.create.inherit</field>-->
+<!--      <field name="model">crm.lead</field>-->
+<!--      <field name="inherit_id" ref="crm.quick_create_opportunity_form" />-->
+<!--      <field name="arch" type="xml">-->
+
+<!--        <xpath expr="//form/group[1]/field[@name='partner_id']"-->
+<!--          position='attributes'>-->
+<!--          <attribute name="options">-->
+<!--            {'no_quick_create': True,}</attribute>-->
+<!--        </xpath>-->
+
+<!--      </field>-->
+<!--    </record>-->
+
+<!--    <record id="crm.res_partner_menu_customer" model="ir.ui.menu">-->
+<!--      <field name="action" ref="account.res_partner_action_customer" />-->
+<!--    </record>-->
+
     <record id="crm_lead_view_form_inherit" model="ir.ui.view">
-      <field name="name">crm.lead.view.form.inherit</field>
-      <field name="model">crm.lead</field>
-      <field name="inherit_id" ref="crm.crm_lead_view_form" />
-      <field name="arch" type="xml">
-
-        <!-- <xpath expr="//form/sheet[1]/group[1]/group[1]/field[@name='partner_id']"
+<field name="name">crm.lead.view.form.inherit</field>
+<field name="model">crm.lead</field>
+<field name="inherit_id" ref="crm.crm_lead_view_form"/>
+<field name="arch" type="xml">
+<!--  <xpath expr="//form/sheet[1]/group[1]/group[1]/field[@name='partner_id']"
           position="attributes">
           <attribute name="options">
             {'no_quick_create': True,}</attribute>
-        </xpath> -->
+        </xpath>  -->
+<!--  /odoo/record[1]/field[3]/form[1]/sheet[1]/group[1]/group[2]  -->
+<xpath expr="//sheet[1]/group[1]/group[2]/field[@name='partner_id']" position="attributes">
+<attribute name="options"> {'no_quick_create': True,}</attribute>
+<attribute name="domain"> [('contact_type','not in',('contact','installation_poc','billing_poc'))]</attribute>
+</xpath>
+<!--  hide partner in lead form view   -->
+<xpath expr="//sheet[1]/group[1]/group[1]/field[@name='partner_id']" position="attributes">
+<attribute name="invisible"> 1</attribute>
+</xpath>
+<xpath expr="//form[1]/header[1]/field[@name='stage_id']" position="replace">
+<field name="stage_id" widget="statusbar" class="o_field_statusbar" options="{'fold_field': 'fold'}" domain="['|', ('team_id', '=', team_id), ('team_id', '=', False)]" invisible="('active' == False) or ('type' == 'lead')"/>
+</xpath>
+<xpath expr="//sheet[1]/group[1]/group[4]//field[@name='user_id']" position="replace">
+<field name="user_id" context="{'default_sales_team_id': team_id}" options="{ 'no_edit': True, 'no_open': True, 'no_create': True, 'no_create_edit': True, 'no_quick_create': True, }" readonly="1" widget="many2one_avatar_user"/>
+</xpath>
+</field>
+</record>
+<record id="quick_create_opportunity_form_inherit" model="ir.ui.view">
+<field name="name">crm.lead.form.quick.create.inherit</field>
+<field name="model">crm.lead</field>
+<field name="inherit_id" ref="crm.quick_create_opportunity_form"/>
+<field name="arch" type="xml">
+<xpath expr="//form/group[1]/field[@name='partner_id']" position="attributes">
+<attribute name="options"> {'no_quick_create': True,}</attribute>
+</xpath>
+</field>
+</record>
+<!--  kanban view   -->
+<record id="crm_lead_kanban_view_inherit" model="ir.ui.view">
+<field name="name">crm.lead.view.kanban.inherit</field>
+<field name="model">crm.lead</field>
+<field name="inherit_id" ref="crm.crm_case_kanban_view_leads"/>
+<field name="arch" type="xml">
+<xpath expr="//kanban" position="attributes">
+<attribute name="on_create"/>
+<attribute name="create">false</attribute>
+<attribute name="records_draggable">false</attribute>
+<attribute name="group_create">false</attribute>
+</xpath>
+</field>
+</record>
+<record id="quick_create_opportunity_form_inherit" model="ir.ui.view">
+<field name="name">crm.lead.form.quick.create.inherit</field>
+<field name="model">crm.lead</field>
+<field name="inherit_id" ref="crm.quick_create_opportunity_form"/>
+<field name="arch" type="xml">
+<xpath expr="//form/group[1]/field[@name='partner_id']" position="attributes">
+<attribute name="options"> {'no_quick_create': True,}</attribute>
+</xpath>
+</field>
+</record>
+<!--  used new acton for customer menu so customer default selected appeares  -->
+<record id="crm.res_partner_menu_customer" model="ir.ui.menu">
+<field name="action" ref="account.res_partner_action_customer"/>
+</record>
 
-        <xpath expr="//form/sheet[1]/group[1]/group[2]/field[@name='partner_id']"
-          position='attributes'>
-          <attribute name="options">
-            {'no_quick_create': True,}</attribute>
-        </xpath>
-
-        <xpath expr="//form[1]/header[1]/field[@name='stage_id']" position="replace">
-          <field name="stage_id" widget="statusbar" class="o_field_statusbar"
-            options="{'fold_field': 'fold'}"
-            domain="['|', ('team_id', '=', team_id), ('team_id', '=', False)]"
-            invisible="('active' == False) or ('type' == 'lead')"
-          />
-        </xpath>
-        <xpath expr="//sheet[1]/group[1]/group[4]//field[@name='user_id']"
-          position="replace">
-          <field name="user_id"
-            context="{'default_sales_team_id': team_id}"
-            options="{
-              'no_edit': True,
-              'no_open': True,
-              'no_create': True,
-              'no_create_edit': True,
-              'no_quick_create': True,
-              }"
-            readonly="1"
-            widget="many2one_avatar_user" />
-
-        </xpath>
-
-      </field>
-    </record>
 
 
-    <record id="quick_create_opportunity_form_inherit" model="ir.ui.view">
-      <field name="name">crm.lead.form.quick.create.inherit</field>
-      <field name="model">crm.lead</field>
-      <field name="inherit_id" ref="crm.quick_create_opportunity_form" />
-      <field name="arch" type="xml">
-        <!-- <xpath expr="//form/sheet[1]/group[1]/group[1]/field[@name='partner_id']"
-          position="attributes">
-          <attribute name="options">
-            {'no_quick_create': True,}</attribute>
-        </xpath> -->
-        <xpath expr="//form/group[1]/field[@name='partner_id']"
-          position='attributes'>
-          <attribute name="options">
-            {'no_quick_create': True,}</attribute>
-        </xpath>
-
-
-      </field>
-    </record>
-
-    <!-- actions opening views on models -->
-    <!--
-    <record model="ir.actions.act_window" id="update_crm_kkn.action_window">
-      <field name="name">update_crm_kkn window</field>
-      <field name="res_model">update_crm_kkn.update_crm_kkn</field>
-      <field name="view_mode">tree,form</field>
-    </record>
--->
-
-    <!-- server action to the one above -->
-    <!--
-    <record model="ir.actions.server" id="update_crm_kkn.action_server">
-      <field name="name">update_crm_kkn server</field>
-      <field name="model_id" ref="model_update_crm_kkn_update_crm_kkn"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": model._name,
-        }
-      </field>
-    </record>
--->
-    <record id="crm.res_partner_menu_customer" model="ir.ui.menu">
-      <field name="action" ref="account.res_partner_action_customer" />
-    </record>
-    <!-- <menuitem name="update_crm_kkn" id="update_crm_kkn.menu_root" /> -->
-    <!-- Top menu item -->
-    <!--
--->
-    <!-- menu categories -->
-    <!--
-    <menuitem name="Menu 1" id="update_crm_kkn.menu_1" parent="update_crm_kkn.menu_root"/>
-    <menuitem name="Menu 2" id="update_crm_kkn.menu_2" parent="update_crm_kkn.menu_root"/>
--->
-    <!-- actions -->
-    <!--
-    <menuitem name="List" id="update_crm_kkn.menu_1_list" parent="update_crm_kkn.menu_1"
-              action="update_crm_kkn.action_window"/>
-    <menuitem name="Server to list" id="update_crm_kkn" parent="update_crm_kkn.menu_2"
-              action="update_crm_kkn.action_server"/>
--->
   </data>
 </odoo>

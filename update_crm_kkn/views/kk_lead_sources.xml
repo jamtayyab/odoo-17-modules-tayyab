@@ -1,0 +1,50 @@
+<odoo>
+    <data>
+        <record id="view_form_kk_lead_source" model="ir.ui.view">
+            <field name="name">kk.lead.source.form</field>
+            <field name="model">kk.lead.source</field>
+            <field name="arch" type="xml">
+                <form string="KKN Lead Source">
+                    <sheet>
+                        <group>
+                            <field name="lead_source"/>
+                            <field name ='current_user' force_save="1" />
+
+                        </group>
+                    </sheet>
+                     <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user"/>
+                        <field name ='activity_ids'/>
+                        <field name="message_ids"/>
+                </div>
+                </form>
+            </field>
+        </record>
+
+      <record id="view_tree_kk_lead_sources" model="ir.ui.view">
+            <field name="name">kk.lead.source.tree</field>
+            <field name="model">kk.lead.source</field>
+            <field name="arch" type="xml">
+                <tree string="KKN Lead Source">
+                    <field name="lead_source"/>
+                    <field name ='current_user' />
+                </tree>
+            </field>
+        </record>
+
+    <record model="ir.actions.act_window" id="crm_kk_lead_source">
+            <field name="name">KKN Lead Source</field>
+            <field name="res_model">kk.lead.source</field>
+            <field name="view_mode">tree,form</field>
+    </record>
+
+      <menuitem
+            id="crm_lead_sources"
+            action="update_crm_kkn.crm_kk_lead_source"
+            name="Lead Sources"
+            parent="kkn_crm_configuration"
+            sequence="101" />
+
+    </data>
+</odoo>
+

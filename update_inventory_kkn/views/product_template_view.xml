@@ -5,6 +5,7 @@
         <field name="model">product.template</field>
         <field name="inherit_id" ref="product.product_template_only_form_view" />
         <field name="arch" type="xml">
+
             <xpath expr="//form[1]/sheet[1]/notebook[1]/page[5]" position="after">
                 <page string="Specification" name="specification" class="page_sales">
                     <group>
@@ -35,6 +36,8 @@
                             </div>
                         </group>
                         <group>
+                            <field name ="for_employees"/>
+                            <field name ="crm_check"/>
                             <field name="is_tower"
                                 invisible="is_rack == True"
                                 force_save="1" />

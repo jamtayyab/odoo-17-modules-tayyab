@@ -1,0 +1,56 @@
+<odoo>
+  <data>
+
+        <record id="view_form_kk_branches" model="ir.ui.view">
+            <field name="name">kk.branches.form</field>
+            <field name="model">kk.branch.type</field>
+            <field name="arch" type="xml">
+                <form string="KKN Branches">
+                    <sheet>
+                        <group>
+                            <field name="kk_branch"/>
+                            <field name ='current_user' force_save="1" />
+
+                        </group>
+                    </sheet>
+                     <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user"/>
+                        <field name ='activity_ids'/>
+                        <field name="message_ids"/>
+                </div>
+                </form>
+            </field>
+        </record>
+
+      <record id="view_tree_kk_branches" model="ir.ui.view">
+            <field name="name">kk.branches.tree</field>
+            <field name="model">kk.branch.type</field>
+            <field name="arch" type="xml">
+                <tree string="KKN Branches">
+                    <field name="kk_branch"/>
+                    <field name ='current_user' />
+                </tree>
+            </field>
+        </record>
+
+    <record model="ir.actions.act_window" id="crm_kkn_branches">
+            <field name="name">KKN Branch Type</field>
+            <field name="res_model">kk.branch.type</field>
+            <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+            id="kkn_crm_configuration"
+            name="KKN CRM Configuration"
+            parent="crm.crm_menu_config"
+            sequence="100"/>
+
+    <menuitem
+            id="kk_branches"
+            action="update_crm_kkn.crm_kkn_branches"
+            name="Branches"
+            parent="kkn_crm_configuration"
+            sequence="100" />
+
+  </data>
+</odoo>

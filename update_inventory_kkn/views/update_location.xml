@@ -21,13 +21,13 @@
                     />
 
                 </field>
-                <!-- <xpath expr="//form[1]/sheet[1]" position="after">
+                <xpath expr="//form[1]/sheet[1]" position="after">
                     <div class="oe_chatter">
                         <field name="message_follower_ids" widget="mail_followers" />
                         <field name="activity_ids" widget="mail_activity" />
                         <field name="message_ids" widget="mail_thread" />
                     </div>
-                </xpath> -->
+                </xpath>
                 <xpath expr="//form[1]/sheet[1]/field[@name='comment']" position="after">
                     <notebook>
                         <page string="Location Coordinates" id="partner_assignation">
@@ -75,77 +75,5 @@
                 </search>
             </field>
         </record>
-
-
-        <!--Adding
-        Address form fields in
-    Location form-->
-
-        <record model="ir.ui.view" id="address_form_view">
-            <field name="name">update_inventory_kkn.location.address_form_view</field>
-            <field name="model">stock.location</field>
-            <field name="inherit_id" ref="stock.view_location_form" />
-            <field name="arch" type="xml">
-                <xpath expr="//form/sheet/group/group[1]" position="after">
-                    <group>
-                        <b id="address">Address</b>
-                        <div class="o_address_format">
-                            <field name="street" placeholder="Street..." class="o_address_street" />
-                            <field name="station_id" placeholder="Station" class="o_address_street"
-                                options="{'no_open': True, 'no_create': True}"
-                                readonly="unique_id != 'New'"
-                            />
-                            <field name="district_id" placeholder="City" class="o_address_city"
-                                options="{'no_open': True, 'no_create': True}"
-                            />
-
-
-                            <field name="state_id" class="o_address_state" placeholder="Province"
-                                options="{'no_open': True, 'no_create': True}"
-                            />
-                            <field name="zip" placeholder="ZIP" class="o_address_zip" />
-                            <field name="country_id" placeholder="Country" class="o_address_country"
-                                options="{'no_open': True, 'no_create': True}"
-                                can_create="true" can_write="true" />
-                        </div>
-                    </group>
-                </xpath>
-            </field>
-        </record>
-
-        <!--Adding/Showing
-                             Location  Address  tree view-->
-        <record model="ir.ui.view" id="locations_form_view">
-            <field name="name">update_inventory_kkn.stock.locations_tree_view</field>
-            <field name="model">stock.location</field>
-            <field name="inherit_id" ref="stock.view_location_tree2" />
-            <field name="arch" type="xml">
-                <xpath expr="//tree[1]/field[@groups='base.group_multi_company']" position="after">
-                    <field name="name" options="{'no_open': True, 'no_create': True}"
-                        readonly="1"
-                    />
-                    <field name="street" options="{'no_open': True, 'no_create': True}"
-                        readonly="1"
-                    />
-                    <field name="station_id" options="{'no_open': True, 'no_create': True}"
-                        readonly="1"
-                    />
-
-                    <field name="district_id" options="{'no_open': True, 'no_create': True}"
-                        readonly="1"
-                    />
-                    <field name="state_id" options="{'no_open': True, 'no_create': True}"
-                        readonly="1"
-                    />
-                    <field name="zip" options="{'no_open': True, 'no_create': True}"
-                        readonly="1"
-                    />
-                    <field name="country_id" options="{'no_open': True, 'no_create': True}"
-                        readonly="1"
-                    />
-                </xpath>
-            </field>
-        </record>
-
     </data>
 </odoo>

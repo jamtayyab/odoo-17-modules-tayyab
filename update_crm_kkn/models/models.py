@@ -1,18 +1,30 @@
 # -*- coding: utf-8 -*-
 
-# from odoo import models, fields, api
+from odoo import models, fields, api
 
 
-# class update_crm_kkn(models.Model):
-#     _name = 'update_crm_kkn.update_crm_kkn'
-#     _description = 'update_crm_kkn.update_crm_kkn'
+class update_crm_kkn(models.Model):
+    _inherit= 'crm.lead'
 
-#     name = fields.Char()
-#     value = fields.Integer()
-#     value2 = fields.Float(compute="_value_pc", store=True)
-#     description = fields.Text()
-#
-#     @api.depends('value')
-#     def _value_pc(self):
-#         for record in self:
-#             record.value2 = float(record.value) / 100
+#your core values.
+# and your value as wel
+# make a video of 5 min
+
+#// your personal values at least 3
+
+# //Development
+# //Service Quality
+# //Reliability
+# //Customer care and support
+# //Integrity  --- Inovation
+
+##_________________________
+# Core values on your desk All
+# Customer Care & Support
+# Innovation
+# Reliability
+
+    def action_survey(self):
+        if self.crm_stage.stage_id.name == 'Opportunity':
+            print("i was hit ")
+

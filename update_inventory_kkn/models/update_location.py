@@ -7,16 +7,14 @@ _logger = logging.getLogger(__name__)
 
 
 class UpdateLocationForm(models.Model):
-    _inherit = "stock.location"
-
-    name = fields.Char(
-        "Location Name",
-        required=True,
-    )
+    _name = "stock.location"
+    _inherit = ["stock.location", "mail.thread", "mail.activity.mixin"]
+    name = fields.Char("Location Name", required=True, tracking=True)
     complete_name = fields.Char(
         "Full Location Name",
         compute="_compute_complete_name",
         store=True,
+        tracking=True,
     )
     location_id = fields.Many2one(
         "stock.location",
@@ -26,10 +24,12 @@ class UpdateLocationForm(models.Model):
         check_company=True,
         help="The parent location that includes this location. Example : The 'Dispatch Zone' is the 'Gate 1' parent "
         "location.",
+        tracking=True,
     )
     # Unique ID for location form
     unique_id = fields.Char(
         string="Unique ID",
+        tracking=True,
         required=True,
         readonly=True,
         default=lambda self: _("New"),
@@ -63,6 +63,7 @@ class UpdateLocationForm(models.Model):
         "\n* Inventory Loss: Virtual location serving as counterpart for inventory operations used to correct stock levels (Physical inventories)"
         "\n* Production: Virtual counterpart location for production operations: this location consumes the components and produces finished products"
         "\n* Transit Location: Counterpart location that should be used in inter-company or inter-warehouses operations",
+        tracking=True,
         ondelete={
             "supplier": "set default",
             "view": "set default",
@@ -78,45 +79,13 @@ class UpdateLocationForm(models.Model):
             "transit": "set default",
         },
     )
-    partner_latitude = fields.Float(
-        "Geo Latitude",
-        digits=(16, 6),
-    )
-    partner_longitude = fields.Float(
-        "Geo Longitude",
-        digits=(16, 6),
-    )
-    date_localization = fields.Date(
-        string="Geolocation Date",
-    )
-
-    street = fields.Char()
-    station_id = fields.Many2one(
-        "res.station",
-        "Station",
-        default=lambda self: self.env["res.station"].search([("name", "=", "Lahore")]),
-    )
-    zip = fields.Char(
-        related="station_id.zip",
-        change_default=True,
-        store=True,
-    )
-    district_id = fields.Many2one(
-        related="station_id.district_id",
-        store=True,
-    )
-    state_id = fields.Many2one(related="station_id.state_id", store=True)
-    country_id = fields.Many2one(
-        related="station_id.state_id.country_id",
-        store=True,
-    )
-    city_code = fields.Char(
-        related="station_id.district_id.code", readonly=True, store=True
-    )
+    partner_latitude = fields.Float("Geo Latitude", digits=(16, 6), tracking=True)
+    partner_longitude = fields.Float("Geo Longitude", digits=(16, 6), tracking=True)
+    date_localization = fields.Date(string="Geolocation Date", tracking=True)
 
     def _generate_id(self, city_id):
         unique_code = self.env["ir.sequence"].next_by_code(
-            "stock.location.sequence"
+            "stock.location.sequenece"
         ) or _("New")
         station = self.env["res.station"].browse(city_id)
 

@@ -19,7 +19,6 @@
     "depends": [
         "base",
         "stock",
-        "mail",
         "update_company_kkn",
         "update_contact_kkn",
         "base_geolocalize",
@@ -41,7 +40,7 @@
         "views/stock_picking_batch_view.xml",
         # "views/switchport_view.xml",
         "views/update_location.xml",
-        # "views/update_contact_stock_location_view.xml",
+        "views/update_contact_stock_location_view.xml",
     ],
     # only loaded in demonstration mode
     "demo": [

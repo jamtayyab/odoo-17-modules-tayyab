@@ -18,9 +18,16 @@
     "depends": ["base", "crm", "update_account_kkn"],
     # always loaded
     "data": [
-        # 'security/ir.model.access.csv',
+        'security/ir.model.access.csv',
         "views/views.xml",
         "views/templates.xml",
+        # "views/crm_lead_view_kk.xml",
+        'views/kk_branch_type.xml',
+        'views/kk_sale_type.xml',
+        'views/kk_lead_sources.xml',
+        'views/kk_requested_medium.xml',
+        'views/kk_crm_form.xml',
+        'views/crm_lead2opportunity.xml',
     ],
     # only loaded in demonstration mode
     "demo": [

@@ -4,6 +4,9 @@ from odoo import models, fields
 class ProductTemplate(models.Model):
     _inherit = "product.template"
 
+
+    for_employees = fields.Boolean("Can Be Used For Employees", tracking=True)
+    crm_check = fields.Boolean("CRM Check", tracking=True)
     allow_minimum_quantity = fields.Boolean("Allow Minimum Quantity", tracking=True)
     minimum_quantity = fields.Integer("Minimum Quantity", tracking=True)
     purchase_description = fields.Text(
