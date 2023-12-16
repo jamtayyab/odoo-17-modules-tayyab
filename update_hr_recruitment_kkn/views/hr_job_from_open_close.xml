@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <record id="update_hr_job_survey_form_inherit" model="ir.ui.view">
+            <field name="name">update_hr_job_survey_form_inherit</field>
+            <field name="model">hr.job</field>
+            <field name="inherit_id" ref='hr_recruitment.hr_job_survey'/>
+            <field name="arch" type="xml">
+                 <xpath expr="//field[@name = 'company_id']" position="attributes">
+                    <attribute name="options">
+                        {'no_quick_create': True,
+                        'no_create_edit': True,
+                        'no_open': True,
+                        'no_create': True, 'no_edit': True
+                        }
+                    </attribute>
+                </xpath>
+            </field>
+        </record>
+
+
+
+        <record id="update_hr_job_form_inherit" model="ir.ui.view">
+            <field name="name">update_hr_job_form_inherit</field>
+            <field name="model">hr.job</field>
+            <field name="inherit_id" ref='hr.view_hr_job_form'/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page[@name = 'recruitment_page']//field[@name = 'department_id']" position="attributes">
+                    <attribute name="options">
+                        {'no_quick_create': True,
+                        'no_create_edit': True,
+                        'no_open': True,
+                        'no_create': True, 'no_edit': True
+                        }
+                    </attribute>
+                </xpath>
+
+                <xpath expr="//notebook/page[@name = 'recruitment_page']//field[@name = 'address_id']" position="attributes">
+                    <attribute name="options">
+                        {'no_quick_create': True,
+                        'no_create_edit': True,
+                        'no_open': True,
+                        'no_create': True, 'no_edit': True
+                        }
+                    </attribute>
+                </xpath>
+
+                <xpath expr="//notebook/page[@name = 'recruitment_page']//field[@name = 'contract_type_id']" position="attributes">
+                    <attribute name="options">
+                        {'no_quick_create': True,
+                        'no_create_edit': True,
+                        'no_open': True,
+                        'no_create': True, 'no_edit': True
+                        }
+                    </attribute>
+                </xpath>
+
+                <xpath expr="//notebook/page[@name = 'recruitment_page']//field[@name = 'company_id']" position="attributes">
+                    <attribute name="options">
+                        {'no_quick_create': True,
+                        'no_create_edit': True,
+                        'no_open': True,
+                        'no_create': True, 'no_edit': True
+                        }
+                    </attribute>
+                </xpath>
+
+                <xpath expr="//notebook/page[@name = 'recruitment_page']//field[@name = 'user_id']" position="attributes">
+                    <attribute name="options">
+                        {'no_quick_create': True,
+                        'no_create_edit': True,
+                        'no_open': True,
+                        'no_create': True, 'no_edit': True
+                        }
+                    </attribute>
+                </xpath>
+
+                <xpath expr="//notebook/page[@name = 'recruitment_page']//field[@name = 'interviewer_ids']" position="attributes">
+                    <attribute name="options">
+                        {'no_quick_create': True,
+                        'no_create_edit': True,
+                        'no_open': True,
+                        'no_create': True, 'no_edit': True
+                        }
+                    </attribute>
+                </xpath>
+
+                 <xpath expr="//field[@name = 'company_id']" position="attributes">
+                    <attribute name="options">
+                        {'no_quick_create': True,
+                        'no_create_edit': True,
+                        'no_open': True,
+                        'no_create': True, 'no_edit': True
+                        }
+                    </attribute>
+                </xpath>
+
+
+
+
+            </field>
+        </record>
+    </data>
+</odoo>
