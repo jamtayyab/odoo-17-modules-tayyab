@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <data>
+        <record id="view_res_partner_form_inherit" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='lang']" position="after">
+                    <field name="start_date" />
+                </xpath>
+
+                <xpath expr="//h1//field[@name='name']" position="before">
+                    <field name="unique_id" placeholder='Unique id' />
+                </xpath>
+                <xpath expr="//h1//field[@id='company']" position='replace'>
+                    <field id="company" class="text-break" name="name" default_focus="1"
+                        placeholder="e.g. new company"
+                        required="type == 'contact'" invisible="is_company == False" />
+                </xpath>
+
+                <xpath expr="//field[@name='company_type']" position="attributes">
+                    <attribute name="readonly">
+                        unique_id not in ['New','N/A']
+                    </attribute>
+                </xpath>
+                <xpath expr="//field[@name='company_type']" position="after">
+
+                    <group>
+                        <group>
+                            <field name="contact_type"
+                                force_save="1"
+                                invisible="company_type == False"
+                                readonly="unique_id not in ['New','N/A'] or context.get('default_contact_type') in ['customer','vendor']"
+                            />
+
+                        </group>
+                        <!-- <group>
+                            <field name="contact_sub_type"
+                                invisible="contact_type != 'customer'"
+                                required="contact_type == 'customer'"
+                                readonly="unique_id not in ['New','N/A']"
+                            />
+                        </group> -->
+                    </group>
+
+                    <group>
+                        <!-- <group>
+                            <field name="customer_subscription_model" widget="radio"
+                                options="{'horizontal': true}"
+                                invisible="contact_sub_type == False"
+                                required="contact_type == 'customer'" />
+                        </group> -->
+                    </group>
+
+                </xpath>
+
+
+                <xpath expr="//field[@name='category_id']" position="before">
+                    <field name="active_status" widget="boolean_toggle" />
+                </xpath>
+
+
+                <!--
+                   Following fields are invisible  as they are not required.
+                   Fields Include City, Street2
+                   -->
+
+
+                <xpath expr="//field[@name='city']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+
+                </xpath>
+
+                <xpath expr="//field[@name='street2']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+
+
+                </xpath>
+
+
+                <xpath expr="//field[@name='street']" position="attributes">
+                    <attribute name="required">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='street2']" position="after">
+                    <field name="station_id"
+                        placeholder="Station"
+                        required="1"
+                        options="{'no_open': True, 'no_create': True, 'no_edit': True}" />
+
+                </xpath>
+
+
+                <!--
+                   Following is to change the Placeholder for changing .
+                   state ->  Province
+                   -->
+
+                <xpath expr="//field[@name='state_id']" position="attributes">
+                    <attribute name="placeholder">Province</attribute>
+                    <attribute name="required">1</attribute>
+                </xpath>
+
+
+                <xpath
+                    expr="//form[1]/sheet[1]/group[1]/group[1]/div[1]/field[@name='zip']"
+                    position="after">
+                    <field name="district_id" placeholder="District"
+                        class="o_address_city" required="1"
+                        readonly="type == 'contact' and parent_id"
+                        options="{'no_create': True, 'no_edit': True, 'no_open': True}" />
+
+                </xpath>
+
+                <!--
+                   Following VAT was changed to NTN/PSTN with help of  Placeholder.
+                   VAT ->  NTN/PSTN
+                   -->
+
+                <xpath expr="//label[@for='vat']" position="before">
+                    <field name="cnic" placeholder="00000-0000000-0"
+                        invisible="company_type == 'company' or contact_type != 'customer'"
+                        required="contact_type == 'customer'"
+                    />
+
+                    <field
+                        name="tax_status" widget="radio"
+                        options="{'horizontal': True}" />
+
+
+                    <field name="pta_registered" widget="radio"
+                        invisible="tax_status == 'unregistered' or company_type == 'person'"
+                        options="{'horizontal': True}" />
+                </xpath>
+
+
+                <xpath expr="//label[@for='vat']" position="attributes">
+                    <attribute name="invisible">tax_status == 'unregistered'</attribute>
+                </xpath>
+                <xpath expr="//sheet[1]/group[1]/group[1]//field[@name='vat']" position="replace">
+                    <field name="vat" placeholder="NTN/PSTN"
+                        invisible="tax_status == 'unregistered'"
+                    />
+                </xpath>
+
+
+                <xpath expr="//label[@for='vat']" position="before">
+                    <field name="gstn" placeholder="00-0000-00000-0"
+                        readonly="parent_id != False"
+                        invisible="tax_status == 'unregistered'"
+                    />
+
+                </xpath>
+
+
+                <xpath expr="//field[@name='mobile']" position="replace">
+                    <field name="mobile" placeholder="+92 304 5425910" required="1" />
+                </xpath>
+
+                <xpath expr="//field[@name='category_id']" position="attributes">
+                   <attribute name="options">{'no_open': True, 'no_create': True, 'no_edit': True}</attribute>
+                </xpath>
+
+                <!-- add address button form view  -->
+
+                <xpath
+                    expr="//page[@name='contact_addresses']/field[@name='child_ids']/form/sheet/field[@name='type']"
+                    position="before">
+                    <group>
+                        <field name="company_type"
+                            invisible="1"
+                        />
+                        <field name="contact_type"
+                            invisible="1"
+                        />
+                        <!-- <field name="contact_sub_type"
+                            invisible="contact_type != 'customer'"
+                            required="contact_type == 'customer'" /> -->
+                    </group>
+
+
+                </xpath>
+                <xpath
+                    expr="//page[@name='contact_addresses']/field[@name='child_ids']/form/sheet/group/group[1]/div/div/field[@name='street2']"
+                    position="attributes">
+                    <attribute name="invisible">"1"</attribute>
+                </xpath>
+                <xpath
+                    expr="//page[@name='contact_addresses']/field[@name='child_ids']/form/sheet/group/group[1]/div/div/field[@name='city']"
+                    position="attributes">
+                    <attribute name="invisible">"1"</attribute>
+
+
+                </xpath>
+                <xpath
+                    expr="//page[@name='contact_addresses']/field[@name='child_ids']/form/sheet/group/group[1]/div/div/field[@name='street2']"
+                    position="after">
+                    <field name="station_id"
+                        placeholder="Station"
+                        options="{'no_open': True, 'no_create': True, 'no_edit': True}" />
+
+                </xpath>
+                <xpath
+                    expr="//page[@name='contact_addresses']/field[@name='child_ids']/form/sheet/group/group[1]/div/div/field[@name='state_id']"
+                    position="replace">
+                    <field name="state_id" placeholder="Province"
+                        class="o_address_state" readonly="False"
+                        options="{'no_create': True, 'no_edit': True, 'no_open': True}" />
+
+                </xpath>
+                <xpath
+                    expr="//page[@name='contact_addresses']/field[@name='child_ids']/form/sheet/group/group[1]/div/div/field[@name='zip']"
+                    position="replace">
+                    <field name="zip" placeholder="Zip Code"
+                        class="o_address_zip" readonly="parent_id"
+                        options="{'no_create': True, 'no_edit': True, 'no_open': True}" />
+                </xpath>
+                <xpath
+                    expr="//page[@name='contact_addresses']/field[@name='child_ids']/form/sheet/group/group[1]/div/div/field[@name='zip']"
+                    position="after">
+                    <field name="district_id" placeholder="District"
+                        class="o_address_city"
+                        readonly="type == 'contact' and parent_id"
+                        options="{'no_create': True, 'no_edit': True, 'no_open': True}" />
+                </xpath>
+                <xpath
+                    expr="//page[@name='contact_addresses']/field[@name='child_ids']/form/sheet/group/group[1]/div/div/field[@name='country_id']"
+                    position="replace">
+                    <field name="country_id"
+                        placeholder="Country"
+                        class="o_address_country"
+                        readonly="False"
+                        options="{'no_create': True, 'no_edit': True, 'no_open': True}" />
+                </xpath>
+                <xpath
+                    expr="//page[@name='contact_addresses']/field[@name='child_ids']/kanban/field[@name='city']"
+                    position="after">
+                    <field name="district_id" />
+                    <field name="station_id" />
+                </xpath>
+                <xpath
+                    expr="//page[@name='contact_addresses']/field[@name='child_ids']/kanban/templates/t/div/div[2]/div[3]/div/field[@name='zip']"
+                    position="before">
+                    <field name="district_id" />
+                    <field name="station_id" />
+                </xpath>
+                <!-- 2nd group for contact details inherit  -->
+                <xpath
+                    expr="//page[@name='contact_addresses']/field[@name='child_ids']/form/sheet/group/group[2]/field[@name='mobile']"
+                    position="replace">
+
+                    <field name="mobile" placeholder="+92 304 5425910" required="1" />
+
+
+                </xpath>
+
+
+            </field>
+        </record>
+
+        <record id="view_res_partner_tree_inherit" model="ir.ui.view">
+            <field name="name">res.partner.tree.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='display_name']" position="before">
+                    <field name="unique_id" string="Unique ID" />
+                </xpath>
+            </field>
+
+        </record>
+    </data>
+</odoo>

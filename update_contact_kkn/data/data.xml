@@ -1,0 +1,901 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="res.country.state" id="state_pk_balochistan">
+            <field name="name">Balochistan</field>
+            <field name="code">PK-BL</field>
+            <field name="country_id" ref="base.pk" />
+        </record>
+
+        <record model="res.country.state" id="state_pk_islamabad">
+            <field name="name">Islamabad</field>
+            <field name="code">PK-ICT</field>
+            <field name="country_id" ref="base.pk" />
+        </record>
+
+        <record model="res.country.state" id="state_pk_khyber_pakhtunkhwa">
+            <field name="name">Khyber Pakhtunkhwa</field>
+            <field name="code">PK-KPK</field>
+            <field name="country_id" ref="base.pk" />
+        </record>
+
+        <record model="res.country.state" id="state_pk_punjab">
+            <field name="name">Punjab</field>
+            <field name="code">PK-PJ</field>
+            <field name="country_id" ref="base.pk" />
+        </record>
+
+        <record model="res.country.state" id="state_pk_sindh">
+            <field name="name">Sindh</field>
+            <field name="code">PK-SN</field>
+            <field name="country_id" ref="base.pk" />
+        </record>
+        <!-- Define records for the res.region (refers to custom module) model -->
+        <record model="res.region" id="region_islamabad">
+            <field name="name">Islamabad Telecom Region</field>
+        </record>
+        <record model="res.region" id="region_rawalpindi">
+            <field name="name">Rawalpindi Telecom Region</field>
+        </record>
+        <record model="res.region" id="region_gujranwala">
+            <field name="name">Gujranwala Telecom Region</field>
+        </record>
+        <record model="res.region" id="region_lahore">
+            <field name="name">Lahore Telecom Region</field>
+        </record>
+        <record model="res.region" id="region_faisalabad">
+            <field name="name">Faisalabad Telecom Region</field>
+        </record>
+        <record model="res.region" id="region_central">
+            <field name="name">Central Telecom Region</field>
+        </record>
+        <record model="res.region" id="region_multan">
+            <field name="name">Multan Telecom Region</field>
+        </record>
+        <record model="res.region" id="region_southern_telecom_5">
+            <field name="name">Southern Telecom Region-V</field>
+        </record>
+        <record model="res.region" id="region_karachi">
+            <field name="name">Karachi Telecom Region</field>
+        </record>
+        <record model="res.region" id="region_northern_telecom_1">
+            <field name="name">Northern Telecom Region-1</field>
+        </record>
+        <record model="res.region" id="region_southern_telecom_1">
+            <field name="name">Southern Telecom Region-1</field>
+        </record>
+        <record model="res.region" id="region_hazara">
+            <field name="name">Hazara Telecom Region</field>
+        </record>
+        <record model="res.region" id="region_northern_telecom_2">
+            <field name="name">Northern Telecom Region-2</field>
+        </record>
+        <record model="res.region" id="region_western">
+            <field name="name">Western Telecom Region</field>
+        </record>
+
+        <!-- District Data Records -->
+        <record model="res.district" id="district_faisalabad">
+            <field name="name">Faisalabad</field>
+            <field name="code">FSD</field>
+            <field name="region_id" ref="region_faisalabad" />
+            <field name="state_id" ref="state_pk_punjab" />
+        </record>
+
+        <record model="res.district" id="district_lahore">
+            <field name="name">Lahore</field>
+            <field name="code">LHR</field>
+            <field name="region_id" ref="region_lahore" />
+            <field name="state_id" ref="state_pk_punjab" />
+        </record>
+
+        <record model="res.district" id="district_karachi">
+            <field name="name">Karachi</field>
+            <field name="code">KHI</field>
+            <field name="region_id" ref="region_karachi" />
+            <field name="state_id" ref="state_pk_sindh" />
+        </record>
+
+        <record model="res.district" id="district_multan">
+            <field name="name">Multan</field>
+            <field name="code">MUX</field>
+            <field name="region_id" ref="region_multan" />
+            <field name="state_id" ref="state_pk_punjab" />
+        </record>
+
+        <record model="res.district" id="district_gujranwala">
+            <field name="name">Gujranwala</field>
+            <field name="code">GRW</field>
+            <field name="region_id" ref="region_gujranwala" />
+            <field name="state_id" ref="state_pk_punjab" />
+        </record>
+
+        <record model="res.district" id="district_kasur">
+            <field name="name">Kasur</field>
+            <field name="code">KSR</field>
+            <field name="region_id" ref="region_central" />
+            <field name="state_id" ref="state_pk_punjab" />
+        </record>
+
+        <record model="res.district" id="district_islamabad">
+            <field name="name">Islamabad</field>
+            <field name="code">ISB</field>
+            <field name="region_id" ref="region_islamabad" />
+            <field name="state_id" ref="state_pk_islamabad" />
+        </record>
+
+        <record model="res.district" id="district_vehari">
+            <field name="name">Vehari</field>
+            <field name="code">VEH</field>
+            <field name="region_id" ref="region_multan" />
+            <field name="state_id" ref="state_pk_punjab" />
+        </record>
+        <record model="res.district" id="district_dera_ghazi_khan">
+            <field name="name">Dera Ghazi Khan</field>
+            <field name="code">DGK</field>
+            <field name="region_id" ref="region_multan" />
+            <field name="state_id" ref="state_pk_punjab" />
+        </record>
+
+        <record model="res.district" id="district_layyah">
+            <field name="name">Layyah</field>
+            <field name="code">LYH</field>
+            <field name="region_id" ref="region_multan" />
+            <field name="state_id" ref="state_pk_punjab" />
+        </record>
+
+        <record model="res.district" id="district_rajanpur">
+            <field name="name">Rajanpur</field>
+            <field name="code">RJP</field>
+            <field name="region_id" ref="region_multan" />
+            <field name="state_id" ref="state_pk_punjab" />
+        </record>
+
+        <record model="res.district" id="district_nankana_sahib">
+            <field name="name">Nankana Sahib</field>
+            <field name="code">NSB</field>
+            <field name="region_id" ref="region_lahore" />
+            <field name="state_id" ref="state_pk_punjab" />
+        </record>
+
+        <record model="res.district" id="district_gujrat">
+            <field name="name">Gujrat</field>
+            <field name="code">GUJ</field>
+            <field name="region_id" ref="region_gujranwala" />
+            <field name="state_id" ref="state_pk_punjab" />
+        </record>
+
+        <record model="res.district" id="district_rawalpindi">
+            <field name="name">Rawalpindi</field>
+            <field name="code">RWP</field>
+            <field name="region_id" ref="region_rawalpindi" />
+            <field name="state_id" ref="state_pk_punjab" />
+        </record>
+
+        <record model="res.district" id="district_jhelum">
+            <field name="name">Jhelum</field>
+            <field name="code">JHL</field>
+            <field name="region_id" ref="region_rawalpindi" />
+            <field name="state_id" ref="state_pk_punjab" />
+        </record>
+
+        <record model="res.district" id="district_sheikhupura">
+            <field name="name">Sheikhupura</field>
+            <field name="code">SHK</field>
+            <field name="region_id" ref="region_central" />
+            <field name="state_id" ref="state_pk_punjab" />
+        </record>
+
+        <record model="res.district" id="district_sahiwal">
+            <field name="name">Sahiwal</field>
+            <field name="code">SAH</field>
+            <field name="region_id" ref="region_central" />
+            <field name="state_id" ref="state_pk_punjab" />
+        </record>
+
+        <record model="res.district" id="district_bahawalpur2">
+            <field name="name">Bahawalpur</field>
+            <field name="code">BWP</field>
+            <field name="region_id" ref="region_multan" />
+            <field name="state_id" ref="state_pk_punjab" />
+        </record>
+
+        <record model="res.district" id="district_toba_tek_singh">
+            <field name="name">Toba Tek Singh</field>
+            <field name="code">TTS</field>
+            <field name="region_id" ref="region_faisalabad" />
+            <field name="state_id" ref="state_pk_punjab" />
+        </record>
+
+        <record model="res.district" id="district_jhang">
+            <field name="name">Jhang</field>
+            <field name="code">JHG</field>
+            <field name="region_id" ref="region_faisalabad" />
+            <field name="state_id" ref="state_pk_punjab" />
+        </record>
+
+        <record model="res.district" id="district_bahawalnagar">
+            <field name="name">Bahawalnagar</field>
+            <field name="code">BHN</field>
+            <field name="region_id" ref="region_multan" />
+            <field name="state_id" ref="state_pk_punjab" />
+        </record>
+
+        <record model="res.district" id="district_rahim_yar_khan">
+            <field name="name">Rahim Yar Khan</field>
+            <field name="code">RYK</field>
+            <field name="region_id" ref="region_multan" />
+            <field name="state_id" ref="state_pk_punjab" />
+        </record>
+
+        <record model="res.district" id="district_hafizabad">
+            <field name="name">Hafizabad</field>
+            <field name="code">HZD</field>
+            <field name="region_id" ref="region_gujranwala" />
+            <field name="state_id" ref="state_pk_punjab" />
+        </record>
+
+        <record model="res.district" id="district_narowal">
+            <field name="name">Narowal</field>
+            <field name="code">NRW</field>
+            <field name="region_id" ref="region_gujranwala" />
+            <field name="state_id" ref="state_pk_punjab" />
+        </record>
+
+        <record model="res.district" id="district_sialkot">
+            <field name="name">Sialkot</field>
+            <field name="code">SKT</field>
+            <field name="region_id" ref="region_gujranwala" />
+            <field name="state_id" ref="state_pk_punjab" />
+        </record>
+
+        <record model="res.district" id="district_chakwal">
+            <field name="name">Chakwal</field>
+            <field name="code">CHK</field>
+            <field name="region_id" ref="region_rawalpindi" />
+            <field name="state_id" ref="state_pk_punjab" />
+        </record>
+
+        <record model="res.district" id="district_attock">
+            <field name="name">Attock</field>
+            <field name="code">ATK</field>
+            <field name="region_id" ref="region_rawalpindi" />
+            <field name="state_id" ref="state_pk_punjab" />
+        </record>
+
+        <record model="res.district" id="district_pakpattan">
+            <field name="name">Pakpattan</field>
+            <field name="code">PKP</field>
+            <field name="region_id" ref="region_central" />
+            <field name="state_id" ref="state_pk_punjab" />
+        </record>
+
+        <record model="res.district" id="district_okara">
+            <field name="name">Okara</field>
+            <field name="code">OKR</field>
+            <field name="region_id" ref="region_central" />
+            <field name="state_id" ref="state_pk_punjab" />
+        </record>
+
+        <record model="res.district" id="district_chiniot">
+            <field name="name">Chiniot</field>
+            <field name="code">CHT</field>
+            <field name="region_id" ref="region_faisalabad" />
+            <field name="state_id" ref="state_pk_punjab" />
+        </record>
+
+        <record model="res.district" id="district_lodhran">
+            <field name="name">Lodhran</field>
+            <field name="code">LDR</field>
+            <field name="region_id" ref="region_multan" />
+            <field name="state_id" ref="state_pk_punjab" />
+        </record>
+
+        <record model="res.district" id="district_khanewal">
+            <field name="name">Khanewal</field>
+            <field name="code">KHN</field>
+            <field name="region_id" ref="region_multan" />
+            <field name="state_id" ref="state_pk_punjab" />
+        </record>
+
+        <record model="res.district" id="district_sargodha">
+            <field name="name">Sargodha</field>
+            <field name="code">SGD</field>
+            <field name="region_id" ref="region_faisalabad" />
+            <field name="state_id" ref="state_pk_punjab" />
+        </record>
+
+        <record model="res.district" id="district_khushab">
+            <field name="name">Khushab</field>
+            <field name="code">KHB</field>
+            <field name="region_id" ref="region_faisalabad" />
+            <field name="state_id" ref="state_pk_punjab" />
+        </record>
+
+        <record model="res.district" id="district_mianwali">
+            <field name="name">Mianwali</field>
+            <field name="code">MNW</field>
+            <field name="region_id" ref="region_faisalabad" />
+            <field name="state_id" ref="state_pk_punjab" />
+        </record>
+
+        <record model="res.district" id="district_bhakkar">
+            <field name="name">Bhakkar</field>
+            <field name="code">BHK</field>
+            <field name="region_id" ref="region_faisalabad" />
+            <field name="state_id" ref="state_pk_punjab" />
+        </record>
+
+        <record model="res.district" id="district_haroonabad">
+            <field name="name">Haroonabad</field>
+            <field name="code">HAR</field>
+            <field name="region_id" ref="region_multan" />
+            <field name="state_id" ref="state_pk_punjab" />
+        </record>
+        <record model="res.district" id="district_murree">
+            <field name="name">Murree</field>
+            <field name="state_id" ref="state_pk_punjab" />
+            <field name="region_id" ref="region_rawalpindi" />
+            <field name="code">MRE</field>
+        </record>
+        <record model="res.district" id="district_abbottabad">
+            <field name="name">Abbottabad</field>
+            <field name="state_id" ref="state_pk_khyber_pakhtunkhwa" />
+            <field name="region_id" ref="region_hazara" />
+            <field name="code">AAW</field>
+        </record>
+        <record model="res.district" id="district_badin">
+            <field name="name">Badin</field>
+            <field name="state_id" ref="state_pk_sindh" />
+            <field name="region_id" ref="region_southern_telecom_1" />
+            <field name="code">BDN</field>
+        </record>
+        <record model="res.district" id="district_bahawalpur">
+            <field name="name">Bahawalpur</field>
+            <field name="state_id" ref="state_pk_punjab" />
+            <field name="region_id" ref="region_multan" />
+            <field name="code">BWP</field>
+        </record>
+        <record model="res.district" id="district_bannu">
+            <field name="name">Bannu</field>
+            <field name="state_id" ref="state_pk_khyber_pakhtunkhwa" />
+            <field name="region_id" ref="region_northern_telecom_2" />
+            <field name="code">BNP</field>
+        </record>
+        <record model="res.district" id="district_charsada">
+            <field name="name">Charsada</field>
+            <field name="state_id" ref="state_pk_khyber_pakhtunkhwa" />
+            <field name="region_id" ref="region_northern_telecom_1" />
+            <field name="code">CHK</field>
+        </record>
+        <record model="res.district" id="district_chitral">
+            <field name="name">Chitral</field>
+            <field name="state_id" ref="state_pk_khyber_pakhtunkhwa" />
+            <field name="region_id" ref="region_northern_telecom_1" />
+            <field name="code">CIL</field>
+        </record>
+        <record model="res.district" id="district_dadu">
+            <field name="name">Dadu</field>
+            <field name="state_id" ref="state_pk_sindh" />
+            <field name="region_id" ref="region_southern_telecom_1" />
+            <field name="code">DDU</field>
+        </record>
+        <record model="res.district" id="district_dera_ismail_khan">
+            <field name="name">Dera Ismail Khan</field>
+            <field name="state_id" ref="state_pk_khyber_pakhtunkhwa" />
+            <field name="region_id" ref="region_northern_telecom_2" />
+            <field name="code">DSK</field>
+        </record>
+        <record model="res.district" id="district_dir">
+            <field name="name">Dir</field>
+            <field name="state_id" ref="state_pk_khyber_pakhtunkhwa" />
+            <field name="region_id" ref="region_northern_telecom_1" />
+            <field name="code">DIR</field>
+        </record>
+        <record model="res.district" id="district_ghotki">
+            <field name="name">Ghotki</field>
+            <field name="state_id" ref="state_pk_sindh" />
+            <field name="region_id" ref="region_southern_telecom_5" />
+            <field name="code">GHT</field>
+        </record>
+        <record model="res.district" id="district_gwadar">
+            <field name="name">Gwadar</field>
+            <field name="state_id" ref="state_pk_balochistan" />
+            <field name="region_id" ref="region_western" />
+            <field name="code">GWD</field>
+        </record>
+        <record model="res.district" id="district_haripur">
+            <field name="name">Haripur</field>
+            <field name="state_id" ref="state_pk_khyber_pakhtunkhwa" />
+            <field name="region_id" ref="region_hazara" />
+            <field name="code">HPR</field>
+        </record>
+        <record model="res.district" id="district_hyderabad">
+            <field name="name">Hyderabad</field>
+            <field name="state_id" ref="state_pk_sindh" />
+            <field name="region_id" ref="region_southern_telecom_1" />
+            <field name="code">HDD</field>
+        </record>
+        <record model="res.district" id="district_jacobabad">
+            <field name="name">Jacobabad</field>
+            <field name="state_id" ref="state_pk_sindh" />
+            <field name="region_id" ref="region_southern_telecom_5" />
+            <field name="code">JAG</field>
+        </record>
+        <record model="res.district" id="district_jam_shoro">
+            <field name="name">Jam Shoro</field>
+            <field name="state_id" ref="state_pk_sindh" />
+            <field name="region_id" ref="region_southern_telecom_1" />
+            <field name="code">JAM</field>
+        </record>
+        <record model="res.district" id="district_jhal_magsi">
+            <field name="name">Jhal Magsi</field>
+            <field name="state_id" ref="state_pk_balochistan" />
+            <field name="region_id" ref="region_western" />
+            <field name="code">JLM</field>
+        </record>
+        <record model="res.district" id="district_kalat">
+            <field name="name">Kalat</field>
+            <field name="state_id" ref="state_pk_balochistan" />
+            <field name="region_id" ref="region_western" />
+            <field name="code">KAL</field>
+        </record>
+        <record model="res.district" id="district_kambar">
+            <field name="name">Kambar</field>
+            <field name="state_id" ref="state_pk_sindh" />
+            <field name="region_id" ref="region_southern_telecom_5" />
+            <field name="code">KMB</field>
+        </record>
+        <record model="res.district" id="district_kashmor">
+            <field name="name">Kashmor</field>
+            <field name="state_id" ref="state_pk_sindh" />
+            <field name="region_id" ref="region_southern_telecom_5" />
+            <field name="code">KZL</field>
+        </record>
+        <record model="res.district" id="district_khairpur">
+            <field name="name">Khairpur</field>
+            <field name="state_id" ref="state_pk_sindh" />
+            <field name="region_id" ref="region_southern_telecom_5" />
+            <field name="code">KHP</field>
+        </record>
+        <record model="res.district" id="district_khuzdar">
+            <field name="name">Khuzdar</field>
+            <field name="region_id" ref="region_western" />
+            <field name="state_id" ref="state_pk_balochistan" />
+            <field name="code">KDD</field>
+        </record>
+        <record model="res.district" id="district_kohat">
+            <field name="name">Kohat</field>
+            <field name="region_id" ref="region_northern_telecom_2" />
+            <field name="state_id" ref="state_pk_khyber_pakhtunkhwa" />
+            <field name="code">KHT</field>
+        </record>
+        <record model="res.district" id="district_kohlu">
+            <field name="name">Kohlu</field>
+            <field name="region_id" ref="region_western" />
+            <field name="state_id" ref="state_pk_balochistan" />
+            <field name="code">KLU</field>
+        </record>
+        <record model="res.district" id="district_lakki_marwat">
+            <field name="name">Lakki Marwat</field>
+            <field name="region_id" ref="region_northern_telecom_2" />
+            <field name="state_id" ref="state_pk_khyber_pakhtunkhwa" />
+            <field name="code">LAL</field>
+        </record>
+        <record model="res.district" id="district_larkana">
+            <field name="name">Larkana</field>
+            <field name="region_id" ref="region_southern_telecom_5" />
+            <field name="state_id" ref="state_pk_sindh" />
+            <field name="code">LRK</field>
+        </record>
+        <record model="res.district" id="district_lasbela">
+            <field name="name">Lasbela</field>
+            <field name="region_id" ref="region_western" />
+            <field name="state_id" ref="state_pk_balochistan" />
+            <field name="code">LSB</field>
+        </record>
+        <record model="res.district" id="district_loralai">
+            <field name="name">Loralai</field>
+            <field name="region_id" ref="region_western" />
+            <field name="state_id" ref="state_pk_balochistan" />
+            <field name="code">LRL</field>
+        </record>
+        <record model="res.district" id="district_malakand">
+            <field name="name">Malakand</field>
+            <field name="region_id" ref="region_northern_telecom_1" />
+            <field name="state_id" ref="state_pk_khyber_pakhtunkhwa" />
+            <field name="code">MKD</field>
+        </record>
+        <record model="res.district" id="district_mandi_bahauddin">
+            <field name="name">Mandi Bahauddin</field>
+            <field name="region_id" ref="region_gujranwala" />
+            <field name="state_id" ref="state_pk_punjab" />
+            <field name="code">MDI</field>
+        </record>
+        <record model="res.district" id="district_mansehra">
+            <field name="name">Mansehra</field>
+            <field name="region_id" ref="region_hazara" />
+            <field name="state_id" ref="state_pk_khyber_pakhtunkhwa" />
+            <field name="code">HRA</field>
+        </record>
+        <record model="res.district" id="district_mardan">
+            <field name="name">Mardan</field>
+            <field name="region_id" ref="region_northern_telecom_1" />
+            <field name="state_id" ref="state_pk_khyber_pakhtunkhwa" />
+            <field name="code">MDX</field>
+        </record>
+        <record model="res.district" id="district_mirpur_khas">
+            <field name="name">Mirpur Khas</field>
+            <field name="region_id" ref="region_southern_telecom_1" />
+            <field name="state_id" ref="state_pk_sindh" />
+            <field name="code">MPD</field>
+        </record>
+        <record model="res.district" id="district_moro">
+            <field name="name">Moro</field>
+            <field name="region_id" ref="region_southern_telecom_5" />
+            <field name="state_id" ref="state_pk_sindh" />
+            <field name="code">MOR</field>
+        </record>
+        <record model="res.district" id="district_multan_cantt">
+            <field name="name">Multan Cantt</field>
+            <field name="region_id" ref="region_multan" />
+            <field name="state_id" ref="state_pk_punjab" />
+            <field name="code">MUL</field>
+        </record>
+        <record model="res.district" id="district_multan_city">
+            <field name="name">Multan City</field>
+            <field name="region_id" ref="region_multan" />
+            <field name="state_id" ref="state_pk_punjab" />
+            <field name="code">MXC</field>
+        </record>
+        <record model="res.district" id="district_muzaffargarh">
+            <field name="name">Muzaffargarh</field>
+            <field name="region_id" ref="region_multan" />
+            <field name="state_id" ref="state_pk_punjab" />
+            <field name="code">MZJ</field>
+        </record>
+        <record model="res.district" id="district_nawab_shah">
+            <field name="name">Nawab Shah</field>
+            <field name="region_id" ref="region_southern_telecom_5" />
+            <field name="state_id" ref="state_pk_sindh" />
+            <field name="code">SAH</field>
+        </record>
+        <record model="res.district" id="district_nowshehra">
+            <field name="name">Nowshera</field>
+            <field name="region_id" ref="region_northern_telecom_1" />
+            <field name="state_id" ref="state_pk_khyber_pakhtunkhwa" />
+            <field name="code">NSR</field>
+        </record>
+        <record model="res.district" id="district_panjgur">
+            <field name="name">Panjgur</field>
+            <field name="region_id" ref="region_western" />
+            <field name="state_id" ref="state_pk_balochistan" />
+            <field name="code">PJG</field>
+        </record>
+        <record model="res.district" id="district_peshawar">
+            <field name="name">Peshawar</field>
+            <field name="region_id" ref="region_northern_telecom_1" />
+            <field name="state_id" ref="state_pk_khyber_pakhtunkhwa" />
+            <field name="code">PEW</field>
+        </record>
+        <record model="res.district" id="district_quetta">
+            <field name="name">Quetta</field>
+            <field name="region_id" ref="region_western" />
+            <field name="state_id" ref="state_pk_balochistan" />
+            <field name="code">QET</field>
+        </record>
+        <record model="res.district" id="district_sanghar">
+            <field name="name">Sanghar</field>
+            <field name="region_id" ref="region_southern_telecom_1" />
+            <field name="state_id" ref="state_pk_sindh" />
+            <field name="code">SNG</field>
+        </record>
+        <record model="res.district" id="district_sibi">
+            <field name="name">Sibi</field>
+            <field name="region_id" ref="region_western" />
+            <field name="state_id" ref="state_pk_balochistan" />
+            <field name="code">SBQ</field>
+        </record>
+        <record model="res.district" id="district_sukkur">
+            <field name="name">Sukkur</field>
+            <field name="region_id" ref="region_southern_telecom_5" />
+            <field name="state_id" ref="state_pk_sindh" />
+            <field name="code">SKR</field>
+        </record>
+
+        <record model="res.district" id="district_swabi">
+            <field name="name">Swabi</field>
+            <field name="region_id" ref="region_northern_telecom_1" />
+            <field name="state_id" ref="state_pk_khyber_pakhtunkhwa" />
+            <field name="code">SWB</field>
+        </record>
+        <record model="res.district" id="district_swat">
+            <field name="name">Swat</field>
+            <field name="region_id" ref="region_northern_telecom_1" />
+            <field name="state_id" ref="state_pk_khyber_pakhtunkhwa" />
+            <field name="code">SWT</field>
+        </record>
+        <record model="res.district" id="district_tando_allahyar">
+            <field name="name">Tando Allahyar</field>
+            <field name="region_id" ref="region_southern_telecom_1" />
+            <field name="state_id" ref="state_pk_sindh" />
+            <field name="code">TDA</field>
+        </record>
+        <record model="res.district" id="district_thatta">
+            <field name="name">Thatta</field>
+            <field name="region_id" ref="region_southern_telecom_1" />
+            <field name="state_id" ref="state_pk_sindh" />
+            <field name="code">THT</field>
+        </record>
+        <record model="res.district" id="district_timargara">
+            <field name="name">Timargara</field>
+            <field name="region_id" ref="region_northern_telecom_1" />
+            <field name="state_id" ref="state_pk_khyber_pakhtunkhwa" />
+            <field name="code">TMG</field>
+        </record>
+        <record model="res.district" id="district_turbat">
+            <field name="name">Turbat</field>
+            <field name="region_id" ref="region_western" />
+            <field name="state_id" ref="state_pk_balochistan" />
+            <field name="code">TUK</field>
+        </record>
+        <record model="res.district" id="district_zhob">
+            <field name="name">Zhob</field>
+            <field name="region_id" ref="region_western" />
+            <field name="state_id" ref="state_pk_balochistan" />
+            <field name="code">PZH</field>
+        </record>
+        <record model="res.district" id="district_ziarat">
+            <field name="name">Ziarat</field>
+            <field name="region_id" ref="region_western" />
+            <field name="state_id" ref="state_pk_balochistan" />
+            <field name="code">ZRT</field>
+        </record>
+        <record model="res.district" id="district_hangu">
+            <field name="name">Hangu</field>
+            <field name="region_id" ref="region_northern_telecom_2" />
+            <field name="state_id" ref="state_pk_khyber_pakhtunkhwa" />
+            <field name="code">HAN</field>
+        </record>
+
+        <record model="res.district" id="district_naushero_feroze">
+            <field name="name">Naushero Feroze</field>
+            <field name="region_id" ref="region_southern_telecom_5" />
+            <field name="state_id" ref="state_pk_sindh" />
+            <field name="code">NSF</field>
+        </record>
+        <record model="res.district" id="district_shikarpur">
+            <field name="name">Shikarpur</field>
+            <field name="region_id" ref="region_southern_telecom_5" />
+            <field name="state_id" ref="state_pk_sindh" />
+            <field name="code">SKP</field>
+        </record>
+        <record model="res.district" id="district_buner">
+            <field name="name">Buner</field>
+            <field name="region_id" ref="region_northern_telecom_1" />
+            <field name="state_id" ref="state_pk_khyber_pakhtunkhwa" />
+            <field name="code">BNR</field>
+        </record>
+        <record model="res.district" id="district_shangla">
+            <field name="name">Shangla</field>
+            <field name="region_id" ref="region_northern_telecom_1" />
+            <field name="state_id" ref="state_pk_khyber_pakhtunkhwa" />
+            <field name="code">SHN</field>
+        </record>
+        <record model="res.district" id="district_tharparkar">
+            <field name="name">Tharparkar</field>
+            <field name="region_id" ref="region_northern_telecom_1" />
+            <field name="state_id" ref="state_pk_khyber_pakhtunkhwa" />
+            <field name="code">TRP</field>
+        </record>
+        <record model="res.district" id="district_umerkot">
+            <field name="name">Umerkot</field>
+            <field name="region_id" ref="region_northern_telecom_1" />
+            <field name="state_id" ref="state_pk_khyber_pakhtunkhwa" />
+            <field name="code">UKT</field>
+        </record>
+        <record model="res.district" id="district_batagram">
+            <field name="name">Batagram</field>
+            <field name="region_id" ref="region_hazara" />
+            <field name="state_id" ref="state_pk_khyber_pakhtunkhwa" />
+            <field name="code">BTG</field>
+        </record>
+        <record model="res.district" id="district_kohistan">
+            <field name="name">Kohistan</field>
+            <field name="region_id" ref="region_hazara" />
+            <field name="state_id" ref="state_pk_khyber_pakhtunkhwa" />
+            <field name="code">KHST</field>
+        </record>
+        <record model="res.district" id="district_karak">
+            <field name="name">Karak</field>
+            <field name="region_id" ref="region_northern_telecom_2" />
+            <field name="state_id" ref="state_pk_khyber_pakhtunkhwa" />
+            <field name="code">KARK</field>
+        </record>
+        <record model="res.district" id="district_tank">
+            <field name="name">Tank</field>
+            <field name="region_id" ref="region_northern_telecom_2" />
+            <field name="state_id" ref="state_pk_khyber_pakhtunkhwa" />
+            <field name="code">TNK</field>
+        </record>
+        <record model="res.district" id="district_awaran">
+            <field name="name">Awaran</field>
+            <field name="region_id" ref="region_western" />
+            <field name="state_id" ref="state_pk_balochistan" />
+            <field name="code">AWN</field>
+        </record>
+        <record model="res.district" id="district_barkhan">
+            <field name="name">Barkhan</field>
+            <field name="region_id" ref="region_western" />
+            <field name="state_id" ref="state_pk_balochistan" />
+            <field name="code">BKN</field>
+        </record>
+        <record model="res.district" id="district_bolan">
+            <field name="name">Bolan</field>
+            <field name="region_id" ref="region_western" />
+            <field name="state_id" ref="state_pk_balochistan" />
+            <field name="code">BLN</field>
+        </record>
+        <record model="res.district" id="district_chaghi">
+            <field name="name">Chaghi</field>
+            <field name="region_id" ref="region_western" />
+            <field name="state_id" ref="state_pk_balochistan" />
+            <field name="code">CHG</field>
+        </record>
+        <record model="res.district" id="district_kech">
+            <field name="name">Kech</field>
+            <field name="region_id" ref="region_western" />
+            <field name="state_id" ref="state_pk_balochistan" />
+            <field name="code">KCH</field>
+        </record>
+        <record model="res.district" id="district_killa_abdullah">
+            <field name="name">Killa Abdullah</field>
+            <field name="region_id" ref="region_western" />
+            <field name="state_id" ref="state_pk_balochistan" />
+            <field name="code">KLA</field>
+        </record>
+        <record model="res.district" id="district_mastung">
+            <field name="name">Mastung</field>
+            <field name="region_id" ref="region_western" />
+            <field name="state_id" ref="state_pk_balochistan" />
+            <field name="code">MTG</field>
+        </record>
+        <record model="res.district" id="district_nasirabad">
+            <field name="name">Nasirabad</field>
+            <field name="region_id" ref="region_western" />
+            <field name="state_id" ref="state_pk_balochistan" />
+            <field name="code">NRD</field>
+        </record>
+        <record model="res.district" id="district_pishin">
+            <field name="name">Pishin</field>
+            <field name="region_id" ref="region_western" />
+            <field name="state_id" ref="state_pk_balochistan" />
+            <field name="code">PIS</field>
+        </record>
+        <record model="res.district" id="district_bajuar_agency">
+            <field name="name">Bajuar Agency</field>
+            <field name="region_id" ref="region_northern_telecom_1" />
+            <field name="state_id" ref="state_pk_khyber_pakhtunkhwa" />
+            <field name="code">BJA</field>
+        </record>
+        <record model="res.district" id="district_khyber_agency">
+            <field name="name">Khyber Agency</field>
+            <field name="region_id" ref="region_northern_telecom_1" />
+            <field name="state_id" ref="state_pk_khyber_pakhtunkhwa" />
+            <field name="code">KBA</field>
+        </record>
+        <record model="res.district" id="district_mohmand_agency">
+            <field name="name">Mohmand Agency</field>
+            <field name="region_id" ref="region_northern_telecom_1" />
+            <field name="state_id" ref="state_pk_khyber_pakhtunkhwa" />
+            <field name="code">MMA</field>
+        </record>
+        <record model="res.district" id="district_daggar">
+            <field name="name">Daggar</field>
+            <field name="region_id" ref="region_northern_telecom_1" />
+            <field name="state_id" ref="state_pk_khyber_pakhtunkhwa" />
+            <field name="code">DGR</field>
+        </record>
+        <record model="res.district" id="district_kurram_agency">
+            <field name="name">Kurram Agency</field>
+            <field name="region_id" ref="region_northern_telecom_2" />
+            <field name="state_id" ref="state_pk_khyber_pakhtunkhwa" />
+            <field name="code">KUA</field>
+        </record>
+        <record model="res.district" id="district_laki_marwat">
+            <field name="name">Laki Marwat</field>
+            <field name="region_id" ref="region_northern_telecom_2" />
+            <field name="state_id" ref="state_pk_khyber_pakhtunkhwa" />
+            <field name="code">LAL</field>
+        </record>
+        <record model="res.district" id="district_north_waziristan_agency">
+            <field name="name">North Waziristan Agency</field>
+            <field name="region_id" ref="region_northern_telecom_2" />
+            <field name="state_id" ref="state_pk_khyber_pakhtunkhwa" />
+            <field name="code">NWA</field>
+        </record>
+        <record model="res.district" id="district_orakzai_agency">
+            <field name="name">Orakzai Agency</field>
+            <field name="region_id" ref="region_northern_telecom_2" />
+            <field name="state_id" ref="state_pk_khyber_pakhtunkhwa" />
+            <field name="code">ORA</field>
+        </record>
+        <record model="res.district" id="district_south_waziristan_agency">
+            <field name="name">South Waziristan Agency</field>
+            <field name="region_id" ref="region_northern_telecom_2" />
+            <field name="state_id" ref="state_pk_khyber_pakhtunkhwa" />
+            <field name="code">SWA</field>
+        </record>
+        <record model="res.district" id="district_thall">
+            <field name="name">Thall</field>
+            <field name="region_id" ref="region_northern_telecom_2" />
+            <field name="state_id" ref="state_pk_khyber_pakhtunkhwa" />
+            <field name="code">THL</field>
+        </record>
+        <record model="res.district" id="district_dera_bugti">
+            <field name="name">Dera Bugti</field>
+            <field name="region_id" ref="region_western" />
+            <field name="state_id" ref="state_pk_balochistan" />
+            <field name="code">DRB</field>
+        </record>
+        <record model="res.district" id="district_jafarabad">
+            <field name="name">Jafarabad</field>
+            <field name="region_id" ref="region_western" />
+            <field name="state_id" ref="state_pk_balochistan" />
+            <field name="code">JFD</field>
+        </record>
+        <record model="res.district" id="district_kharan">
+            <field name="name">Kharan</field>
+            <field name="region_id" ref="region_western" />
+            <field name="state_id" ref="state_pk_balochistan" />
+            <field name="code">KRN</field>
+        </record>
+        <record model="res.district" id="district_musa_khail">
+            <field name="name">Musa Khail</field>
+            <field name="region_id" ref="region_western" />
+            <field name="state_id" ref="state_pk_balochistan" />
+            <field name="code">MKL</field>
+        </record>
+        <record model="res.district" id="district_qilla_abdullah">
+            <field name="name">Qilla Abdullah</field>
+            <field name="region_id" ref="region_western" />
+            <field name="state_id" ref="state_pk_balochistan" />
+            <field name="code">QLA</field>
+        </record>
+        <record model="res.district" id="district_qilla_saifullah">
+            <field name="name">Qilla Saifullah</field>
+            <field name="region_id" ref="region_western" />
+            <field name="state_id" ref="state_pk_balochistan" />
+            <field name="code">QLS</field>
+        </record>
+        <record model="res.district" id="district_wazirabad">
+            <field name="name">Wazirabad</field>
+            <field name="region_id" ref="region_gujranwala" />
+            <field name="state_id" ref="state_pk_punjab" />
+            <field name="code">WZD</field>
+        </record>
+        <record model="res.district" id="district_shahdra_town_lahore">
+            <field name="name">Shahdra Town Lahore</field>
+            <field name="region_id" ref="region_lahore" />
+            <field name="state_id" ref="state_pk_punjab" />
+            <field name="code">950</field>
+        </record>
+
+        <!-- tier records  -->
+
+        <record model="res.tier" id="tier_1">
+            <field name="name">TIER-I</field>
+
+        </record>
+        <record model="res.tier" id="tier_2">
+            <field name="name">TIER-II</field>
+
+        </record>
+        <record model="res.tier" id="tier_3">
+            <field name="name">TIER-III</field>
+
+        </record>
+
+
+    </data>
+</odoo>

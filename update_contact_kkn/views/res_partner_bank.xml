@@ -1,0 +1,26 @@
+<odoo>
+    <data>
+        <!-- res_bank from view-->
+        <record model="ir.ui.view" id="res_partner_bank_form_view">
+            <field name="name">res_partner_bank_form_view</field>
+            <field name="model">res.partner.bank</field>
+            <field name="inherit_id" ref="account.view_partner_bank_form_inherit_account"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='bank_id']" position="attributes">
+                    <attribute name="options">
+                         {'no_create': True, 'no_edit': True, 'no_open': True}
+                    </attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="options">
+                         {'no_create': True, 'no_edit': True, 'no_open': True}
+                    </attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>
